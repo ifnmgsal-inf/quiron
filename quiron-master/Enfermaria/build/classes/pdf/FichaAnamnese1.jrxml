@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaAnamnese" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7b1a6fe5-b2ce-47bb-b6e6-35a13a019aa9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="58"/>
+	<style name="Titulo" fontName="Times New Roman" fontSize="14" isItalic="false"/>
+	<style name="Detail" fontName="Times New Roman" fontSize="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+	<queryString>
+		<![CDATA[SELECT * FROM pacientes]]>
+	</queryString>
+	<field name="idPaciente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dtNascimento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="matricula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="curso" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="turma" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rua" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="numero" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bairro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="municipio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="uf" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefone" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomeMae" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefoneMae" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomePai" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefonePai" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nomeResponsavel" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telefoneResponsavel" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sexo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="peso" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="altura" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoSanguineo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mora" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="regime" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="planoSaude" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cartaoSus" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vacinasInfancia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vacinasAdolescencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="vacinaFaltando" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="doencaInfanciaAdolescencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="catapora" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="caxumba" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dengue" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hepatite" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="meningite" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pneumonia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rubeola" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sarampo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cirurgiaRealizada" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="alergiaMedicamentosa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="alergiaAlimentar" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cancer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cardiopatias" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="diabetes" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hipertensaoArterial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="oftalmologico" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="renal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="mental" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="doencaEspecifica" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nenhumaDificuldadeRegistrada" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="doencaCronica" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="deficienciaAuditiva" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="deficienciaFisica" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="deficienciaVisual" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dificuldadeConcentracao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dificuldadeEscrita" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="dificuldadeLeitura" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="superdotacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="transtornoDesenvolvimento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nenhumaEspecifica" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="protese" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="asma" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bronquite" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cronicaDiabetes" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pressaoAlta" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="problemaCardiaco" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="problemaRenal" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="rinite" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="doencaCronicaOutros" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="acompanhamentoProblema" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="medicamentoContinuo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desmaios" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="epistaxe" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pressaoArterial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cefaleia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="diarreia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="colica" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="psicologico" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fonaudiologo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fisioterapia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="terapiaOcupacional" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="acompanhamentoEspecializadoOutro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="anotacaoRelevante" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="contatoEmergencia" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="102" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="67" width="555" height="35" uuid="8ca25ebd-5efd-42f4-ba1e-fd6fe3eb9b8d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[CGAE - COORDENAÇÃO GERAL DE ASSISTÊNCIA AO EDUCANDO FAE - FICHA DE ASSISTÊNCIA AO EDUCANDO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="522" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="20" uuid="fb5197e7-df45-4308-8669-f614951780ba"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[IDENTIFICAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="100" height="20" uuid="c7911474-b45e-48cf-acdf-1eb885deb506"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="40" width="221" height="20" uuid="96b35f81-5fcc-4a29-bf0b-f40c11dd5567"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="20" uuid="707d40d9-5c42-4469-a258-355910e4c18a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CURSO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="60" width="221" height="20" uuid="321e3c19-e2ca-4a6f-a89d-87f74a87d31f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{curso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="321" y="40" width="100" height="20" uuid="4b269b68-0f5b-415e-b2ee-e99347e4d499"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DATA NASC. :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="421" y="40" width="100" height="20" uuid="fbb0e449-69b0-429f-b920-fa457235b3e2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dtNascimento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="321" y="60" width="100" height="20" uuid="6b670ba8-e56e-4f55-b26c-a5e146b97eba"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TURMA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="421" y="60" width="100" height="20" uuid="1e68b295-d64a-45a5-ad76-fb64749011da"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{turma}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="281" width="100" height="20" uuid="7460afdf-bb41-4325-a834-d3794e2c6749"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME DA MÃE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="281" width="221" height="20" uuid="53f909bb-a315-4c00-b371-18beb374407e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeMae}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="321" y="281" width="100" height="20" uuid="090edb4d-d3fa-44b1-8927-fb7b35a6cc3a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="421" y="281" width="100" height="20" uuid="1aadef35-50c4-4a47-a962-99c51c33cc8f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefoneMae}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="301" width="100" height="20" uuid="425e8ae7-98be-4e21-b301-f364ea64b90f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME DO PAI]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="301" width="221" height="20" uuid="d3f6061f-ede7-48e5-b620-1c77cc33c218"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomePai}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="321" y="301" width="100" height="20" uuid="0341e90a-662f-404c-96b8-1e4fde26460d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="421" y="301" width="100" height="20" uuid="41778570-4592-4618-9f4f-4db08c7addcc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefonePai}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="321" width="100" height="20" uuid="e5302230-28bf-464d-a70b-18512aea33aa"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESPONSÁVEL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="321" width="221" height="20" uuid="d68847da-d0c6-4ab9-a672-5b3980b34659"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomeResponsavel}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="321" y="321" width="100" height="20" uuid="d9c2b913-2890-4160-91ee-eb6a6168cd8c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="421" y="321" width="100" height="20" uuid="fede7800-7b12-4f5b-b9fc-0571f672b6b3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefoneResponsavel}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="47" height="20" uuid="c95bb830-104d-43f0-9656-3070b81b8017"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEXO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="47" y="100" width="53" height="20" uuid="ccb9d430-155e-45dd-881f-d93b0cb9667a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sexo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="101" y="100" width="46" height="20" uuid="be51edf1-24e7-4e3a-810c-a0b76e79f790"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PESO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="147" y="100" width="58" height="20" uuid="60f6ebe9-4817-47af-8bee-f6a780c527c2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{peso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="205" y="100" width="57" height="20" uuid="d5b8b18f-3c57-4859-bfcf-0cfb410fdf2c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALTURA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="261" y="100" width="60" height="20" uuid="53a89fd4-cb1c-4b95-a84f-bd53368d5c8f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{altura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="321" y="100" width="114" height="20" uuid="d95ed039-92ca-415b-8dc9-77cd9259839f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO SANGUÍNEO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="435" y="100" width="86" height="20" uuid="0e4c2072-290b-4c45-b938-8e9da88db6d5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipoSanguineo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="120" width="100" height="20" uuid="4c263e0f-0785-4cc9-8f95-ae8609919c6f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MORADIA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="120" width="104" height="20" uuid="c8971e79-c9ae-4868-923e-068414f7f376"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mora}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="204" y="120" width="57" height="20" uuid="0e981544-4605-46cd-b585-15e733163334"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REGIME]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="261" y="120" width="60" height="20" uuid="de87874a-5f94-4267-a1f4-8b9bfc568441"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{regime}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="321" y="120" width="114" height="20" uuid="647f54bc-6833-406e-a0b0-585d264e409d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PLANO DE SAÚDE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="435" y="120" width="86" height="20" uuid="15fa96e7-811d-447f-ab2d-27c6b13a4f2a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{planoSaude}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="140" width="100" height="20" uuid="5bda4645-4286-4ff5-99bf-6d76995ae8bd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CARTÃO SUS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="101" y="140" width="100" height="20" uuid="feb21478-fe00-437b-825b-bd7ba5bf121a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cartaoSus}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="200" width="100" height="20" uuid="722fdf6c-27b6-4f05-8121-7c8e45edb55f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="200" width="131" height="20" uuid="ad6f2a51-e6a8-45e2-8685-7f7c30d385d5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{rua}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="231" y="200" width="30" height="20" uuid="a7149786-2790-4e9f-b093-52ff04d86ea4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="261" y="200" width="54" height="20" uuid="a4090003-ca75-4c2d-8cfc-18bf70ed65b8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="315" y="200" width="100" height="20" uuid="fb4d6048-b264-43a3-aaef-d0e5910b2563"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BAIRRO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="415" y="200" width="124" height="20" uuid="4741f272-2a8d-4a40-accc-338d95291a32"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bairro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="220" width="100" height="20" uuid="e300b4e3-9819-4454-b6cb-affbb3415829"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CIDADE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="220" width="131" height="20" uuid="b1566a04-2688-4d37-8fef-fddec02993f2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{municipio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="231" y="220" width="30" height="20" uuid="bda74e7c-c542-451f-b51c-a85892c3292e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="262" y="220" width="54" height="20" uuid="e9a4e21a-b5ea-4651-b38c-84ee24941ad2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{uf}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="234" y="80" width="87" height="20" uuid="e5fcd174-a3c3-4577-8ce4-16e6bb3b7479"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONE]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="321" y="80" width="100" height="20" uuid="9cbcb0b3-b2a0-4f91-a2f8-4f85364dd46f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="361" width="147" height="20" uuid="c29d5194-71f2-4671-adaa-bd3ee33f31e2"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[HISTÓRIA PREGRESSA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="441" width="203" height="20" uuid="6ebf79a4-fec2-488f-91f1-446617fb05d4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VACINAS NA INFÂNCIA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="204" y="441" width="350" height="20" uuid="fa45e20d-7d56-4539-ac49-74ccdc64a822"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vacinasInfancia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="461" width="203" height="20" uuid="1845f844-1bb9-4ace-94b7-2ed60389966d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VACINAS NA ADOLESCÊNCIA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="204" y="461" width="350" height="20" uuid="baea1ca4-0f23-41e9-b951-7fa50acc2d29"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vacinasAdolescencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="204" y="481" width="350" height="20" uuid="9cc10176-b265-4039-842f-fd5d08f6bf0e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vacinaFaltando}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="501" width="288" height="20" uuid="e1a84ab1-e5a2-4d34-abbb-c085872c1cd3"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOENÇAS NA INFÂNCIA E ADOLESCÊNCIA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="289" y="501" width="266" height="20" uuid="033f316f-f205-476b-9ab6-c251276ad4a7"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{doencaInfanciaAdolescencia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="421" width="204" height="20" uuid="a9f90d32-a254-4a24-ab21-e04a18efb87e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CIRURGIAS REALIZADAS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="205" y="421" width="350" height="20" uuid="8af17c8f-4f77-4358-b26e-b208749a01ec"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cirurgiaRealizada}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="401" width="204" height="20" uuid="bb9ce4af-4e42-4dd3-9990-f7686a12ced1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALERGIAS MEDICAMENTOSOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="204" y="401" width="350" height="20" uuid="79804857-cba6-4746-8ee4-a7a2a29a23d8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{alergiaMedicamentosa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="381" width="204" height="20" uuid="5403b630-34e7-416a-8162-3ccaa91ef94a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ALERGIA ALIMENTAR]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="205" y="381" width="350" height="20" uuid="1989da29-7c31-4bfb-93e5-e254e928afb0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{alergiaAlimentar}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="80" width="100" height="20" uuid="60eb6b01-9f8d-4e8d-bb1d-ebe4df671ec1"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="80" width="100" height="20" uuid="4561af36-c181-4d9b-a642-6f4607091912"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="180" width="100" height="20" uuid="a5318e67-e3f4-4c0e-9118-50a2af99d241"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[ENDEREÇO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="260" width="100" height="20" uuid="a6505854-1a8f-49a7-b89a-b6230c8ed556"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[CONTATOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="481" width="203" height="20" uuid="d0fdfbd3-b8d0-49bd-945c-736c717a7ffe"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VACINAS FALTANDO]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
