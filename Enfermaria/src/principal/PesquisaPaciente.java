@@ -1,5 +1,7 @@
 /*
- * Classe Pesquisar Paciente.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package principal;
 
@@ -68,6 +70,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
     }
 
     public void saiMouse(JButton botao) {
+
         botao.setOpaque(false);
         botao.setContentAreaFilled(false);
         botao.setBorderPainted(false);
@@ -87,6 +90,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             while (rs.next()) {
 
                 tabelaPacientes.addRow(new String[]{rs.getString("nome"), rs.getString("cpf"), rs.getString("dtNascimento"), rs.getString("idPaciente")});
+
             }
 
         } catch (SQLException ex) {
@@ -110,6 +114,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
     }
 
     public void deletaDoBD() {
+
         PreparedStatement pstmt = null;
         if (tblPacientes.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não há pacientes registrados");

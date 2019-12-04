@@ -1,5 +1,7 @@
 /*
- * Classe do Cartão de Vacinação.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package cartaovacina;
 
@@ -163,6 +165,7 @@ public class AlterarCartao extends javax.swing.JFrame {
                 tfInfluenza8.setText(rs.getString("influenza8"));
                 tfLoteInfluenza8.setText(rs.getString("loteInfluenza8"));
                 tfValInfluenza8.setText(rs.getString("valInfluenza8"));
+
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);

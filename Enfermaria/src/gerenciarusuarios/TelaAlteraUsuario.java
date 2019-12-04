@@ -1,5 +1,7 @@
 /*
- * Classe de Alterar Usuário.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package gerenciarusuarios;
 
@@ -50,6 +52,7 @@ public class TelaAlteraUsuario extends javax.swing.JFrame {
     }
 
     public void saiMouse(JButton botao) {
+
         botao.setOpaque(false);
         botao.setContentAreaFilled(false);
         botao.setBorderPainted(false);
@@ -79,6 +82,7 @@ public class TelaAlteraUsuario extends javax.swing.JFrame {
         } else {
             this.caixaUsuario();
         }
+
     }
 
     public void valorCampos() {
@@ -92,6 +96,7 @@ public class TelaAlteraUsuario extends javax.swing.JFrame {
         } else {
             administrador = 0;
         }
+
     }
 
     public void preencheCampos() {
@@ -428,6 +433,7 @@ public class TelaAlteraUsuario extends javax.swing.JFrame {
         cpfVazio= cpfVazio.replace("/", "");
         cpfVazio= cpfVazio.replace(".", "");
         cpfVazio= cpfVazio.replace("-", "");
+        System.out.println(cpfVazio);
         if(tfNome.getText().equals("") || tfMatricula.getText().equals("") || cpfVazio.trim().length()==0){
             JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios (campos com *)", "ERRO", JOptionPane.ERROR_MESSAGE);
         }

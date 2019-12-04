@@ -1,5 +1,7 @@
 /*
- * Classe de Encaminhamentos ao hospital.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package hospital;
 
@@ -50,6 +52,7 @@ public class TelaEncaminhamentos extends javax.swing.JFrame {
     }
 
     public void saiMouse(JButton botao) {
+
         botao.setOpaque(false);
         botao.setContentAreaFilled(false);
         botao.setBorderPainted(false);
@@ -560,8 +563,9 @@ public class TelaEncaminhamentos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "PREENCHA OS CAMPOS COM *", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         else{
-            this.inserirBD();
+        this.inserirBD();
         }
+
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed

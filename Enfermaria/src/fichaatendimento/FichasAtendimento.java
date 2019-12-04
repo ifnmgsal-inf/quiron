@@ -1,5 +1,7 @@
 /*
- * Classe da Ficha Médica (consulta).
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package fichaatendimento;
 
@@ -53,6 +55,7 @@ public class FichasAtendimento extends javax.swing.JFrame {
     }
 
     public void saiMouse(JButton botao) {
+
         botao.setOpaque(false);
         botao.setContentAreaFilled(false);
         botao.setBorderPainted(false);
@@ -545,6 +548,7 @@ public class FichasAtendimento extends javax.swing.JFrame {
             }
             this.inserirBD();
         }
+
     }//GEN-LAST:event_formWindowClosing
 
     private void tfRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfRuaActionPerformed

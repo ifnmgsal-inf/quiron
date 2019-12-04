@@ -1,5 +1,7 @@
 /*
- * Classe do Relatório.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package relatorio;
 
@@ -46,6 +48,7 @@ public class TelaRelatorios extends javax.swing.JFrame {
     }
 
     public void saiMouse(JButton botao) {
+
         botao.setOpaque(false);
         botao.setContentAreaFilled(false);
         botao.setBorderPainted(false);
@@ -304,8 +307,8 @@ public class TelaRelatorios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha a data inicial e a final", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         else{
-            this.calculaAtendimentos();
-            this.calculaEncaminhamentos();
+        this.calculaAtendimentos();
+        this.calculaEncaminhamentos();
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 

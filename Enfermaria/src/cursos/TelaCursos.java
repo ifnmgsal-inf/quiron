@@ -1,5 +1,7 @@
 /*
- * Classe de Cadastrar Cursos.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package cursos;
 
@@ -42,6 +44,7 @@ public class TelaCursos extends javax.swing.JFrame {
     }
 
     public void saiMouse(JButton botao) {
+
         botao.setOpaque(false);
         botao.setContentAreaFilled(false);
         botao.setBorderPainted(false);
@@ -400,7 +403,8 @@ public class TelaCursos extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         else
-            this.adicionarCurso();
+        this.adicionarCurso();
+        
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -427,8 +431,6 @@ public class TelaCursos extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-        } catch (ArrayIndexOutOfBoundsException ax) {
-            JOptionPane.showMessageDialog(null, "Selecione/Insira o curso a ser alterado ", "ERRO", JOptionPane.ERROR_MESSAGE);
         }
         this.preencheTabela();
         this.travarCampos();
@@ -436,7 +438,7 @@ public class TelaCursos extends javax.swing.JFrame {
         this.resetBotoes();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    public void adicionarCurso() {
+    public void adicionarCurso(){
         PreparedStatement pstmt = null;
         String qry = "INSERT INTO cursos(curso, nivel) VALUES(?,?)";
 
