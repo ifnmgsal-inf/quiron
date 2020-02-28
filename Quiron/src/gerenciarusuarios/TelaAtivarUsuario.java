@@ -159,7 +159,7 @@ public class TelaAtivarUsuario extends javax.swing.JFrame {
 
         lblImagemUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Usuário M.png"))); // NOI18N
         pnlAtivarUsuario.add(lblImagemUsuario);
-        lblImagemUsuario.setBounds(150, 70, 0, 0);
+        lblImagemUsuario.setBounds(150, 70, 110, 110);
 
         lblImagemLapis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Lápis P.png"))); // NOI18N
         pnlAtivarUsuario.add(lblImagemLapis);

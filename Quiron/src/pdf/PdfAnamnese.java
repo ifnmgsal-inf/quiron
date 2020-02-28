@@ -6,19 +6,21 @@
 package pdf;
 
 import bancodedados.MysqlConnect;
-import com.itextpdf.text.BadElementException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.PageSize;
+
 import java.awt.Desktop;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import principal.PesquisaPaciente;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -26,27 +28,28 @@ import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author roger
  */
-public class PdfAnamnese {
+public class PdfAnamnese{
 
     Connection conn = null;
-
     Document documento = new Document();
     //Definindo Fontes
     Font fonteTitulo = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD + Font.UNDERLINE);
     Font fontePergunta = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
     Font fonteAlternativa = new Font(Font.FontFamily.TIMES_ROMAN, 12);
     Font fonteResposta = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.UNDERLINE);
-
+    
     public void conectar() {
         try {
             conn = MysqlConnect.connectDB();
@@ -490,15 +493,20 @@ public class PdfAnamnese {
                 } else {
                     doencaCronica += "( )RINITE";
                 }
-                if ("Não".equals(rs.getString("doencaCronicaOutros"))) {
-                    doencaCronica += "( )OUTRAS ";
-                    this.criarParagrafoMultiplaEscolha("", doencaCronica, "");
-                } else if (null == rs.getString("doencaCronicaOutros")) {
+                if (null == rs.getString("doencaCronicaOutros")) {
                     doencaCronica += "( )OUTRAS ";
                     this.criarParagrafoMultiplaEscolha("", doencaCronica, "");
                 } else {
-                    doencaCronica += "(X)OUTRAS ";
-                    this.criarParagrafoMultiplaEscolha("", doencaCronica, rs.getString("doencaCronicaOutros"));
+                    switch (rs.getString("doencaCronicaOutros")) {
+                        case "Não":
+                            doencaCronica += "( )OUTRAS ";
+                            this.criarParagrafoMultiplaEscolha("", doencaCronica, "");
+                            break;
+                        default:
+                            doencaCronica += "(X)OUTRAS ";
+                            this.criarParagrafoMultiplaEscolha("", doencaCronica, rs.getString("doencaCronicaOutros"));
+                            break;
+                    }
                 }
 
                 //Acompanhamento
@@ -590,8 +598,6 @@ public class PdfAnamnese {
         try {
             PdfWriter.getInstance(documento, new FileOutputStream("PDF_Anamnese.pdf"));
             documento.setPageSize(PageSize.A4);
-
-            //Preparando o documento para receber dados
             documento.open();
 
             //Imagem - Logo IFNMG - Campus Salinas

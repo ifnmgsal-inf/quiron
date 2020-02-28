@@ -143,7 +143,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
         lblImagemUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Usuário M.png"))); // NOI18N
         pnlLogin.add(lblImagemUsuario);
-        lblImagemUsuario.setBounds(230, 20, 110, 110);
+        lblImagemUsuario.setBounds(230, 40, 110, 110);
 
         lblImagemFundo.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         lblImagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Login.png"))); // NOI18N

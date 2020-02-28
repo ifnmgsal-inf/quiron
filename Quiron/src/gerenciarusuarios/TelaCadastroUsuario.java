@@ -138,7 +138,7 @@ public class TelaCadastroUsuario extends javax.swing.JFrame {
 
         lblImagemUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Usuário M.png"))); // NOI18N
         pnlNovoUsuario.add(lblImagemUsuario);
-        lblImagemUsuario.setBounds(150, 70, 0, 0);
+        lblImagemUsuario.setBounds(150, 70, 110, 110);
 
         lblImagemMais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone + P.png"))); // NOI18N
         pnlNovoUsuario.add(lblImagemMais);

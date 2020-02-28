@@ -228,7 +228,7 @@ public class TelaAlteraUsuario extends javax.swing.JFrame {
 
         lblImagemUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Usuário M.png"))); // NOI18N
         pnlAlterarUsuario.add(lblImagemUsuario);
-        lblImagemUsuario.setBounds(150, 60, 0, 0);
+        lblImagemUsuario.setBounds(150, 60, 110, 110);
 
         lblImagemLapis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Lápis P.png"))); // NOI18N
         pnlAlterarUsuario.add(lblImagemLapis);
