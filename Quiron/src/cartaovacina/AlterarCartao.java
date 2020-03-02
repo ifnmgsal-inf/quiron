@@ -40,9 +40,10 @@ public class AlterarCartao extends javax.swing.JFrame {
         this.imprimirIdentificacao();
         this.imprimirDuplaAdulto();
         this.imprimirInfluenza();
-        this.imprimirHepatite();
-        this.imprimirVacinaAmarela();
+        this.imprimirFebre();
+        this.imprimirDuplaViral();
         this.imprimirTripliceViral();
+        this.imprimirOutras();
     }
 
     public void entraMouse(JButton botao) {
@@ -172,17 +173,17 @@ public class AlterarCartao extends javax.swing.JFrame {
         }
     }
 
-    public void imprimirHepatite() {
+    public void imprimirFebre() {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String qry = "SELECT hepatite1, loteHepatite1, valHepatite1,"
-                + " hepatite2, loteHepatite2, valHepatite2,"
-                + " hepatite3, loteHepatite3, valHepatite3,"
-                + " hepatite4, loteHepatite4, valHepatite4,"
-                + " hepatite5, loteHepatite5, valHepatite5,"
-                + " hepatite6, loteHepatite6, valHepatite6,"
-                + " hepatite7, loteHepatite7, valHepatite7,"
-                + " hepatite8, loteHepatite8, valHepatite8"
+        String qry = "SELECT febre1, loteFebre1, valFebre1,"
+                + " febre2, loteFebre2, valFebre2,"
+                + " febre3, loteFebre3, valFebre3,"
+                + " febre4, loteFebre4, valFebre4,"
+                + " febre5, loteFebre5, valFebre5,"
+                + " febre6, loteFebre6, valFebre6,"
+                + " febre7, loteFebre7, valFebre7,"
+                + " febre8, loteFebre8, valFebre8"
                 + " FROM cartaovacina WHERE idPaciente= ?";
 
         try {
@@ -191,41 +192,42 @@ public class AlterarCartao extends javax.swing.JFrame {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                tfHepatite1.setText(rs.getString("hepatite1"));
-                tfLoteHepatite1.setText(rs.getString("loteHepatite1"));
-                tfValHepatite1.setText(rs.getString("valHepatite1"));
-                tfHepatite2.setText(rs.getString("hepatite2"));
-                tfLoteHepatite2.setText(rs.getString("loteHepatite2"));
-                tfValHepatite2.setText(rs.getString("valHepatite2"));
-                tfHepatite3.setText(rs.getString("hepatite3"));
-                tfLoteHepatite3.setText(rs.getString("loteHepatite3"));
-                tfValHepatite3.setText(rs.getString("valHepatite3"));
-                tfHepatite4.setText(rs.getString("hepatite4"));
-                tfLoteHepatite4.setText(rs.getString("loteHepatite4"));
-                tfValHepatite4.setText(rs.getString("valHepatite4"));
-                tfHepatite5.setText(rs.getString("hepatite5"));
-                tfLoteHepatite5.setText(rs.getString("loteHepatite5"));
-                tfValHepatite5.setText(rs.getString("valHepatite5"));
-                tfHepatite6.setText(rs.getString("hepatite6"));
-                tfLoteHepatite6.setText(rs.getString("loteHepatite6"));
-                tfValHepatite6.setText(rs.getString("valHepatite6"));
-                tfHepatite7.setText(rs.getString("hepatite7"));
-                tfLoteHepatite7.setText(rs.getString("loteHepatite7"));
-                tfValHepatite7.setText(rs.getString("valHepatite7"));
-                tfHepatite8.setText(rs.getString("hepatite8"));
-                tfLoteHepatite8.setText(rs.getString("loteHepatite8"));
-                tfValHepatite8.setText(rs.getString("valHepatite8"));
+                tfFebre1.setText(rs.getString("febre1"));
+                tfLoteFebre1.setText(rs.getString("loteFebre1"));
+                tfValFebre1.setText(rs.getString("valFebre1"));
+                tfFebre2.setText(rs.getString("febre2"));
+                tfLoteFebre2.setText(rs.getString("loteFebre2"));
+                tfValFebre2.setText(rs.getString("valFebre2"));
+                tfFebre3.setText(rs.getString("febre3"));
+                tfLoteFebre3.setText(rs.getString("loteFebre3"));
+                tfValFebre3.setText(rs.getString("valFebre3"));
+                tfFebre4.setText(rs.getString("febre4"));
+                tfLoteFebre4.setText(rs.getString("loteFebre4"));
+                tfValFebre4.setText(rs.getString("valFebre4"));
+                tfFebre5.setText(rs.getString("febre5"));
+                tfLoteFebre5.setText(rs.getString("loteFebre5"));
+                tfValFebre5.setText(rs.getString("valFebre5"));
+                tfFebre6.setText(rs.getString("febre6"));
+                tfLoteFebre6.setText(rs.getString("loteFebre6"));
+                tfValFebre6.setText(rs.getString("valFebre6"));
+                tfFebre7.setText(rs.getString("febre7"));
+                tfLoteFebre7.setText(rs.getString("loteFebre7"));
+                tfValFebre7.setText(rs.getString("valFebre7"));
+                tfFebre8.setText(rs.getString("febre8"));
+                tfLoteFebre8.setText(rs.getString("loteFebre8"));
+                tfValFebre8.setText(rs.getString("valFebre8"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    public void imprimirVacinaAmarela() {
+    public void imprimirDuplaViral() {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String qry = "SELECT doseInicial, loteFebre, valFebre,"
-                + " revacinacao, loteRevacinacao, valRevacinacao"
+
+        String qry = "SELECT duplaViral1, loteDupla1, valDupla1,"
+                + " duplaViral2, loteDupla2, valDupla2"
                 + " FROM cartaovacina WHERE idPaciente= ?";
 
         try {
@@ -234,12 +236,12 @@ public class AlterarCartao extends javax.swing.JFrame {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                tfDoseInicial.setText(rs.getString("doseInicial"));
-                tfLoteFebre.setText(rs.getString("loteFebre"));
-                tfValFebre.setText(rs.getString("valFebre"));
-                tfRevacinacao.setText(rs.getString("revacinacao"));
-                tfLoteRevacinacao.setText(rs.getString("loteRevacinacao"));
-                tfValRevacinacao.setText(rs.getString("valRevacinacao"));
+                tfDuplaViral1.setText(rs.getString("duplaViral1"));
+                tfLoteDupla1.setText(rs.getString("loteDupla1"));
+                tfValDupla1.setText(rs.getString("valDupla1"));
+                tfDuplaViral2.setText(rs.getString("duplaViral2"));
+                tfLoteDuplaViral2.setText(rs.getString("loteDupla2"));
+                tfValDupla2.setText(rs.getString("valDupla2"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -271,32 +273,43 @@ public class AlterarCartao extends javax.swing.JFrame {
         }
     }
 
-    /*public void atualizarCartao() {
+    public void imprimirOutras() {
         PreparedStatement pstmt = null;
-        String qry = "INSERT INTO CartaoVacina(nome, dn, tipoSanguineo,"
-                + " endereco, municipio, uf, telefone, grs, idPaciente, cpf) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        ResultSet rs = null;
+        String qry = "SELECT outra1, dtOutra1, loteOutra1, valOutra1, outra1d2,"
+                + " dtOutra1d2, loteOutra1d2, valOutra1d2, outra2, dtOutra2,"
+                + " loteOutra2, valOutra2, outra2d2, dtOutra2d2, loteOutra2d2, valOutra2d2"
+                + " FROM cartaovacina WHERE idPaciente= ?";
 
         try {
             pstmt = conn.prepareStatement(qry);
-            pstmt.setString(1, tfNome.getText());
-            pstmt.setString(2, tfDN.getText());
-            pstmt.setString(3, tfTipoSanguineo.getText());
-            pstmt.setString(4, tfEndereco.getText());
-            pstmt.setString(5, tfMunicipio.getText());
-            pstmt.setString(6, tfUF.getText());
-            pstmt.setString(7, tfTelefone.getText());
-            pstmt.setString(8, tfGRS.getText());
-            pstmt.setString(9, tfIdPaciente.getText());
-            pstmt.setString(10, tfCpf.getText());
+            pstmt.setString(1, tfIdPaciente.getText());
+            rs = pstmt.executeQuery();
 
-            pstmt.executeUpdate();
+            while (rs.next()) {
+                tfOutra1.setText(rs.getString("outra1"));
+                tfDtOutra1.setText(rs.getString("dtOutra1"));
+                tfLoteOutra1.setText(rs.getString("loteOutra1"));
+                tfValOutra1.setText(rs.getString("valOutra1"));
+                tfOutra1d2.setText(rs.getString("outra1d2"));
+                tfDtOutra1d2.setText(rs.getString("dtOutra1d2"));
+                tfLoteOutra1d2.setText(rs.getString("loteOutra1d2"));
+                tfValOutra1d2.setText(rs.getString("valOutra1d2"));
 
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+                tfOutra2.setText(rs.getString("outra2"));
+                tfDtOutra2.setText(rs.getString("dtOutra2"));
+                tfLoteOutra2.setText(rs.getString("loteOutra2"));
+                tfValOutra2.setText(rs.getString("valOutra2"));
+                tfOutra2d2.setText(rs.getString("outra2d2"));
+                tfDtOutra2d2.setText(rs.getString("dtOutra2d2"));
+                tfLoteOutra2d2.setText(rs.getString("loteOutra2d2"));
+                tfValOutra2d2.setText(rs.getString("valOutra2d2"));
 
+            }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
-    }*/
+    }
 
     public void atualizarCartao() {
         PreparedStatement pstmt = null;
@@ -394,40 +407,41 @@ public class AlterarCartao extends javax.swing.JFrame {
         }
     }
 
-    public void atualizarHepatite() {
+    public void atualizarFebreAmarela() {
         PreparedStatement pstmt = null;
-        String qry = "UPDATE CartaoVacina SET hepatite1= ?, loteHepatite1= ?, valHepatite1= ?, hepatite2= ?, loteHepatite2= ?, valHepatite2= ?, "
-                + "hepatite3= ?, loteHepatite3= ?, valHepatite3= ?, hepatite4= ?, loteHepatite4= ?, valHepatite4= ?, "
-                + "hepatite5= ?, loteHepatite5= ?, valHepatite5= ?, hepatite6= ?, loteHepatite6= ?, valHepatite6= ?, "
-                + "hepatite7= ?, loteHepatite7= ?, valHepatite7= ?, hepatite8= ?, loteHepatite8= ?, valHepatite8= ?"
-                + " WHERE idPaciente= ?";
+        String qry = "UPDATE cartaovacina SET "
+                + "febre1= ?, loteFebre1= ?, valFebre1= ?, febre2= ?, loteFebre2= ?, valFebre2= ?, "
+                + "febre3= ?, loteFebre3= ?, valFebre3= ?, febre4= ?, loteFebre4= ?, valFebre4= ?, "
+                + "febre5= ?, loteFebre5= ?, valFebre5= ?, febre6= ?, loteFebre6= ?, valFebre6= ?, "
+                + "febre7= ?, loteFebre7= ?, valFebre7= ?, febre8= ?, loteFebre8= ?, valFebre8= ? "
+                + "WHERE idPaciente= ?";
 
         try {
             pstmt = conn.prepareStatement(qry);
-            pstmt.setString(1, tfHepatite1.getText());
-            pstmt.setString(2, tfLoteHepatite1.getText());
-            pstmt.setString(3, tfValHepatite1.getText());
-            pstmt.setString(4, tfHepatite2.getText());
-            pstmt.setString(5, tfLoteHepatite2.getText());
-            pstmt.setString(6, tfValHepatite2.getText());
-            pstmt.setString(7, tfHepatite3.getText());
-            pstmt.setString(8, tfLoteHepatite3.getText());
-            pstmt.setString(9, tfValHepatite3.getText());
-            pstmt.setString(10, tfHepatite4.getText());
-            pstmt.setString(11, tfLoteHepatite4.getText());
-            pstmt.setString(12, tfValHepatite4.getText());
-            pstmt.setString(13, tfHepatite5.getText());
-            pstmt.setString(14, tfLoteHepatite5.getText());
-            pstmt.setString(15, tfValHepatite5.getText());
-            pstmt.setString(16, tfHepatite6.getText());
-            pstmt.setString(17, tfLoteHepatite6.getText());
-            pstmt.setString(18, tfValHepatite6.getText());
-            pstmt.setString(19, tfHepatite7.getText());
-            pstmt.setString(20, tfLoteHepatite7.getText());
-            pstmt.setString(21, tfValHepatite7.getText());
-            pstmt.setString(22, tfHepatite8.getText());
-            pstmt.setString(23, tfLoteHepatite8.getText());
-            pstmt.setString(24, tfValHepatite8.getText());
+            pstmt.setString(1, tfFebre1.getText());
+            pstmt.setString(2, tfLoteFebre1.getText());
+            pstmt.setString(3, tfValFebre1.getText());
+            pstmt.setString(4, tfFebre2.getText());
+            pstmt.setString(5, tfLoteFebre2.getText());
+            pstmt.setString(6, tfValFebre2.getText());
+            pstmt.setString(7, tfFebre3.getText());
+            pstmt.setString(8, tfLoteFebre3.getText());
+            pstmt.setString(9, tfValFebre3.getText());
+            pstmt.setString(10, tfFebre4.getText());
+            pstmt.setString(11, tfLoteFebre4.getText());
+            pstmt.setString(12, tfValFebre4.getText());
+            pstmt.setString(13, tfFebre5.getText());
+            pstmt.setString(14, tfLoteFebre5.getText());
+            pstmt.setString(15, tfValFebre5.getText());
+            pstmt.setString(16, tfFebre6.getText());
+            pstmt.setString(17, tfLoteFebre6.getText());
+            pstmt.setString(18, tfValFebre6.getText());
+            pstmt.setString(19, tfFebre7.getText());
+            pstmt.setString(20, tfLoteFebre7.getText());
+            pstmt.setString(21, tfValFebre7.getText());
+            pstmt.setString(22, tfFebre8.getText());
+            pstmt.setString(23, tfLoteFebre8.getText());
+            pstmt.setString(24, tfValFebre8.getText());
             pstmt.setString(25, tfIdPaciente.getText());
 
             pstmt.executeUpdate();
@@ -439,21 +453,21 @@ public class AlterarCartao extends javax.swing.JFrame {
         }
     }
 
-    public void atualizarFebreAmarela() {
+    public void atualizarDuplaViral() {
         PreparedStatement pstmt = null;
-        String qry = "UPDATE CartaoVacina SET doseInicial= ?, loteFebre= ?,"
-                + " valFebre= ?, revacinacao= ?, loteRevacinacao= ?, valRevacinacao= ?"
+        String qry = "UPDATE CartaoVacina SET duplaViral1= ?, loteDupla1= ?,"
+                + " valDupla1= ?, duplaViral2= ?, loteDupla2= ?, valDupla2= ?"
                 + " WHERE idPaciente= ?";
 
         try {
             pstmt = conn.prepareStatement(qry);
-            pstmt.setString(1, tfDoseInicial.getText());
-            pstmt.setString(2, tfLoteFebre.getText());
-            pstmt.setString(3, tfValFebre.getText());
-            pstmt.setString(4, tfRevacinacao.getText());
-            pstmt.setString(5, tfLoteRevacinacao.getText());
-            pstmt.setString(6, tfValRevacinacao.getText());
-                pstmt.setString(7, tfIdPaciente.getText());
+            pstmt.setString(1, tfDuplaViral1.getText());
+            pstmt.setString(2, tfLoteDupla1.getText());
+            pstmt.setString(3, tfValDupla1.getText());
+            pstmt.setString(4, tfDuplaViral2.getText());
+            pstmt.setString(5, tfLoteDuplaViral2.getText());
+            pstmt.setString(6, tfValDupla2.getText());
+            pstmt.setString(7, tfIdPaciente.getText());
 
             pstmt.executeUpdate();
 
@@ -479,6 +493,45 @@ public class AlterarCartao extends javax.swing.JFrame {
             pstmt.setString(5, tfLoteTriplice2.getText());
             pstmt.setString(6, tfValTriplice2.getText());
             pstmt.setString(7, tfIdPaciente.getText());
+
+            pstmt.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void atualizarOutras() {
+        PreparedStatement pstmt = null;
+        String qry = "UPDATE cartaovacina SET outra1= ?, dtOutra1= ?,"
+                + " loteOutra1= ?, valOutra1= ?, outra1d2= ?, dtOutra1d2= ?,"
+                + " loteOutra1d2= ?, valOutra1d2= ?,"
+                + " outra2= ?, dtOutra2= ?, loteOutra2= ?, valOutra2= ?,"
+                + " outra2d2= ?, dtOutra2d2= ?, loteOutra2d2= ?, valOutra2d2= ?"
+                + " WHERE idPaciente= ?";
+
+        try {
+            pstmt = conn.prepareStatement(qry);
+            pstmt.setString(1, tfOutra1.getText());
+            pstmt.setString(2, tfDtOutra1.getText());
+            pstmt.setString(3, tfLoteOutra1.getText());
+            pstmt.setString(4, tfValOutra1.getText());
+            pstmt.setString(5, tfOutra1d2.getText());
+            pstmt.setString(6, tfDtOutra1d2.getText());
+            pstmt.setString(7, tfLoteOutra1d2.getText());
+            pstmt.setString(8, tfValOutra1d2.getText());
+
+            pstmt.setString(9, tfOutra2.getText());
+            pstmt.setString(10, tfDtOutra2.getText());
+            pstmt.setString(11, tfLoteOutra2.getText());
+            pstmt.setString(12, tfValOutra2.getText());
+            pstmt.setString(13, tfOutra2d2.getText());
+            pstmt.setString(14, tfDtOutra2d2.getText());
+            pstmt.setString(15, tfLoteOutra2d2.getText());
+            pstmt.setString(16, tfValOutra2d2.getText());
+            pstmt.setString(17, tfIdPaciente.getText());
 
             pstmt.executeUpdate();
 
@@ -601,67 +654,67 @@ public class AlterarCartao extends javax.swing.JFrame {
         tfValInfluenza2 = new javax.swing.JFormattedTextField();
         lblValInfluenza5 = new javax.swing.JLabel();
         lblFundo3 = new javax.swing.JLabel();
-        pnlHepatiteB = new javax.swing.JPanel();
-        pnlHepatiteInterno = new javax.swing.JPanel();
+        pnlFebre = new javax.swing.JPanel();
+        pnlFebreAmarelaInterno = new javax.swing.JPanel();
         lblValHepatite5 = new javax.swing.JLabel();
-        tfValHepatite6 = new javax.swing.JFormattedTextField();
+        tfValFebre6 = new javax.swing.JFormattedTextField();
         lblValHepatite1 = new javax.swing.JLabel();
-        tfHepatite7 = new javax.swing.JFormattedTextField();
-        tfValHepatite2 = new javax.swing.JFormattedTextField();
+        tfFebre7 = new javax.swing.JFormattedTextField();
+        tfValFebre2 = new javax.swing.JFormattedTextField();
         lblLoteHepatite6 = new javax.swing.JLabel();
-        tfHepatite3 = new javax.swing.JFormattedTextField();
-        tfLoteHepatite7 = new javax.swing.JTextField();
+        tfFebre3 = new javax.swing.JFormattedTextField();
+        tfLoteFebre7 = new javax.swing.JTextField();
         lblLoteHepatite2 = new javax.swing.JLabel();
         lblValHepatite6 = new javax.swing.JLabel();
-        tfLoteHepatite3 = new javax.swing.JTextField();
-        tfValHepatite7 = new javax.swing.JFormattedTextField();
+        tfLoteFebre3 = new javax.swing.JTextField();
+        tfValFebre7 = new javax.swing.JFormattedTextField();
         lblValHepatite2 = new javax.swing.JLabel();
-        tfHepatite8 = new javax.swing.JFormattedTextField();
-        tfValHepatite3 = new javax.swing.JFormattedTextField();
+        tfFebre8 = new javax.swing.JFormattedTextField();
+        tfValFebre3 = new javax.swing.JFormattedTextField();
         lblLoteHepatite7 = new javax.swing.JLabel();
-        tfHepatite4 = new javax.swing.JFormattedTextField();
-        tfLoteHepatite8 = new javax.swing.JTextField();
+        tfFebre4 = new javax.swing.JFormattedTextField();
+        tfLoteFebre8 = new javax.swing.JTextField();
         lblLoteHepatite3 = new javax.swing.JLabel();
-        tfLoteHepatite4 = new javax.swing.JTextField();
+        tfLoteFebre4 = new javax.swing.JTextField();
         lblValHepatite7 = new javax.swing.JLabel();
-        tfValHepatite8 = new javax.swing.JFormattedTextField();
+        tfValFebre8 = new javax.swing.JFormattedTextField();
         lblValHepatite3 = new javax.swing.JLabel();
-        btnSalvarHepatite = new javax.swing.JButton();
-        tfValHepatite4 = new javax.swing.JFormattedTextField();
-        tfHepatite5 = new javax.swing.JFormattedTextField();
-        lblHepatiteB = new javax.swing.JLabel();
+        btnSalvarFebre = new javax.swing.JButton();
+        tfValFebre4 = new javax.swing.JFormattedTextField();
+        tfFebre5 = new javax.swing.JFormattedTextField();
+        lblFebreAmarela = new javax.swing.JLabel();
         lblLoteHepatite4 = new javax.swing.JLabel();
-        tfHepatite1 = new javax.swing.JFormattedTextField();
-        tfLoteHepatite5 = new javax.swing.JTextField();
+        tfFebre1 = new javax.swing.JFormattedTextField();
+        tfLoteFebre5 = new javax.swing.JTextField();
         lblLoteHepatite = new javax.swing.JLabel();
         lblValHepatite4 = new javax.swing.JLabel();
-        tfLoteHepatite1 = new javax.swing.JTextField();
-        tfValHepatite5 = new javax.swing.JFormattedTextField();
+        tfLoteFebre1 = new javax.swing.JTextField();
+        tfValFebre5 = new javax.swing.JFormattedTextField();
         lblValHepatite = new javax.swing.JLabel();
-        tfHepatite6 = new javax.swing.JFormattedTextField();
-        tfValHepatite1 = new javax.swing.JFormattedTextField();
+        tfFebre6 = new javax.swing.JFormattedTextField();
+        tfValFebre1 = new javax.swing.JFormattedTextField();
         lblLoteHepatite5 = new javax.swing.JLabel();
-        tfHepatite2 = new javax.swing.JFormattedTextField();
-        tfLoteHepatite6 = new javax.swing.JTextField();
+        tfFebre2 = new javax.swing.JFormattedTextField();
+        tfLoteFebre6 = new javax.swing.JTextField();
         lblLoteHepatite1 = new javax.swing.JLabel();
-        tfLoteHepatite2 = new javax.swing.JTextField();
+        tfLoteFebre2 = new javax.swing.JTextField();
         lblFundo4 = new javax.swing.JLabel();
         pnlFebreAmarela = new javax.swing.JPanel();
         pnlFebreInterno = new javax.swing.JPanel();
         lblLoteRevacinacao = new javax.swing.JLabel();
-        lblDoseIncial = new javax.swing.JLabel();
+        lblDupla1 = new javax.swing.JLabel();
         lblValRevacinacao = new javax.swing.JLabel();
-        tfDoseInicial = new javax.swing.JFormattedTextField();
-        btnSalvarFebre = new javax.swing.JButton();
-        tfLoteFebre = new javax.swing.JTextField();
-        tfValFebre = new javax.swing.JFormattedTextField();
+        tfDuplaViral1 = new javax.swing.JFormattedTextField();
+        btnSalvarDuplaViral = new javax.swing.JButton();
+        tfLoteDupla1 = new javax.swing.JTextField();
+        tfValDupla1 = new javax.swing.JFormattedTextField();
         lblLoteFebre = new javax.swing.JLabel();
         lblValFebre = new javax.swing.JLabel();
-        lblRevacinacao = new javax.swing.JLabel();
-        tfRevacinacao = new javax.swing.JFormattedTextField();
-        tfLoteRevacinacao = new javax.swing.JTextField();
-        tfValRevacinacao = new javax.swing.JFormattedTextField();
-        lblFebreAmarela = new javax.swing.JLabel();
+        lblDupla2 = new javax.swing.JLabel();
+        tfDuplaViral2 = new javax.swing.JFormattedTextField();
+        tfLoteDuplaViral2 = new javax.swing.JTextField();
+        tfValDupla2 = new javax.swing.JFormattedTextField();
+        lblDuplaViral = new javax.swing.JLabel();
         lblFundo5 = new javax.swing.JLabel();
         pnlTripliceViral = new javax.swing.JPanel();
         pnlTripliceInterno = new javax.swing.JPanel();
@@ -680,6 +733,44 @@ public class AlterarCartao extends javax.swing.JFrame {
         lblLote1 = new javax.swing.JLabel();
         btnSalvarTriplice = new javax.swing.JButton();
         lblFundo6 = new javax.swing.JLabel();
+        pnlOutras = new javax.swing.JPanel();
+        pnlTripliceInterno1 = new javax.swing.JPanel();
+        lblOutras1 = new javax.swing.JLabel();
+        lblDose5 = new javax.swing.JLabel();
+        lblDescricao1 = new javax.swing.JLabel();
+        tfOutra1 = new javax.swing.JTextField();
+        tfDtOutra1 = new javax.swing.JFormattedTextField();
+        lblLote5 = new javax.swing.JLabel();
+        tfLoteOutra1 = new javax.swing.JTextField();
+        lblVal5 = new javax.swing.JLabel();
+        tfValOutra1 = new javax.swing.JFormattedTextField();
+        lblDose6 = new javax.swing.JLabel();
+        lblDescricao2 = new javax.swing.JLabel();
+        tfOutra1d2 = new javax.swing.JTextField();
+        tfDtOutra1d2 = new javax.swing.JFormattedTextField();
+        lblLote6 = new javax.swing.JLabel();
+        tfLoteOutra1d2 = new javax.swing.JTextField();
+        lblVal6 = new javax.swing.JLabel();
+        tfValOutra1d2 = new javax.swing.JFormattedTextField();
+        lblOutras2 = new javax.swing.JLabel();
+        lblDose7 = new javax.swing.JLabel();
+        lblDescricao3 = new javax.swing.JLabel();
+        tfOutra2 = new javax.swing.JTextField();
+        tfDtOutra2 = new javax.swing.JFormattedTextField();
+        lblLote7 = new javax.swing.JLabel();
+        tfLoteOutra2 = new javax.swing.JTextField();
+        lblVal7 = new javax.swing.JLabel();
+        tfValOutra2 = new javax.swing.JFormattedTextField();
+        lblDose8 = new javax.swing.JLabel();
+        lblDescricao4 = new javax.swing.JLabel();
+        tfOutra2d2 = new javax.swing.JTextField();
+        tfDtOutra2d2 = new javax.swing.JFormattedTextField();
+        lblLote8 = new javax.swing.JLabel();
+        tfLoteOutra2d2 = new javax.swing.JTextField();
+        lblVal8 = new javax.swing.JLabel();
+        tfValOutra2d2 = new javax.swing.JFormattedTextField();
+        btnSalvarOutras = new javax.swing.JButton();
+        lblFundo7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cartão de Vacinação");
@@ -736,7 +827,7 @@ public class AlterarCartao extends javax.swing.JFrame {
             }
         });
         pnlDadosInterno.add(btnGravar);
-        btnGravar.setBounds(360, 380, 140, 30);
+        btnGravar.setBounds(590, 360, 120, 30);
 
         lblCpf.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblCpf.setForeground(new java.awt.Color(255, 255, 255));
@@ -899,17 +990,15 @@ public class AlterarCartao extends javax.swing.JFrame {
         tfIdPaciente.setBounds(110, 340, 100, 23);
         tfIdPaciente.setVisible(false);
 
-        lblFundo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral P.png"))); // NOI18N
+        lblFundo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral Vacina.png"))); // NOI18N
         pnlDadosInterno.add(lblFundo1);
-        lblFundo1.setBounds(0, 0, 670, 449);
+        lblFundo1.setBounds(0, 0, 720, 450);
 
         javax.swing.GroupLayout pnlDadosLayout = new javax.swing.GroupLayout(pnlDados);
         pnlDados.setLayout(pnlDadosLayout);
         pnlDadosLayout.setHorizontalGroup(
             pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDadosLayout.createSequentialGroup()
-                .addComponent(pnlDadosInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlDadosInterno, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
         );
         pnlDadosLayout.setVerticalGroup(
             pnlDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -937,13 +1026,13 @@ public class AlterarCartao extends javax.swing.JFrame {
         lblVal3.setForeground(new java.awt.Color(255, 255, 255));
         lblVal3.setText("Val:");
         pnlDuplaAdultoInterno.add(lblVal3);
-        lblVal3.setBounds(340, 250, 50, 17);
+        lblVal3.setBounds(350, 250, 50, 17);
 
         lblLote3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblLote3.setForeground(new java.awt.Color(255, 255, 255));
         lblLote3.setText("Lote:");
         pnlDuplaAdultoInterno.add(lblLote3);
-        lblLote3.setBounds(340, 210, 50, 17);
+        lblLote3.setBounds(350, 210, 50, 17);
 
         tfLote3.setBackground(new java.awt.Color(153, 153, 153));
         tfLote3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -984,19 +1073,19 @@ public class AlterarCartao extends javax.swing.JFrame {
         lblValReforco.setForeground(new java.awt.Color(255, 255, 255));
         lblValReforco.setText("Val:");
         pnlDuplaAdultoInterno.add(lblValReforco);
-        lblValReforco.setBounds(500, 250, 50, 17);
+        lblValReforco.setBounds(510, 250, 50, 17);
 
         lblLoteReforco.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblLoteReforco.setForeground(new java.awt.Color(255, 255, 255));
         lblLoteReforco.setText("Lote:");
         pnlDuplaAdultoInterno.add(lblLoteReforco);
-        lblLoteReforco.setBounds(500, 210, 50, 17);
+        lblLoteReforco.setBounds(510, 210, 50, 17);
 
         lblTitulo.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
         lblTitulo.setText("DUPLA ADULTO (CONTRA TÉTANO E DIFTERIA)");
         pnlDuplaAdultoInterno.add(lblTitulo);
-        lblTitulo.setBounds(30, 50, 440, 22);
+        lblTitulo.setBounds(30, 70, 440, 22);
 
         tfLoteReforco.setBackground(new java.awt.Color(153, 153, 153));
         tfLoteReforco.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -1066,7 +1155,7 @@ public class AlterarCartao extends javax.swing.JFrame {
             }
         });
         pnlDuplaAdultoInterno.add(btnSalvar);
-        btnSalvar.setBounds(370, 380, 120, 30);
+        btnSalvar.setBounds(590, 360, 120, 30);
 
         tfLote.setBackground(new java.awt.Color(153, 153, 153));
         tfLote.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -1138,23 +1227,21 @@ public class AlterarCartao extends javax.swing.JFrame {
         pnlDuplaAdultoInterno.add(lblDose2);
         lblDose2.setBounds(240, 140, 80, 17);
 
-        lblFundo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral P.png"))); // NOI18N
+        lblFundo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral Vacina.png"))); // NOI18N
         pnlDuplaAdultoInterno.add(lblFundo2);
-        lblFundo2.setBounds(0, 0, 670, 449);
+        lblFundo2.setBounds(0, 0, 720, 449);
 
         javax.swing.GroupLayout pnlDuplaAdultaLayout = new javax.swing.GroupLayout(pnlDuplaAdulta);
         pnlDuplaAdulta.setLayout(pnlDuplaAdultaLayout);
         pnlDuplaAdultaLayout.setHorizontalGroup(
             pnlDuplaAdultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDuplaAdultaLayout.createSequentialGroup()
-                .addComponent(pnlDuplaAdultoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlDuplaAdultoInterno, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
         );
         pnlDuplaAdultaLayout.setVerticalGroup(
             pnlDuplaAdultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDuplaAdultaLayout.createSequentialGroup()
                 .addComponent(pnlDuplaAdultoInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         pnlCartao.addTab("Dupla Adulto ", pnlDuplaAdulta);
@@ -1352,7 +1439,7 @@ public class AlterarCartao extends javax.swing.JFrame {
             }
         });
         pnlInfluenzaInterno.add(btnSalvarInfluenza);
-        btnSalvarInfluenza.setBounds(370, 380, 120, 30);
+        btnSalvarInfluenza.setBounds(590, 360, 120, 30);
 
         lblValInfluenza3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblValInfluenza3.setForeground(new java.awt.Color(255, 255, 255));
@@ -1375,7 +1462,7 @@ public class AlterarCartao extends javax.swing.JFrame {
         lblInfluenza.setForeground(new java.awt.Color(255, 255, 255));
         lblInfluenza.setText("INFLUENZA (CONTRA GRIPE)");
         pnlInfluenzaInterno.add(lblInfluenza);
-        lblInfluenza.setBounds(30, 50, 310, 22);
+        lblInfluenza.setBounds(30, 70, 310, 22);
 
         tfLoteInfluenza5.setBackground(new java.awt.Color(153, 153, 153));
         tfLoteInfluenza5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -1514,429 +1601,209 @@ public class AlterarCartao extends javax.swing.JFrame {
         pnlInfluenzaInterno.add(lblValInfluenza5);
         lblValInfluenza5.setBounds(190, 320, 50, 17);
 
-        lblFundo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral P.png"))); // NOI18N
+        lblFundo3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral Vacina.png"))); // NOI18N
         pnlInfluenzaInterno.add(lblFundo3);
-        lblFundo3.setBounds(0, 0, 670, 449);
+        lblFundo3.setBounds(0, 0, 720, 449);
 
         javax.swing.GroupLayout pnlInfluenzaLayout = new javax.swing.GroupLayout(pnlInfluenza);
         pnlInfluenza.setLayout(pnlInfluenzaLayout);
         pnlInfluenzaLayout.setHorizontalGroup(
             pnlInfluenzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlInfluenzaLayout.createSequentialGroup()
-                .addComponent(pnlInfluenzaInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlInfluenzaInterno, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
         );
         pnlInfluenzaLayout.setVerticalGroup(
             pnlInfluenzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlInfluenzaLayout.createSequentialGroup()
                 .addComponent(pnlInfluenzaInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         pnlCartao.addTab("Influenza", pnlInfluenza);
 
-        pnlHepatiteInterno.setLayout(null);
+        pnlFebreAmarelaInterno.setLayout(null);
 
         lblValHepatite5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblValHepatite5.setForeground(new java.awt.Color(255, 255, 255));
         lblValHepatite5.setText("Val:");
-        pnlHepatiteInterno.add(lblValHepatite5);
+        pnlFebreAmarelaInterno.add(lblValHepatite5);
         lblValHepatite5.setBounds(190, 320, 50, 17);
 
-        tfValHepatite6.setBackground(new java.awt.Color(153, 153, 153));
-        tfValHepatite6.setForeground(new java.awt.Color(255, 255, 255));
+        tfValFebre6.setBackground(new java.awt.Color(153, 153, 153));
+        tfValFebre6.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfValHepatite6.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfValFebre6.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfValHepatite6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfValHepatite6);
-        tfValHepatite6.setBounds(240, 320, 80, 23);
+        tfValFebre6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfValFebre6);
+        tfValFebre6.setBounds(240, 320, 80, 23);
 
         lblValHepatite1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblValHepatite1.setForeground(new java.awt.Color(255, 255, 255));
         lblValHepatite1.setText("Val:");
-        pnlHepatiteInterno.add(lblValHepatite1);
+        pnlFebreAmarelaInterno.add(lblValHepatite1);
         lblValHepatite1.setBounds(190, 180, 50, 17);
 
-        tfHepatite7.setBackground(new java.awt.Color(153, 153, 153));
-        tfHepatite7.setForeground(new java.awt.Color(255, 255, 255));
+        tfFebre7.setBackground(new java.awt.Color(153, 153, 153));
+        tfFebre7.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfHepatite7.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfFebre7.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfHepatite7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfHepatite7);
-        tfHepatite7.setBounds(400, 240, 80, 23);
+        tfFebre7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfFebre7);
+        tfFebre7.setBounds(400, 240, 80, 23);
 
-        tfValHepatite2.setBackground(new java.awt.Color(153, 153, 153));
-        tfValHepatite2.setForeground(new java.awt.Color(255, 255, 255));
+        tfValFebre2.setBackground(new java.awt.Color(153, 153, 153));
+        tfValFebre2.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfValHepatite2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfValFebre2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfValHepatite2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfValHepatite2);
-        tfValHepatite2.setBounds(240, 180, 80, 23);
+        tfValFebre2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfValFebre2);
+        tfValFebre2.setBounds(240, 180, 80, 23);
 
         lblLoteHepatite6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblLoteHepatite6.setForeground(new java.awt.Color(255, 255, 255));
         lblLoteHepatite6.setText("Lote:");
-        pnlHepatiteInterno.add(lblLoteHepatite6);
+        pnlFebreAmarelaInterno.add(lblLoteHepatite6);
         lblLoteHepatite6.setBounds(350, 280, 50, 17);
 
-        tfHepatite3.setBackground(new java.awt.Color(153, 153, 153));
-        tfHepatite3.setForeground(new java.awt.Color(255, 255, 255));
+        tfFebre3.setBackground(new java.awt.Color(153, 153, 153));
+        tfFebre3.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfHepatite3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfFebre3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfHepatite3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfHepatite3);
-        tfHepatite3.setBounds(400, 100, 80, 23);
+        tfFebre3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfFebre3);
+        tfFebre3.setBounds(400, 100, 80, 23);
 
-        tfLoteHepatite7.setBackground(new java.awt.Color(153, 153, 153));
-        tfLoteHepatite7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfLoteHepatite7.setForeground(new java.awt.Color(255, 255, 255));
-        pnlHepatiteInterno.add(tfLoteHepatite7);
-        tfLoteHepatite7.setBounds(400, 280, 80, 23);
+        tfLoteFebre7.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteFebre7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteFebre7.setForeground(new java.awt.Color(255, 255, 255));
+        pnlFebreAmarelaInterno.add(tfLoteFebre7);
+        tfLoteFebre7.setBounds(400, 280, 80, 23);
 
         lblLoteHepatite2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblLoteHepatite2.setForeground(new java.awt.Color(255, 255, 255));
         lblLoteHepatite2.setText("Lote:");
-        pnlHepatiteInterno.add(lblLoteHepatite2);
+        pnlFebreAmarelaInterno.add(lblLoteHepatite2);
         lblLoteHepatite2.setBounds(350, 140, 50, 17);
 
         lblValHepatite6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblValHepatite6.setForeground(new java.awt.Color(255, 255, 255));
         lblValHepatite6.setText("Val:");
-        pnlHepatiteInterno.add(lblValHepatite6);
+        pnlFebreAmarelaInterno.add(lblValHepatite6);
         lblValHepatite6.setBounds(350, 320, 50, 17);
 
-        tfLoteHepatite3.setBackground(new java.awt.Color(153, 153, 153));
-        tfLoteHepatite3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfLoteHepatite3.setForeground(new java.awt.Color(255, 255, 255));
-        pnlHepatiteInterno.add(tfLoteHepatite3);
-        tfLoteHepatite3.setBounds(400, 140, 80, 23);
+        tfLoteFebre3.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteFebre3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteFebre3.setForeground(new java.awt.Color(255, 255, 255));
+        pnlFebreAmarelaInterno.add(tfLoteFebre3);
+        tfLoteFebre3.setBounds(400, 140, 80, 23);
 
-        tfValHepatite7.setBackground(new java.awt.Color(153, 153, 153));
-        tfValHepatite7.setForeground(new java.awt.Color(255, 255, 255));
+        tfValFebre7.setBackground(new java.awt.Color(153, 153, 153));
+        tfValFebre7.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfValHepatite7.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfValFebre7.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfValHepatite7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfValHepatite7);
-        tfValHepatite7.setBounds(400, 320, 80, 23);
+        tfValFebre7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfValFebre7);
+        tfValFebre7.setBounds(400, 320, 80, 23);
 
         lblValHepatite2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblValHepatite2.setForeground(new java.awt.Color(255, 255, 255));
         lblValHepatite2.setText("Val:");
-        pnlHepatiteInterno.add(lblValHepatite2);
+        pnlFebreAmarelaInterno.add(lblValHepatite2);
         lblValHepatite2.setBounds(350, 180, 50, 17);
 
-        tfHepatite8.setBackground(new java.awt.Color(153, 153, 153));
-        tfHepatite8.setForeground(new java.awt.Color(255, 255, 255));
+        tfFebre8.setBackground(new java.awt.Color(153, 153, 153));
+        tfFebre8.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfHepatite8.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfFebre8.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfHepatite8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfHepatite8);
-        tfHepatite8.setBounds(550, 240, 80, 23);
+        tfFebre8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfFebre8);
+        tfFebre8.setBounds(550, 240, 80, 23);
 
-        tfValHepatite3.setBackground(new java.awt.Color(153, 153, 153));
-        tfValHepatite3.setForeground(new java.awt.Color(255, 255, 255));
+        tfValFebre3.setBackground(new java.awt.Color(153, 153, 153));
+        tfValFebre3.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfValHepatite3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfValFebre3.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfValHepatite3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfValHepatite3);
-        tfValHepatite3.setBounds(400, 180, 80, 23);
+        tfValFebre3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfValFebre3);
+        tfValFebre3.setBounds(400, 180, 80, 23);
 
         lblLoteHepatite7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblLoteHepatite7.setForeground(new java.awt.Color(255, 255, 255));
         lblLoteHepatite7.setText("Lote:");
-        pnlHepatiteInterno.add(lblLoteHepatite7);
+        pnlFebreAmarelaInterno.add(lblLoteHepatite7);
         lblLoteHepatite7.setBounds(500, 280, 50, 17);
 
-        tfHepatite4.setBackground(new java.awt.Color(153, 153, 153));
-        tfHepatite4.setForeground(new java.awt.Color(255, 255, 255));
+        tfFebre4.setBackground(new java.awt.Color(153, 153, 153));
+        tfFebre4.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfHepatite4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfFebre4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfHepatite4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfHepatite4);
-        tfHepatite4.setBounds(550, 100, 80, 23);
+        tfFebre4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfFebre4);
+        tfFebre4.setBounds(550, 100, 80, 23);
 
-        tfLoteHepatite8.setBackground(new java.awt.Color(153, 153, 153));
-        tfLoteHepatite8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfLoteHepatite8.setForeground(new java.awt.Color(255, 255, 255));
-        pnlHepatiteInterno.add(tfLoteHepatite8);
-        tfLoteHepatite8.setBounds(550, 280, 80, 23);
+        tfLoteFebre8.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteFebre8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteFebre8.setForeground(new java.awt.Color(255, 255, 255));
+        pnlFebreAmarelaInterno.add(tfLoteFebre8);
+        tfLoteFebre8.setBounds(550, 280, 80, 23);
 
         lblLoteHepatite3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblLoteHepatite3.setForeground(new java.awt.Color(255, 255, 255));
         lblLoteHepatite3.setText("Lote:");
-        pnlHepatiteInterno.add(lblLoteHepatite3);
+        pnlFebreAmarelaInterno.add(lblLoteHepatite3);
         lblLoteHepatite3.setBounds(500, 140, 50, 17);
 
-        tfLoteHepatite4.setBackground(new java.awt.Color(153, 153, 153));
-        tfLoteHepatite4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfLoteHepatite4.setForeground(new java.awt.Color(255, 255, 255));
-        pnlHepatiteInterno.add(tfLoteHepatite4);
-        tfLoteHepatite4.setBounds(550, 140, 80, 23);
+        tfLoteFebre4.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteFebre4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteFebre4.setForeground(new java.awt.Color(255, 255, 255));
+        pnlFebreAmarelaInterno.add(tfLoteFebre4);
+        tfLoteFebre4.setBounds(550, 140, 80, 23);
 
         lblValHepatite7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblValHepatite7.setForeground(new java.awt.Color(255, 255, 255));
         lblValHepatite7.setText("Val:");
-        pnlHepatiteInterno.add(lblValHepatite7);
+        pnlFebreAmarelaInterno.add(lblValHepatite7);
         lblValHepatite7.setBounds(500, 320, 50, 17);
 
-        tfValHepatite8.setBackground(new java.awt.Color(153, 153, 153));
-        tfValHepatite8.setForeground(new java.awt.Color(255, 255, 255));
+        tfValFebre8.setBackground(new java.awt.Color(153, 153, 153));
+        tfValFebre8.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfValHepatite8.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfValFebre8.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfValHepatite8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfValHepatite8);
-        tfValHepatite8.setBounds(550, 320, 80, 23);
+        tfValFebre8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfValFebre8);
+        tfValFebre8.setBounds(550, 320, 80, 23);
 
         lblValHepatite3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblValHepatite3.setForeground(new java.awt.Color(255, 255, 255));
         lblValHepatite3.setText("Val:");
-        pnlHepatiteInterno.add(lblValHepatite3);
+        pnlFebreAmarelaInterno.add(lblValHepatite3);
         lblValHepatite3.setBounds(500, 180, 50, 17);
-
-        btnSalvarHepatite.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnSalvarHepatite.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalvarHepatite.setText("SALVAR");
-        btnSalvarHepatite.setBorderPainted(false);
-        btnSalvarHepatite.setContentAreaFilled(false);
-        btnSalvarHepatite.setFocusPainted(false);
-        btnSalvarHepatite.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSalvarHepatiteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSalvarHepatiteMouseExited(evt);
-            }
-        });
-        btnSalvarHepatite.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarHepatiteActionPerformed(evt);
-            }
-        });
-        pnlHepatiteInterno.add(btnSalvarHepatite);
-        btnSalvarHepatite.setBounds(370, 380, 120, 31);
-
-        tfValHepatite4.setBackground(new java.awt.Color(153, 153, 153));
-        tfValHepatite4.setForeground(new java.awt.Color(255, 255, 255));
-        try {
-            tfValHepatite4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        tfValHepatite4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfValHepatite4);
-        tfValHepatite4.setBounds(550, 180, 80, 23);
-
-        tfHepatite5.setBackground(new java.awt.Color(153, 153, 153));
-        tfHepatite5.setForeground(new java.awt.Color(255, 255, 255));
-        try {
-            tfHepatite5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        tfHepatite5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfHepatite5);
-        tfHepatite5.setBounds(90, 240, 80, 23);
-
-        lblHepatiteB.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblHepatiteB.setForeground(new java.awt.Color(255, 255, 255));
-        lblHepatiteB.setText("HEPATITE B");
-        pnlHepatiteInterno.add(lblHepatiteB);
-        lblHepatiteB.setBounds(30, 50, 270, 22);
-
-        lblLoteHepatite4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblLoteHepatite4.setForeground(new java.awt.Color(255, 255, 255));
-        lblLoteHepatite4.setText("Lote:");
-        pnlHepatiteInterno.add(lblLoteHepatite4);
-        lblLoteHepatite4.setBounds(40, 280, 50, 17);
-
-        tfHepatite1.setBackground(new java.awt.Color(153, 153, 153));
-        tfHepatite1.setForeground(new java.awt.Color(255, 255, 255));
-        try {
-            tfHepatite1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        tfHepatite1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfHepatite1);
-        tfHepatite1.setBounds(90, 100, 80, 23);
-
-        tfLoteHepatite5.setBackground(new java.awt.Color(153, 153, 153));
-        tfLoteHepatite5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfLoteHepatite5.setForeground(new java.awt.Color(255, 255, 255));
-        pnlHepatiteInterno.add(tfLoteHepatite5);
-        tfLoteHepatite5.setBounds(90, 280, 80, 23);
-
-        lblLoteHepatite.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblLoteHepatite.setForeground(new java.awt.Color(255, 255, 255));
-        lblLoteHepatite.setText("Lote:");
-        pnlHepatiteInterno.add(lblLoteHepatite);
-        lblLoteHepatite.setBounds(40, 140, 50, 17);
-
-        lblValHepatite4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblValHepatite4.setForeground(new java.awt.Color(255, 255, 255));
-        lblValHepatite4.setText("Val:");
-        pnlHepatiteInterno.add(lblValHepatite4);
-        lblValHepatite4.setBounds(40, 320, 50, 17);
-
-        tfLoteHepatite1.setBackground(new java.awt.Color(153, 153, 153));
-        tfLoteHepatite1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfLoteHepatite1.setForeground(new java.awt.Color(255, 255, 255));
-        pnlHepatiteInterno.add(tfLoteHepatite1);
-        tfLoteHepatite1.setBounds(90, 140, 80, 23);
-
-        tfValHepatite5.setBackground(new java.awt.Color(153, 153, 153));
-        tfValHepatite5.setForeground(new java.awt.Color(255, 255, 255));
-        try {
-            tfValHepatite5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        tfValHepatite5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfValHepatite5);
-        tfValHepatite5.setBounds(90, 320, 80, 23);
-
-        lblValHepatite.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblValHepatite.setForeground(new java.awt.Color(255, 255, 255));
-        lblValHepatite.setText("Val:");
-        pnlHepatiteInterno.add(lblValHepatite);
-        lblValHepatite.setBounds(40, 180, 50, 17);
-
-        tfHepatite6.setBackground(new java.awt.Color(153, 153, 153));
-        tfHepatite6.setForeground(new java.awt.Color(255, 255, 255));
-        try {
-            tfHepatite6.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        tfHepatite6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfHepatite6);
-        tfHepatite6.setBounds(240, 240, 80, 23);
-
-        tfValHepatite1.setBackground(new java.awt.Color(153, 153, 153));
-        tfValHepatite1.setForeground(new java.awt.Color(255, 255, 255));
-        try {
-            tfValHepatite1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        tfValHepatite1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfValHepatite1);
-        tfValHepatite1.setBounds(90, 180, 80, 23);
-
-        lblLoteHepatite5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblLoteHepatite5.setForeground(new java.awt.Color(255, 255, 255));
-        lblLoteHepatite5.setText("Lote:");
-        pnlHepatiteInterno.add(lblLoteHepatite5);
-        lblLoteHepatite5.setBounds(190, 280, 50, 17);
-
-        tfHepatite2.setBackground(new java.awt.Color(153, 153, 153));
-        tfHepatite2.setForeground(new java.awt.Color(255, 255, 255));
-        try {
-            tfHepatite2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        tfHepatite2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlHepatiteInterno.add(tfHepatite2);
-        tfHepatite2.setBounds(240, 100, 80, 23);
-
-        tfLoteHepatite6.setBackground(new java.awt.Color(153, 153, 153));
-        tfLoteHepatite6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfLoteHepatite6.setForeground(new java.awt.Color(255, 255, 255));
-        pnlHepatiteInterno.add(tfLoteHepatite6);
-        tfLoteHepatite6.setBounds(240, 280, 80, 23);
-
-        lblLoteHepatite1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblLoteHepatite1.setForeground(new java.awt.Color(255, 255, 255));
-        lblLoteHepatite1.setText("Lote:");
-        pnlHepatiteInterno.add(lblLoteHepatite1);
-        lblLoteHepatite1.setBounds(190, 140, 50, 17);
-
-        tfLoteHepatite2.setBackground(new java.awt.Color(153, 153, 153));
-        tfLoteHepatite2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfLoteHepatite2.setForeground(new java.awt.Color(255, 255, 255));
-        pnlHepatiteInterno.add(tfLoteHepatite2);
-        tfLoteHepatite2.setBounds(240, 140, 80, 23);
-
-        lblFundo4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblFundo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral P.png"))); // NOI18N
-        pnlHepatiteInterno.add(lblFundo4);
-        lblFundo4.setBounds(0, 0, 670, 449);
-
-        javax.swing.GroupLayout pnlHepatiteBLayout = new javax.swing.GroupLayout(pnlHepatiteB);
-        pnlHepatiteB.setLayout(pnlHepatiteBLayout);
-        pnlHepatiteBLayout.setHorizontalGroup(
-            pnlHepatiteBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHepatiteBLayout.createSequentialGroup()
-                .addComponent(pnlHepatiteInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        pnlHepatiteBLayout.setVerticalGroup(
-            pnlHepatiteBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHepatiteBLayout.createSequentialGroup()
-                .addComponent(pnlHepatiteInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
-        );
-
-        pnlCartao.addTab("Hepatite B", pnlHepatiteB);
-
-        pnlFebreInterno.setLayout(null);
-
-        lblLoteRevacinacao.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblLoteRevacinacao.setForeground(new java.awt.Color(255, 255, 255));
-        lblLoteRevacinacao.setText("Lote:");
-        pnlFebreInterno.add(lblLoteRevacinacao);
-        lblLoteRevacinacao.setBounds(190, 210, 50, 17);
-
-        lblDoseIncial.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblDoseIncial.setForeground(new java.awt.Color(255, 255, 255));
-        lblDoseIncial.setText("DOSE INICIAL");
-        pnlFebreInterno.add(lblDoseIncial);
-        lblDoseIncial.setBounds(90, 140, 97, 17);
-
-        lblValRevacinacao.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblValRevacinacao.setForeground(new java.awt.Color(255, 255, 255));
-        lblValRevacinacao.setText("Val:");
-        pnlFebreInterno.add(lblValRevacinacao);
-        lblValRevacinacao.setBounds(190, 250, 50, 17);
-
-        tfDoseInicial.setBackground(new java.awt.Color(153, 153, 153));
-        tfDoseInicial.setForeground(new java.awt.Color(255, 255, 255));
-        try {
-            tfDoseInicial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        tfDoseInicial.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlFebreInterno.add(tfDoseInicial);
-        tfDoseInicial.setBounds(100, 170, 80, 23);
 
         btnSalvarFebre.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnSalvarFebre.setForeground(new java.awt.Color(255, 255, 255));
@@ -1957,25 +1824,246 @@ public class AlterarCartao extends javax.swing.JFrame {
                 btnSalvarFebreActionPerformed(evt);
             }
         });
-        pnlFebreInterno.add(btnSalvarFebre);
-        btnSalvarFebre.setBounds(370, 380, 120, 30);
+        pnlFebreAmarelaInterno.add(btnSalvarFebre);
+        btnSalvarFebre.setBounds(590, 360, 120, 31);
 
-        tfLoteFebre.setBackground(new java.awt.Color(153, 153, 153));
-        tfLoteFebre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfLoteFebre.setForeground(new java.awt.Color(255, 255, 255));
-        pnlFebreInterno.add(tfLoteFebre);
-        tfLoteFebre.setBounds(100, 210, 80, 23);
-
-        tfValFebre.setBackground(new java.awt.Color(153, 153, 153));
-        tfValFebre.setForeground(new java.awt.Color(255, 255, 255));
+        tfValFebre4.setBackground(new java.awt.Color(153, 153, 153));
+        tfValFebre4.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfValFebre.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfValFebre4.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfValFebre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlFebreInterno.add(tfValFebre);
-        tfValFebre.setBounds(100, 250, 80, 23);
+        tfValFebre4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfValFebre4);
+        tfValFebre4.setBounds(550, 180, 80, 23);
+
+        tfFebre5.setBackground(new java.awt.Color(153, 153, 153));
+        tfFebre5.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfFebre5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfFebre5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfFebre5);
+        tfFebre5.setBounds(90, 240, 80, 23);
+
+        lblFebreAmarela.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblFebreAmarela.setForeground(new java.awt.Color(255, 255, 255));
+        lblFebreAmarela.setText("FEBRE AMARELA");
+        pnlFebreAmarelaInterno.add(lblFebreAmarela);
+        lblFebreAmarela.setBounds(30, 70, 270, 22);
+
+        lblLoteHepatite4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblLoteHepatite4.setForeground(new java.awt.Color(255, 255, 255));
+        lblLoteHepatite4.setText("Lote:");
+        pnlFebreAmarelaInterno.add(lblLoteHepatite4);
+        lblLoteHepatite4.setBounds(40, 280, 50, 17);
+
+        tfFebre1.setBackground(new java.awt.Color(153, 153, 153));
+        tfFebre1.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfFebre1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfFebre1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfFebre1);
+        tfFebre1.setBounds(90, 100, 80, 23);
+
+        tfLoteFebre5.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteFebre5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteFebre5.setForeground(new java.awt.Color(255, 255, 255));
+        pnlFebreAmarelaInterno.add(tfLoteFebre5);
+        tfLoteFebre5.setBounds(90, 280, 80, 23);
+
+        lblLoteHepatite.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblLoteHepatite.setForeground(new java.awt.Color(255, 255, 255));
+        lblLoteHepatite.setText("Lote:");
+        pnlFebreAmarelaInterno.add(lblLoteHepatite);
+        lblLoteHepatite.setBounds(40, 140, 50, 17);
+
+        lblValHepatite4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblValHepatite4.setForeground(new java.awt.Color(255, 255, 255));
+        lblValHepatite4.setText("Val:");
+        pnlFebreAmarelaInterno.add(lblValHepatite4);
+        lblValHepatite4.setBounds(40, 320, 50, 17);
+
+        tfLoteFebre1.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteFebre1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteFebre1.setForeground(new java.awt.Color(255, 255, 255));
+        pnlFebreAmarelaInterno.add(tfLoteFebre1);
+        tfLoteFebre1.setBounds(90, 140, 80, 23);
+
+        tfValFebre5.setBackground(new java.awt.Color(153, 153, 153));
+        tfValFebre5.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfValFebre5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfValFebre5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfValFebre5);
+        tfValFebre5.setBounds(90, 320, 80, 23);
+
+        lblValHepatite.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblValHepatite.setForeground(new java.awt.Color(255, 255, 255));
+        lblValHepatite.setText("Val:");
+        pnlFebreAmarelaInterno.add(lblValHepatite);
+        lblValHepatite.setBounds(40, 180, 50, 17);
+
+        tfFebre6.setBackground(new java.awt.Color(153, 153, 153));
+        tfFebre6.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfFebre6.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfFebre6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfFebre6);
+        tfFebre6.setBounds(240, 240, 80, 23);
+
+        tfValFebre1.setBackground(new java.awt.Color(153, 153, 153));
+        tfValFebre1.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfValFebre1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfValFebre1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfValFebre1);
+        tfValFebre1.setBounds(90, 180, 80, 23);
+
+        lblLoteHepatite5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblLoteHepatite5.setForeground(new java.awt.Color(255, 255, 255));
+        lblLoteHepatite5.setText("Lote:");
+        pnlFebreAmarelaInterno.add(lblLoteHepatite5);
+        lblLoteHepatite5.setBounds(190, 280, 50, 17);
+
+        tfFebre2.setBackground(new java.awt.Color(153, 153, 153));
+        tfFebre2.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfFebre2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfFebre2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreAmarelaInterno.add(tfFebre2);
+        tfFebre2.setBounds(240, 100, 80, 23);
+
+        tfLoteFebre6.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteFebre6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteFebre6.setForeground(new java.awt.Color(255, 255, 255));
+        pnlFebreAmarelaInterno.add(tfLoteFebre6);
+        tfLoteFebre6.setBounds(240, 280, 80, 23);
+
+        lblLoteHepatite1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblLoteHepatite1.setForeground(new java.awt.Color(255, 255, 255));
+        lblLoteHepatite1.setText("Lote:");
+        pnlFebreAmarelaInterno.add(lblLoteHepatite1);
+        lblLoteHepatite1.setBounds(190, 140, 50, 17);
+
+        tfLoteFebre2.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteFebre2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteFebre2.setForeground(new java.awt.Color(255, 255, 255));
+        pnlFebreAmarelaInterno.add(tfLoteFebre2);
+        tfLoteFebre2.setBounds(240, 140, 80, 23);
+
+        lblFundo4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblFundo4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral Vacina.png"))); // NOI18N
+        pnlFebreAmarelaInterno.add(lblFundo4);
+        lblFundo4.setBounds(0, 0, 720, 449);
+
+        javax.swing.GroupLayout pnlFebreLayout = new javax.swing.GroupLayout(pnlFebre);
+        pnlFebre.setLayout(pnlFebreLayout);
+        pnlFebreLayout.setHorizontalGroup(
+            pnlFebreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlFebreAmarelaInterno, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
+        );
+        pnlFebreLayout.setVerticalGroup(
+            pnlFebreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFebreLayout.createSequentialGroup()
+                .addComponent(pnlFebreAmarelaInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
+        );
+
+        pnlCartao.addTab("Febre Amarela", pnlFebre);
+
+        pnlFebreInterno.setLayout(null);
+
+        lblLoteRevacinacao.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblLoteRevacinacao.setForeground(new java.awt.Color(255, 255, 255));
+        lblLoteRevacinacao.setText("Lote:");
+        pnlFebreInterno.add(lblLoteRevacinacao);
+        lblLoteRevacinacao.setBounds(190, 210, 50, 17);
+
+        lblDupla1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDupla1.setForeground(new java.awt.Color(255, 255, 255));
+        lblDupla1.setText("1º DOSE");
+        pnlFebreInterno.add(lblDupla1);
+        lblDupla1.setBounds(110, 150, 53, 17);
+
+        lblValRevacinacao.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblValRevacinacao.setForeground(new java.awt.Color(255, 255, 255));
+        lblValRevacinacao.setText("Val:");
+        pnlFebreInterno.add(lblValRevacinacao);
+        lblValRevacinacao.setBounds(190, 250, 50, 17);
+
+        tfDuplaViral1.setBackground(new java.awt.Color(153, 153, 153));
+        tfDuplaViral1.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfDuplaViral1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfDuplaViral1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfDuplaViral1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfDuplaViral1ActionPerformed(evt);
+            }
+        });
+        pnlFebreInterno.add(tfDuplaViral1);
+        tfDuplaViral1.setBounds(100, 170, 80, 23);
+
+        btnSalvarDuplaViral.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnSalvarDuplaViral.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalvarDuplaViral.setText("SALVAR");
+        btnSalvarDuplaViral.setBorderPainted(false);
+        btnSalvarDuplaViral.setContentAreaFilled(false);
+        btnSalvarDuplaViral.setFocusPainted(false);
+        btnSalvarDuplaViral.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalvarDuplaViralMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalvarDuplaViralMouseExited(evt);
+            }
+        });
+        btnSalvarDuplaViral.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarDuplaViralActionPerformed(evt);
+            }
+        });
+        pnlFebreInterno.add(btnSalvarDuplaViral);
+        btnSalvarDuplaViral.setBounds(590, 360, 120, 30);
+
+        tfLoteDupla1.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteDupla1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteDupla1.setForeground(new java.awt.Color(255, 255, 255));
+        pnlFebreInterno.add(tfLoteDupla1);
+        tfLoteDupla1.setBounds(100, 210, 80, 23);
+
+        tfValDupla1.setBackground(new java.awt.Color(153, 153, 153));
+        tfValDupla1.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfValDupla1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfValDupla1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreInterno.add(tfValDupla1);
+        tfValDupla1.setBounds(100, 250, 80, 23);
 
         lblLoteFebre.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblLoteFebre.setForeground(new java.awt.Color(255, 255, 255));
@@ -1989,67 +2077,65 @@ public class AlterarCartao extends javax.swing.JFrame {
         pnlFebreInterno.add(lblValFebre);
         lblValFebre.setBounds(50, 250, 50, 17);
 
-        lblRevacinacao.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblRevacinacao.setForeground(new java.awt.Color(255, 255, 255));
-        lblRevacinacao.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblRevacinacao.setText("REVACINAÇÃO");
-        pnlFebreInterno.add(lblRevacinacao);
-        lblRevacinacao.setBounds(230, 140, 104, 17);
+        lblDupla2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDupla2.setForeground(new java.awt.Color(255, 255, 255));
+        lblDupla2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDupla2.setText("2º DOSE");
+        pnlFebreInterno.add(lblDupla2);
+        lblDupla2.setBounds(240, 150, 70, 20);
 
-        tfRevacinacao.setBackground(new java.awt.Color(153, 153, 153));
-        tfRevacinacao.setForeground(new java.awt.Color(255, 255, 255));
+        tfDuplaViral2.setBackground(new java.awt.Color(153, 153, 153));
+        tfDuplaViral2.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfRevacinacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfDuplaViral2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfRevacinacao.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlFebreInterno.add(tfRevacinacao);
-        tfRevacinacao.setBounds(240, 170, 80, 23);
+        tfDuplaViral2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreInterno.add(tfDuplaViral2);
+        tfDuplaViral2.setBounds(240, 170, 80, 23);
 
-        tfLoteRevacinacao.setBackground(new java.awt.Color(153, 153, 153));
-        tfLoteRevacinacao.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfLoteRevacinacao.setForeground(new java.awt.Color(255, 255, 255));
-        pnlFebreInterno.add(tfLoteRevacinacao);
-        tfLoteRevacinacao.setBounds(240, 210, 80, 23);
+        tfLoteDuplaViral2.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteDuplaViral2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteDuplaViral2.setForeground(new java.awt.Color(255, 255, 255));
+        pnlFebreInterno.add(tfLoteDuplaViral2);
+        tfLoteDuplaViral2.setBounds(240, 210, 80, 23);
 
-        tfValRevacinacao.setBackground(new java.awt.Color(153, 153, 153));
-        tfValRevacinacao.setForeground(new java.awt.Color(255, 255, 255));
+        tfValDupla2.setBackground(new java.awt.Color(153, 153, 153));
+        tfValDupla2.setForeground(new java.awt.Color(255, 255, 255));
         try {
-            tfValRevacinacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfValDupla2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        tfValRevacinacao.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlFebreInterno.add(tfValRevacinacao);
-        tfValRevacinacao.setBounds(240, 250, 80, 23);
+        tfValDupla2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlFebreInterno.add(tfValDupla2);
+        tfValDupla2.setBounds(240, 250, 80, 23);
 
-        lblFebreAmarela.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblFebreAmarela.setForeground(new java.awt.Color(255, 255, 255));
-        lblFebreAmarela.setText("FEBRE AMARELA");
-        pnlFebreInterno.add(lblFebreAmarela);
-        lblFebreAmarela.setBounds(30, 50, 154, 22);
+        lblDuplaViral.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblDuplaViral.setForeground(new java.awt.Color(255, 255, 255));
+        lblDuplaViral.setText("DUPLA VIRAL (SARAMPO + RUBÉOLA)");
+        pnlFebreInterno.add(lblDuplaViral);
+        lblDuplaViral.setBounds(30, 70, 420, 22);
 
-        lblFundo5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral P.png"))); // NOI18N
+        lblFundo5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral Vacina.png"))); // NOI18N
         pnlFebreInterno.add(lblFundo5);
-        lblFundo5.setBounds(0, 0, 670, 449);
+        lblFundo5.setBounds(0, 0, 720, 450);
 
         javax.swing.GroupLayout pnlFebreAmarelaLayout = new javax.swing.GroupLayout(pnlFebreAmarela);
         pnlFebreAmarela.setLayout(pnlFebreAmarelaLayout);
         pnlFebreAmarelaLayout.setHorizontalGroup(
             pnlFebreAmarelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlFebreAmarelaLayout.createSequentialGroup()
-                .addComponent(pnlFebreInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlFebreInterno, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
         );
         pnlFebreAmarelaLayout.setVerticalGroup(
             pnlFebreAmarelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFebreAmarelaLayout.createSequentialGroup()
                 .addComponent(pnlFebreInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
-        pnlCartao.addTab("Febre Amarela", pnlFebreAmarela);
+        pnlCartao.addTab("Dupla Viral", pnlFebreAmarela);
 
         pnlTripliceInterno.setLayout(null);
 
@@ -2075,7 +2161,7 @@ public class AlterarCartao extends javax.swing.JFrame {
         lblDose4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDose4.setText("2º DOSE");
         pnlTripliceInterno.add(lblDose4);
-        lblDose4.setBounds(240, 140, 80, 17);
+        lblDose4.setBounds(240, 150, 80, 17);
 
         tfTriplice2.setBackground(new java.awt.Color(153, 153, 153));
         tfTriplice2.setForeground(new java.awt.Color(255, 255, 255));
@@ -2104,7 +2190,7 @@ public class AlterarCartao extends javax.swing.JFrame {
         lblTriplice.setForeground(new java.awt.Color(255, 255, 255));
         lblTriplice.setText("TRÍPLICE VIRAL (SARAMPO + RUBÉOLA + CAXUMBA)");
         pnlTripliceInterno.add(lblTriplice);
-        lblTriplice.setBounds(30, 50, 520, 22);
+        lblTriplice.setBounds(30, 70, 520, 22);
 
         lblVal4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblVal4.setForeground(new java.awt.Color(255, 255, 255));
@@ -2117,7 +2203,7 @@ public class AlterarCartao extends javax.swing.JFrame {
         lblDose1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblDose1.setText("1º DOSE");
         pnlTripliceInterno.add(lblDose1);
-        lblDose1.setBounds(100, 140, 80, 17);
+        lblDose1.setBounds(100, 150, 80, 20);
 
         tfValTriplice2.setBackground(new java.awt.Color(153, 153, 153));
         tfValTriplice2.setForeground(new java.awt.Color(255, 255, 255));
@@ -2173,19 +2259,17 @@ public class AlterarCartao extends javax.swing.JFrame {
             }
         });
         pnlTripliceInterno.add(btnSalvarTriplice);
-        btnSalvarTriplice.setBounds(370, 380, 120, 31);
+        btnSalvarTriplice.setBounds(590, 360, 120, 31);
 
-        lblFundo6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral P.png"))); // NOI18N
+        lblFundo6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral Vacina.png"))); // NOI18N
         pnlTripliceInterno.add(lblFundo6);
-        lblFundo6.setBounds(0, 0, 670, 450);
+        lblFundo6.setBounds(0, 0, 720, 450);
 
         javax.swing.GroupLayout pnlTripliceViralLayout = new javax.swing.GroupLayout(pnlTripliceViral);
         pnlTripliceViral.setLayout(pnlTripliceViralLayout);
         pnlTripliceViralLayout.setHorizontalGroup(
             pnlTripliceViralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlTripliceViralLayout.createSequentialGroup()
-                .addComponent(pnlTripliceInterno, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnlTripliceInterno, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
         );
         pnlTripliceViralLayout.setVerticalGroup(
             pnlTripliceViralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2196,6 +2280,297 @@ public class AlterarCartao extends javax.swing.JFrame {
 
         pnlCartao.addTab("Tríplice Viral", pnlTripliceViral);
 
+        pnlTripliceInterno1.setLayout(null);
+
+        lblOutras1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblOutras1.setForeground(new java.awt.Color(255, 255, 255));
+        lblOutras1.setText("OUTRAS VACINAS");
+        pnlTripliceInterno1.add(lblOutras1);
+        lblOutras1.setBounds(60, 60, 180, 22);
+
+        lblDose5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDose5.setForeground(new java.awt.Color(255, 255, 255));
+        lblDose5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDose5.setText("1º DOSE");
+        pnlTripliceInterno1.add(lblDose5);
+        lblDose5.setBounds(70, 150, 80, 17);
+
+        lblDescricao1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDescricao1.setForeground(new java.awt.Color(255, 255, 255));
+        lblDescricao1.setText("Desc.:");
+        pnlTripliceInterno1.add(lblDescricao1);
+        lblDescricao1.setBounds(20, 190, 50, 17);
+
+        tfOutra1.setBackground(new java.awt.Color(153, 153, 153));
+        tfOutra1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfOutra1.setForeground(new java.awt.Color(255, 255, 255));
+        pnlTripliceInterno1.add(tfOutra1);
+        tfOutra1.setBounds(70, 190, 80, 23);
+
+        tfDtOutra1.setBackground(new java.awt.Color(153, 153, 153));
+        tfDtOutra1.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfDtOutra1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfDtOutra1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlTripliceInterno1.add(tfDtOutra1);
+        tfDtOutra1.setBounds(70, 230, 80, 23);
+
+        lblLote5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblLote5.setForeground(new java.awt.Color(255, 255, 255));
+        lblLote5.setText("Lote:");
+        pnlTripliceInterno1.add(lblLote5);
+        lblLote5.setBounds(20, 270, 50, 17);
+
+        tfLoteOutra1.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteOutra1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteOutra1.setForeground(new java.awt.Color(255, 255, 255));
+        pnlTripliceInterno1.add(tfLoteOutra1);
+        tfLoteOutra1.setBounds(70, 270, 80, 23);
+
+        lblVal5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblVal5.setForeground(new java.awt.Color(255, 255, 255));
+        lblVal5.setText("Val:");
+        pnlTripliceInterno1.add(lblVal5);
+        lblVal5.setBounds(20, 310, 50, 17);
+
+        tfValOutra1.setBackground(new java.awt.Color(153, 153, 153));
+        tfValOutra1.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfValOutra1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfValOutra1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlTripliceInterno1.add(tfValOutra1);
+        tfValOutra1.setBounds(70, 310, 80, 23);
+
+        lblDose6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDose6.setForeground(new java.awt.Color(255, 255, 255));
+        lblDose6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDose6.setText("2º DOSE");
+        pnlTripliceInterno1.add(lblDose6);
+        lblDose6.setBounds(230, 150, 80, 17);
+
+        lblDescricao2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDescricao2.setForeground(new java.awt.Color(255, 255, 255));
+        lblDescricao2.setText("Desc.:");
+        pnlTripliceInterno1.add(lblDescricao2);
+        lblDescricao2.setBounds(180, 190, 50, 17);
+
+        tfOutra1d2.setBackground(new java.awt.Color(153, 153, 153));
+        tfOutra1d2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfOutra1d2.setForeground(new java.awt.Color(255, 255, 255));
+        pnlTripliceInterno1.add(tfOutra1d2);
+        tfOutra1d2.setBounds(230, 190, 80, 23);
+
+        tfDtOutra1d2.setBackground(new java.awt.Color(153, 153, 153));
+        tfDtOutra1d2.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfDtOutra1d2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfDtOutra1d2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlTripliceInterno1.add(tfDtOutra1d2);
+        tfDtOutra1d2.setBounds(230, 230, 80, 23);
+
+        lblLote6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblLote6.setForeground(new java.awt.Color(255, 255, 255));
+        lblLote6.setText("Lote:");
+        pnlTripliceInterno1.add(lblLote6);
+        lblLote6.setBounds(180, 270, 50, 17);
+
+        tfLoteOutra1d2.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteOutra1d2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteOutra1d2.setForeground(new java.awt.Color(255, 255, 255));
+        pnlTripliceInterno1.add(tfLoteOutra1d2);
+        tfLoteOutra1d2.setBounds(230, 270, 80, 23);
+
+        lblVal6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblVal6.setForeground(new java.awt.Color(255, 255, 255));
+        lblVal6.setText("Val:");
+        pnlTripliceInterno1.add(lblVal6);
+        lblVal6.setBounds(180, 310, 50, 17);
+
+        tfValOutra1d2.setBackground(new java.awt.Color(153, 153, 153));
+        tfValOutra1d2.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfValOutra1d2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfValOutra1d2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlTripliceInterno1.add(tfValOutra1d2);
+        tfValOutra1d2.setBounds(230, 310, 80, 23);
+
+        lblOutras2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblOutras2.setForeground(new java.awt.Color(255, 255, 255));
+        lblOutras2.setText("OUTRAS VACINAS");
+        pnlTripliceInterno1.add(lblOutras2);
+        lblOutras2.setBounds(420, 60, 180, 22);
+
+        lblDose7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDose7.setForeground(new java.awt.Color(255, 255, 255));
+        lblDose7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDose7.setText("1º DOSE");
+        pnlTripliceInterno1.add(lblDose7);
+        lblDose7.setBounds(410, 150, 80, 17);
+
+        lblDescricao3.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDescricao3.setForeground(new java.awt.Color(255, 255, 255));
+        lblDescricao3.setText("Desc.:");
+        pnlTripliceInterno1.add(lblDescricao3);
+        lblDescricao3.setBounds(360, 190, 50, 17);
+
+        tfOutra2.setBackground(new java.awt.Color(153, 153, 153));
+        tfOutra2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfOutra2.setForeground(new java.awt.Color(255, 255, 255));
+        pnlTripliceInterno1.add(tfOutra2);
+        tfOutra2.setBounds(410, 190, 80, 23);
+
+        tfDtOutra2.setBackground(new java.awt.Color(153, 153, 153));
+        tfDtOutra2.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfDtOutra2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfDtOutra2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlTripliceInterno1.add(tfDtOutra2);
+        tfDtOutra2.setBounds(410, 230, 80, 23);
+
+        lblLote7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblLote7.setForeground(new java.awt.Color(255, 255, 255));
+        lblLote7.setText("Lote:");
+        pnlTripliceInterno1.add(lblLote7);
+        lblLote7.setBounds(360, 270, 50, 17);
+
+        tfLoteOutra2.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteOutra2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteOutra2.setForeground(new java.awt.Color(255, 255, 255));
+        pnlTripliceInterno1.add(tfLoteOutra2);
+        tfLoteOutra2.setBounds(410, 270, 80, 23);
+
+        lblVal7.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblVal7.setForeground(new java.awt.Color(255, 255, 255));
+        lblVal7.setText("Val:");
+        pnlTripliceInterno1.add(lblVal7);
+        lblVal7.setBounds(360, 310, 50, 17);
+
+        tfValOutra2.setBackground(new java.awt.Color(153, 153, 153));
+        tfValOutra2.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfValOutra2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfValOutra2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlTripliceInterno1.add(tfValOutra2);
+        tfValOutra2.setBounds(410, 310, 80, 23);
+
+        lblDose8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDose8.setForeground(new java.awt.Color(255, 255, 255));
+        lblDose8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDose8.setText("2º DOSE");
+        pnlTripliceInterno1.add(lblDose8);
+        lblDose8.setBounds(570, 150, 80, 17);
+
+        lblDescricao4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDescricao4.setForeground(new java.awt.Color(255, 255, 255));
+        lblDescricao4.setText("Desc.:");
+        pnlTripliceInterno1.add(lblDescricao4);
+        lblDescricao4.setBounds(520, 190, 50, 17);
+
+        tfOutra2d2.setBackground(new java.awt.Color(153, 153, 153));
+        tfOutra2d2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfOutra2d2.setForeground(new java.awt.Color(255, 255, 255));
+        pnlTripliceInterno1.add(tfOutra2d2);
+        tfOutra2d2.setBounds(570, 190, 80, 23);
+
+        tfDtOutra2d2.setBackground(new java.awt.Color(153, 153, 153));
+        tfDtOutra2d2.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfDtOutra2d2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfDtOutra2d2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlTripliceInterno1.add(tfDtOutra2d2);
+        tfDtOutra2d2.setBounds(570, 230, 80, 23);
+
+        lblLote8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblLote8.setForeground(new java.awt.Color(255, 255, 255));
+        lblLote8.setText("Lote:");
+        pnlTripliceInterno1.add(lblLote8);
+        lblLote8.setBounds(520, 270, 50, 17);
+
+        tfLoteOutra2d2.setBackground(new java.awt.Color(153, 153, 153));
+        tfLoteOutra2d2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfLoteOutra2d2.setForeground(new java.awt.Color(255, 255, 255));
+        pnlTripliceInterno1.add(tfLoteOutra2d2);
+        tfLoteOutra2d2.setBounds(570, 270, 80, 23);
+
+        lblVal8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblVal8.setForeground(new java.awt.Color(255, 255, 255));
+        lblVal8.setText("Val:");
+        pnlTripliceInterno1.add(lblVal8);
+        lblVal8.setBounds(520, 310, 50, 17);
+
+        tfValOutra2d2.setBackground(new java.awt.Color(153, 153, 153));
+        tfValOutra2d2.setForeground(new java.awt.Color(255, 255, 255));
+        try {
+            tfValOutra2d2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfValOutra2d2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        pnlTripliceInterno1.add(tfValOutra2d2);
+        tfValOutra2d2.setBounds(570, 310, 80, 23);
+
+        btnSalvarOutras.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnSalvarOutras.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalvarOutras.setText("SALVAR");
+        btnSalvarOutras.setBorderPainted(false);
+        btnSalvarOutras.setContentAreaFilled(false);
+        btnSalvarOutras.setDefaultCapable(false);
+        btnSalvarOutras.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalvarOutrasMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalvarOutrasMouseExited(evt);
+            }
+        });
+        btnSalvarOutras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarOutrasActionPerformed(evt);
+            }
+        });
+        pnlTripliceInterno1.add(btnSalvarOutras);
+        btnSalvarOutras.setBounds(590, 360, 120, 31);
+
+        lblFundo7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Geral Vacina.png"))); // NOI18N
+        pnlTripliceInterno1.add(lblFundo7);
+        lblFundo7.setBounds(0, 0, 720, 450);
+
+        javax.swing.GroupLayout pnlOutrasLayout = new javax.swing.GroupLayout(pnlOutras);
+        pnlOutras.setLayout(pnlOutrasLayout);
+        pnlOutrasLayout.setHorizontalGroup(
+            pnlOutrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlTripliceInterno1, javax.swing.GroupLayout.DEFAULT_SIZE, 714, Short.MAX_VALUE)
+        );
+        pnlOutrasLayout.setVerticalGroup(
+            pnlOutrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOutrasLayout.createSequentialGroup()
+                .addComponent(pnlTripliceInterno1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        pnlCartao.addTab("Outras", pnlOutras);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -2204,7 +2579,7 @@ public class AlterarCartao extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlCartao)
+            .addComponent(pnlCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -2255,20 +2630,10 @@ public class AlterarCartao extends javax.swing.JFrame {
         this.saiMouse(btnSalvarInfluenza);
     }//GEN-LAST:event_btnSalvarInfluenzaMouseExited
 
-    private void btnSalvarHepatiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarHepatiteActionPerformed
-        this.atualizarHepatite();
+    private void btnSalvarFebreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFebreActionPerformed
+        this.atualizarFebreAmarela();
         // pnlCartao.setSelectedIndex(1);
-    }//GEN-LAST:event_btnSalvarHepatiteActionPerformed
-
-    private void btnSalvarHepatiteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarHepatiteMouseEntered
-        // TODO add your handling code here:
-        this.entraMouse(btnSalvarHepatite);
-    }//GEN-LAST:event_btnSalvarHepatiteMouseEntered
-
-    private void btnSalvarHepatiteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarHepatiteMouseExited
-        // TODO add your handling code here:
-        this.saiMouse(btnSalvarHepatite);
-    }//GEN-LAST:event_btnSalvarHepatiteMouseExited
+    }//GEN-LAST:event_btnSalvarFebreActionPerformed
 
     private void btnSalvarFebreMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarFebreMouseEntered
         // TODO add your handling code here:
@@ -2280,15 +2645,25 @@ public class AlterarCartao extends javax.swing.JFrame {
         this.saiMouse(btnSalvarFebre);
     }//GEN-LAST:event_btnSalvarFebreMouseExited
 
+    private void btnSalvarDuplaViralMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarDuplaViralMouseEntered
+        // TODO add your handling code here:
+        this.entraMouse(btnSalvarDuplaViral);
+    }//GEN-LAST:event_btnSalvarDuplaViralMouseEntered
+
+    private void btnSalvarDuplaViralMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarDuplaViralMouseExited
+        // TODO add your handling code here:
+        this.saiMouse(btnSalvarDuplaViral);
+    }//GEN-LAST:event_btnSalvarDuplaViralMouseExited
+
     private void btnSalvarInfluenzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarInfluenzaActionPerformed
         this.atualizarInfluenza();
         //pnlCartao.setSelectedIndex(1);
     }//GEN-LAST:event_btnSalvarInfluenzaActionPerformed
 
-    private void btnSalvarFebreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarFebreActionPerformed
-        this.atualizarFebreAmarela();
+    private void btnSalvarDuplaViralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarDuplaViralActionPerformed
+        this.atualizarDuplaViral();
         //pnlCartao.setSelectedIndex(1);
-    }//GEN-LAST:event_btnSalvarFebreActionPerformed
+    }//GEN-LAST:event_btnSalvarDuplaViralActionPerformed
 
     private void btnSalvarTripliceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarTripliceActionPerformed
         this.atualizarTripliceViral();
@@ -2312,6 +2687,23 @@ public class AlterarCartao extends javax.swing.JFrame {
     private void tfIdPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfIdPacienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfIdPacienteActionPerformed
+
+    private void tfDuplaViral1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDuplaViral1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfDuplaViral1ActionPerformed
+
+    private void btnSalvarOutrasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarOutrasMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarOutrasMouseEntered
+
+    private void btnSalvarOutrasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalvarOutrasMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalvarOutrasMouseExited
+
+    private void btnSalvarOutrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarOutrasActionPerformed
+        // TODO add your handling code here:
+        this.atualizarOutras();
+    }//GEN-LAST:event_btnSalvarOutrasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -2366,19 +2758,30 @@ public class AlterarCartao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnSalvarDuplaViral;
     private javax.swing.JButton btnSalvarFebre;
-    private javax.swing.JButton btnSalvarHepatite;
     private javax.swing.JButton btnSalvarInfluenza;
+    private javax.swing.JButton btnSalvarOutras;
     private javax.swing.JButton btnSalvarTriplice;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblDN;
+    private javax.swing.JLabel lblDescricao1;
+    private javax.swing.JLabel lblDescricao2;
+    private javax.swing.JLabel lblDescricao3;
+    private javax.swing.JLabel lblDescricao4;
     private javax.swing.JLabel lblDose;
     private javax.swing.JLabel lblDose1;
     private javax.swing.JLabel lblDose2;
     private javax.swing.JLabel lblDose3;
     private javax.swing.JLabel lblDose4;
-    private javax.swing.JLabel lblDoseIncial;
+    private javax.swing.JLabel lblDose5;
+    private javax.swing.JLabel lblDose6;
+    private javax.swing.JLabel lblDose7;
+    private javax.swing.JLabel lblDose8;
+    private javax.swing.JLabel lblDupla1;
+    private javax.swing.JLabel lblDupla2;
+    private javax.swing.JLabel lblDuplaViral;
     private javax.swing.JLabel lblFebreAmarela;
     private javax.swing.JLabel lblFundo1;
     private javax.swing.JLabel lblFundo2;
@@ -2386,8 +2789,8 @@ public class AlterarCartao extends javax.swing.JFrame {
     private javax.swing.JLabel lblFundo4;
     private javax.swing.JLabel lblFundo5;
     private javax.swing.JLabel lblFundo6;
+    private javax.swing.JLabel lblFundo7;
     private javax.swing.JLabel lblGRS;
-    private javax.swing.JLabel lblHepatiteB;
     private javax.swing.JLabel lblIdPaciente;
     private javax.swing.JLabel lblInfluenza;
     private javax.swing.JLabel lblLote;
@@ -2395,6 +2798,10 @@ public class AlterarCartao extends javax.swing.JFrame {
     private javax.swing.JLabel lblLote2;
     private javax.swing.JLabel lblLote3;
     private javax.swing.JLabel lblLote4;
+    private javax.swing.JLabel lblLote5;
+    private javax.swing.JLabel lblLote6;
+    private javax.swing.JLabel lblLote7;
+    private javax.swing.JLabel lblLote8;
     private javax.swing.JLabel lblLoteFebre;
     private javax.swing.JLabel lblLoteHepatite;
     private javax.swing.JLabel lblLoteHepatite1;
@@ -2417,8 +2824,9 @@ public class AlterarCartao extends javax.swing.JFrame {
     private javax.swing.JLabel lblMunicipio;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNumero;
+    private javax.swing.JLabel lblOutras1;
+    private javax.swing.JLabel lblOutras2;
     private javax.swing.JLabel lblReforco;
-    private javax.swing.JLabel lblRevacinacao;
     private javax.swing.JLabel lblRua;
     private javax.swing.JLabel lblTelefone;
     private javax.swing.JLabel lblTipoSanguineo;
@@ -2430,6 +2838,10 @@ public class AlterarCartao extends javax.swing.JFrame {
     private javax.swing.JLabel lblVal2;
     private javax.swing.JLabel lblVal3;
     private javax.swing.JLabel lblVal4;
+    private javax.swing.JLabel lblVal5;
+    private javax.swing.JLabel lblVal6;
+    private javax.swing.JLabel lblVal7;
+    private javax.swing.JLabel lblVal8;
     private javax.swing.JLabel lblValFebre;
     private javax.swing.JLabel lblValHepatite;
     private javax.swing.JLabel lblValHepatite1;
@@ -2454,13 +2866,15 @@ public class AlterarCartao extends javax.swing.JFrame {
     private javax.swing.JPanel pnlDadosInterno;
     private javax.swing.JPanel pnlDuplaAdulta;
     private javax.swing.JPanel pnlDuplaAdultoInterno;
+    private javax.swing.JPanel pnlFebre;
     private javax.swing.JPanel pnlFebreAmarela;
+    private javax.swing.JPanel pnlFebreAmarelaInterno;
     private javax.swing.JPanel pnlFebreInterno;
-    private javax.swing.JPanel pnlHepatiteB;
-    private javax.swing.JPanel pnlHepatiteInterno;
     private javax.swing.JPanel pnlInfluenza;
     private javax.swing.JPanel pnlInfluenzaInterno;
+    private javax.swing.JPanel pnlOutras;
     private javax.swing.JPanel pnlTripliceInterno;
+    private javax.swing.JPanel pnlTripliceInterno1;
     private javax.swing.JPanel pnlTripliceViral;
     private javax.swing.JTextField tfBairro;
     private javax.swing.JFormattedTextField tfCpf;
@@ -2468,16 +2882,21 @@ public class AlterarCartao extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tfDose1;
     private javax.swing.JFormattedTextField tfDose2;
     private javax.swing.JFormattedTextField tfDose3;
-    private javax.swing.JFormattedTextField tfDoseInicial;
+    private javax.swing.JFormattedTextField tfDtOutra1;
+    private javax.swing.JFormattedTextField tfDtOutra1d2;
+    private javax.swing.JFormattedTextField tfDtOutra2;
+    private javax.swing.JFormattedTextField tfDtOutra2d2;
+    private javax.swing.JFormattedTextField tfDuplaViral1;
+    private javax.swing.JFormattedTextField tfDuplaViral2;
+    private javax.swing.JFormattedTextField tfFebre1;
+    private javax.swing.JFormattedTextField tfFebre2;
+    private javax.swing.JFormattedTextField tfFebre3;
+    private javax.swing.JFormattedTextField tfFebre4;
+    private javax.swing.JFormattedTextField tfFebre5;
+    private javax.swing.JFormattedTextField tfFebre6;
+    private javax.swing.JFormattedTextField tfFebre7;
+    private javax.swing.JFormattedTextField tfFebre8;
     private javax.swing.JTextField tfGRS;
-    private javax.swing.JFormattedTextField tfHepatite1;
-    private javax.swing.JFormattedTextField tfHepatite2;
-    private javax.swing.JFormattedTextField tfHepatite3;
-    private javax.swing.JFormattedTextField tfHepatite4;
-    private javax.swing.JFormattedTextField tfHepatite5;
-    private javax.swing.JFormattedTextField tfHepatite6;
-    private javax.swing.JFormattedTextField tfHepatite7;
-    private javax.swing.JFormattedTextField tfHepatite8;
     private javax.swing.JTextField tfIdPaciente;
     private javax.swing.JFormattedTextField tfInfluenza1;
     private javax.swing.JFormattedTextField tfInfluenza2;
@@ -2490,15 +2909,16 @@ public class AlterarCartao extends javax.swing.JFrame {
     private javax.swing.JTextField tfLote;
     private javax.swing.JTextField tfLote2;
     private javax.swing.JTextField tfLote3;
-    private javax.swing.JTextField tfLoteFebre;
-    private javax.swing.JTextField tfLoteHepatite1;
-    private javax.swing.JTextField tfLoteHepatite2;
-    private javax.swing.JTextField tfLoteHepatite3;
-    private javax.swing.JTextField tfLoteHepatite4;
-    private javax.swing.JTextField tfLoteHepatite5;
-    private javax.swing.JTextField tfLoteHepatite6;
-    private javax.swing.JTextField tfLoteHepatite7;
-    private javax.swing.JTextField tfLoteHepatite8;
+    private javax.swing.JTextField tfLoteDupla1;
+    private javax.swing.JTextField tfLoteDuplaViral2;
+    private javax.swing.JTextField tfLoteFebre1;
+    private javax.swing.JTextField tfLoteFebre2;
+    private javax.swing.JTextField tfLoteFebre3;
+    private javax.swing.JTextField tfLoteFebre4;
+    private javax.swing.JTextField tfLoteFebre5;
+    private javax.swing.JTextField tfLoteFebre6;
+    private javax.swing.JTextField tfLoteFebre7;
+    private javax.swing.JTextField tfLoteFebre8;
     private javax.swing.JTextField tfLoteInfluenza1;
     private javax.swing.JTextField tfLoteInfluenza2;
     private javax.swing.JTextField tfLoteInfluenza3;
@@ -2507,15 +2927,21 @@ public class AlterarCartao extends javax.swing.JFrame {
     private javax.swing.JTextField tfLoteInfluenza6;
     private javax.swing.JTextField tfLoteInfluenza7;
     private javax.swing.JTextField tfLoteInfluenza8;
+    private javax.swing.JTextField tfLoteOutra1;
+    private javax.swing.JTextField tfLoteOutra1d2;
+    private javax.swing.JTextField tfLoteOutra2;
+    private javax.swing.JTextField tfLoteOutra2d2;
     private javax.swing.JTextField tfLoteReforco;
-    private javax.swing.JTextField tfLoteRevacinacao;
     private javax.swing.JTextField tfLoteTriplice1;
     private javax.swing.JTextField tfLoteTriplice2;
     private javax.swing.JTextField tfMunicipio;
     private javax.swing.JTextField tfNCasa;
     private javax.swing.JTextField tfNome;
+    private javax.swing.JTextField tfOutra1;
+    private javax.swing.JTextField tfOutra1d2;
+    private javax.swing.JTextField tfOutra2;
+    private javax.swing.JTextField tfOutra2d2;
     private javax.swing.JFormattedTextField tfReforco;
-    private javax.swing.JFormattedTextField tfRevacinacao;
     private javax.swing.JTextField tfRua;
     private javax.swing.JTextField tfTelefone;
     private javax.swing.JTextField tfTipoSanguineo;
@@ -2525,15 +2951,16 @@ public class AlterarCartao extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tfVal1;
     private javax.swing.JFormattedTextField tfVal2;
     private javax.swing.JFormattedTextField tfVal3;
-    private javax.swing.JFormattedTextField tfValFebre;
-    private javax.swing.JFormattedTextField tfValHepatite1;
-    private javax.swing.JFormattedTextField tfValHepatite2;
-    private javax.swing.JFormattedTextField tfValHepatite3;
-    private javax.swing.JFormattedTextField tfValHepatite4;
-    private javax.swing.JFormattedTextField tfValHepatite5;
-    private javax.swing.JFormattedTextField tfValHepatite6;
-    private javax.swing.JFormattedTextField tfValHepatite7;
-    private javax.swing.JFormattedTextField tfValHepatite8;
+    private javax.swing.JFormattedTextField tfValDupla1;
+    private javax.swing.JFormattedTextField tfValDupla2;
+    private javax.swing.JFormattedTextField tfValFebre1;
+    private javax.swing.JFormattedTextField tfValFebre2;
+    private javax.swing.JFormattedTextField tfValFebre3;
+    private javax.swing.JFormattedTextField tfValFebre4;
+    private javax.swing.JFormattedTextField tfValFebre5;
+    private javax.swing.JFormattedTextField tfValFebre6;
+    private javax.swing.JFormattedTextField tfValFebre7;
+    private javax.swing.JFormattedTextField tfValFebre8;
     private javax.swing.JFormattedTextField tfValInfluenza1;
     private javax.swing.JFormattedTextField tfValInfluenza2;
     private javax.swing.JFormattedTextField tfValInfluenza3;
@@ -2542,8 +2969,11 @@ public class AlterarCartao extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tfValInfluenza6;
     private javax.swing.JFormattedTextField tfValInfluenza7;
     private javax.swing.JFormattedTextField tfValInfluenza8;
+    private javax.swing.JFormattedTextField tfValOutra1;
+    private javax.swing.JFormattedTextField tfValOutra1d2;
+    private javax.swing.JFormattedTextField tfValOutra2;
+    private javax.swing.JFormattedTextField tfValOutra2d2;
     private javax.swing.JFormattedTextField tfValReforco;
-    private javax.swing.JFormattedTextField tfValRevacinacao;
     private javax.swing.JFormattedTextField tfValTriplice1;
     private javax.swing.JFormattedTextField tfValTriplice2;
     // End of variables declaration//GEN-END:variables

@@ -410,7 +410,10 @@ public class TelaAlterarPaciente extends javax.swing.JFrame {
                 if ("Sim".equals(rs.getString("mental"))) {
                     rbMental.setSelected(true);
                 }
-                if (!"Não".equals(rs.getString("doencaEspecifica")) || rs.getString("doencaEspecifica")!=null) {
+                if ("Não".equals(rs.getString("doencaEspecifica")) || rs.getString("doencaEspecifica")==null) {
+                    rbHistFamiliarOutro.setSelected(false);
+                    tfEspecificar.setEnabled(false);
+                }else{
                     rbHistFamiliarOutro.setSelected(true);
                     tfEspecificar.setEnabled(true);
                     tfEspecificar.setText(rs.getString("doencaEspecifica"));

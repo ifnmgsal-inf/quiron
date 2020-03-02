@@ -7,19 +7,25 @@ package principal;
 
 import bancodedados.MysqlConnect;
 import cartaovacina.AlterarCartao;
+import com.itextpdf.text.DocumentException;
 import fichaatendimento.FichasAtendimento;
 import gerenciarpacientes.TelaAlterarPaciente;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pdf.PdfAnamnese;
+import pdf.PdfCartaoVacina;
+import pdf.PdfFichaAtendimento;
 
 /**
  *
@@ -139,6 +145,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         }
     }
 
+    /*
     public void PesquisaTabela() {
         boolean encontrar = false;
         int tamanhoTabela = tblPacientes.getRowCount();
@@ -156,6 +163,42 @@ public class PesquisaPaciente extends javax.swing.JDialog {
                 tblPacientes.clearSelection();
             }
         }
+    }*/
+    
+    public void pesquisaNome(){
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        DefaultTableModel tabelaPacientes = (DefaultTableModel) tblPacientes.getModel();
+        tabelaPacientes.setNumRows(0);
+        String qry = "SELECT idPaciente, nome, cpf, dtNascimento FROM pacientes WHERE nome LIKE ? ";
+        try {
+            pstmt = conn.prepareStatement(qry);
+            pstmt.setString(1, "%" + tfNome.getText() + "%");
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                tabelaPacientes.addRow(new String[]{rs.getString("nome"), rs.getString("cpf"), rs.getString("dtNascimento"), rs.getString("idPaciente")});
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void pesquisaDtNascimento(){
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        DefaultTableModel tabelaPacientes = (DefaultTableModel) tblPacientes.getModel();
+        tabelaPacientes.setNumRows(0);
+        String qry = "SELECT idPaciente, nome, cpf, dtNascimento FROM pacientes WHERE dtNascimento LIKE ? ";
+        try {
+            pstmt = conn.prepareStatement(qry);
+            pstmt.setString(1, "%" + tfDtNascimento.getText() + "%");
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                tabelaPacientes.addRow(new String[]{rs.getString("nome"), rs.getString("cpf"), rs.getString("dtNascimento"), rs.getString("idPaciente")});
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -168,10 +211,11 @@ public class PesquisaPaciente extends javax.swing.JDialog {
     private void initComponents() {
 
         pnlPesquisa = new javax.swing.JPanel();
-        btnPesquisar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
-        ftfCpf = new javax.swing.JFormattedTextField();
-        lblCpf = new javax.swing.JLabel();
+        tfDtNascimento = new javax.swing.JTextField();
+        tfNome = new javax.swing.JTextField();
+        lblDtNascimento = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
         btnPdf = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPacientes = new javax.swing.JTable();
@@ -190,29 +234,6 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         });
 
         pnlPesquisa.setLayout(null);
-
-        btnPesquisar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnPesquisar.setForeground(new java.awt.Color(255, 255, 255));
-        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Lupa P.png"))); // NOI18N
-        btnPesquisar.setText("PESQUISAR");
-        btnPesquisar.setBorderPainted(false);
-        btnPesquisar.setContentAreaFilled(false);
-        btnPesquisar.setFocusPainted(false);
-        btnPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnPesquisarMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnPesquisarMouseExited(evt);
-            }
-        });
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
-            }
-        });
-        pnlPesquisa.add(btnPesquisar);
-        btnPesquisar.setBounds(260, 100, 170, 30);
 
         btnAlterar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
@@ -236,20 +257,46 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         pnlPesquisa.add(btnAlterar);
         btnAlterar.setBounds(400, 370, 150, 30);
 
-        try {
-            ftfCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        ftfCpf.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        pnlPesquisa.add(ftfCpf);
-        ftfCpf.setBounds(160, 100, 100, 23);
+        tfDtNascimento.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfDtNascimento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfDtNascimentoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfDtNascimentoKeyReleased(evt);
+            }
+        });
+        pnlPesquisa.add(tfDtNascimento);
+        tfDtNascimento.setBounds(460, 100, 80, 20);
 
-        lblCpf.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblCpf.setForeground(new java.awt.Color(255, 255, 255));
-        lblCpf.setText("CPF");
-        pnlPesquisa.add(lblCpf);
-        lblCpf.setBounds(110, 100, 26, 17);
+        tfNome.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNomeActionPerformed(evt);
+            }
+        });
+        tfNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfNomeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfNomeKeyReleased(evt);
+            }
+        });
+        pnlPesquisa.add(tfNome);
+        tfNome.setBounds(150, 100, 150, 20);
+
+        lblDtNascimento.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDtNascimento.setForeground(new java.awt.Color(255, 255, 255));
+        lblDtNascimento.setText("DT. NASCIMENTO:");
+        pnlPesquisa.add(lblDtNascimento);
+        lblDtNascimento.setBounds(330, 100, 130, 17);
+
+        lblNome.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblNome.setForeground(new java.awt.Color(255, 255, 255));
+        lblNome.setText("NOME:");
+        pnlPesquisa.add(lblNome);
+        lblNome.setBounds(90, 100, 60, 17);
 
         btnPdf.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnPdf.setForeground(new java.awt.Color(255, 255, 255));
@@ -303,7 +350,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         }
 
         pnlPesquisa.add(jScrollPane1);
-        jScrollPane1.setBounds(80, 140, 470, 150);
+        jScrollPane1.setBounds(80, 150, 470, 150);
 
         btnRemover.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnRemover.setForeground(new java.awt.Color(255, 255, 255));
@@ -352,7 +399,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
 
         lblImagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Pesquisa.png"))); // NOI18N
         pnlPesquisa.add(lblImagemFundo);
-        lblImagemFundo.setBounds(-10, 0, 670, 462);
+        lblImagemFundo.setBounds(-10, 0, 650, 462);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -368,16 +415,6 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnPesquisarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesquisarMouseEntered
-        // TODO add your handling code here:
-        this.entraMouse(btnPesquisar);
-    }//GEN-LAST:event_btnPesquisarMouseEntered
-
-    private void btnPesquisarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPesquisarMouseExited
-        // TODO add your handling code here:
-        this.saiMouse(btnPesquisar);
-    }//GEN-LAST:event_btnPesquisarMouseExited
 
     private void btnAlterarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarMouseEntered
         // TODO add your handling code here:
@@ -418,11 +455,6 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // TODO add your handling code here:
-        this.PesquisaTabela();
-    }//GEN-LAST:event_btnPesquisarActionPerformed
-
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ESCAPE) {
@@ -432,7 +464,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
 
     private void tblPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPacientesMouseClicked
         // TODO add your handling code here:
-        ftfCpf.setText(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 1).toString());
+        //ftfCpf.setText(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 1).toString());
     }//GEN-LAST:event_tblPacientesMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
@@ -498,18 +530,20 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             } else {
                 switch (TelaPrincipal.controlePesquisa) {
                     case 0:
-                        int idSelecionado = Integer.parseInt(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
+                        int idSelecionado0 = Integer.parseInt(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
                         PdfAnamnese meuPdf = new PdfAnamnese();
-                        meuPdf.pdfAnamnese(idSelecionado);
-                        //meuPdf.PdfAnamnese(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
-                        //meuPdf.PdfAnamnese2(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
-                        //meuPdf.PdfAnamnese3(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
+                        meuPdf.pdfAnamnese(idSelecionado0);
                         break;
                     case 1:
-                        //meuPdf.PdfFicha(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
+                        //int idSelecionado1 = Integer.parseInt(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
+                        PdfFichaAtendimento meuPdfFicha = new PdfFichaAtendimento();
+                        meuPdfFicha.pdfFichaAtendimento(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
+                        //meuPdf.pdfFicha(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
                         break;    
                     case 3:
-                        //meuPdf.PdfCartaoVacina(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
+                        int idSelecionado3 = Integer.parseInt(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
+                        PdfCartaoVacina meuCartaoVacina = new PdfCartaoVacina();
+                        meuCartaoVacina.pdfCartao(idSelecionado3);
                         break;
                     default:
                         JOptionPane.showMessageDialog(null, "Erro no PDF", "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -518,8 +552,36 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(null, "Selecione um paciente!", "ERRO", JOptionPane.ERROR_MESSAGE);
+        } catch (DocumentException ex) {
+            Logger.getLogger(PesquisaPaciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PesquisaPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnPdfActionPerformed
+
+    private void tfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfNomeActionPerformed
+
+    private void tfNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomeKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tfNomeKeyPressed
+
+    private void tfDtNascimentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDtNascimentoKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tfDtNascimentoKeyPressed
+
+    private void tfDtNascimentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDtNascimentoKeyReleased
+        // TODO add your handling code here:
+        this.pesquisaDtNascimento();
+    }//GEN-LAST:event_tfDtNascimentoKeyReleased
+
+    private void tfNomeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomeKeyReleased
+        // TODO add your handling code here:
+        this.pesquisaNome();
+    }//GEN-LAST:event_tfNomeKeyReleased
 
     /**
      * @param args the command line arguments
@@ -566,14 +628,15 @@ public class PesquisaPaciente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnPdf;
-    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSelecionar;
-    private javax.swing.JFormattedTextField ftfCpf;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCpf;
+    private javax.swing.JLabel lblDtNascimento;
     private javax.swing.JLabel lblImagemFundo;
+    private javax.swing.JLabel lblNome;
     private javax.swing.JPanel pnlPesquisa;
     private javax.swing.JTable tblPacientes;
+    private javax.swing.JTextField tfDtNascimento;
+    private javax.swing.JTextField tfNome;
     // End of variables declaration//GEN-END:variables
 }

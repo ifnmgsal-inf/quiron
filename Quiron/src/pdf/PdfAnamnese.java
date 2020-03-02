@@ -43,7 +43,10 @@ import javax.swing.JOptionPane;
 public class PdfAnamnese{
 
     Connection conn = null;
-    Document documento = new Document();
+    Document documento = new Document(PageSize.A4.rotate());
+    
+  
+    //document.setPageSize(PageSize.A4.rotate());
     //Definindo Fontes
     Font fonteTitulo = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD + Font.UNDERLINE);
     Font fontePergunta = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
@@ -61,7 +64,23 @@ public class PdfAnamnese{
     public void criarParagrafo(String pergunta, String resposta) throws DocumentException {
         Paragraph novoP = new Paragraph();
         novoP.add(new Chunk(pergunta, fontePergunta));
+        if (resposta == null) {
+            novoP.add(new Chunk("", fonteResposta));
+        } else {
         novoP.add(new Chunk(resposta, fonteResposta));
+        }
+        documento.add(novoP);
+    }
+    
+    public void criarParagrafoDireita(String pergunta, String resposta) throws DocumentException {
+        Paragraph novoP = new Paragraph();
+        novoP.setAlignment(Element.ALIGN_RIGHT);
+        novoP.add(new Chunk(pergunta, fontePergunta));
+        if (resposta == null) {
+            novoP.add(new Chunk("", fonteResposta));
+        } else {
+        novoP.add(new Chunk(resposta, fonteResposta));
+        }
         documento.add(novoP);
     }
 
@@ -69,7 +88,11 @@ public class PdfAnamnese{
         Paragraph novoP = new Paragraph();
         novoP.add(new Chunk(pergunta, fontePergunta));
         novoP.add(new Chunk(alternativas, fonteAlternativa));
+        if (resposta == null) {
+            novoP.add(new Chunk("", fonteResposta));
+        } else {
         novoP.add(new Chunk(resposta, fonteResposta));
+        }
         documento.add(novoP);
     }
 
@@ -366,7 +389,7 @@ public class PdfAnamnese{
                 } else {
                     doencasFamilia += "( )PROBLEMAS MENTAIS ";
                 }
-                if ("Não".equals(rs.getString("doencaEspecifica"))) {
+                if ("Não".equals(rs.getString("doencaEspecifica")) || rs.getString("doencaEspecifica")==null) {
                     doencasFamilia += "( )OUTRAS ";
                 } else {
                     doencasFamilia += "(X)OUTRAS. ESPECIFICAR: " + rs.getString("doencaEspecifica");
@@ -623,19 +646,18 @@ public class PdfAnamnese{
             this.conectar();
             documento.add(new Paragraph("IDENTIFICAÇÃO", fonteTitulo));
             this.pdfIdentificacao(idPaciente);
-            documento.add(new Paragraph("HISTÓRIA PREGRESSA", fonteTitulo));
+            documento.add(new Paragraph("\nHISTÓRIA PREGRESSA", fonteTitulo));
             this.pdfHistoriaPregressa(idPaciente);
-            documento.add(new Paragraph("HISTÓRICO FAMILIAR", fonteTitulo));
+            documento.add(new Paragraph("\nHISTÓRICO FAMILIAR", fonteTitulo));
             this.pdfHistoricoFamiliar(idPaciente);
-            documento.add(new Paragraph("HISTÓRIA DE DOENÇA ATUAL", fonteTitulo));
+            documento.add(new Paragraph("\nHISTÓRIA DE DOENÇA ATUAL", fonteTitulo));
             this.pdfHistoricoDoencaAtual(idPaciente);
-
-            documento.add(new Paragraph("OBSERVAÇÕES: CASO NÃO QUERIA RELATAR"
+            documento.add(new Paragraph("\nOBSERVAÇÕES: CASO NÃO QUERIA RELATAR"
                     + " O PROBLEMA DE SAÚDE NESTE FORMULÁRIO, FAVOR PROCURAR"
                     + " O SETOR DE ENFERMAGEM OU DE PSICOLOGIA PARA INFORMAR"
                     + " SOBRE ALGUM PROCEDIMENTO OU CUIDADO DE QUE TENHA"
                     + " NECESSIDADE.", fontePergunta));
-            documento.add(new Paragraph("-EM CASO DE USO CONTÍNUO DE MEDICAÇÃO"
+            documento.add(new Paragraph("\n-EM CASO DE USO CONTÍNUO DE MEDICAÇÃO"
                     + " E A MESMA PRECISA SER ADMINISTRADA NA ESCOLA, FAVOR"
                     + " TRAZER A RECEITA MÉDICA. NENHUMA MEDICAÇÃO SERÁ"
                     + " ADMINISTRADA NA ESCOLA SEM A APRESENTAÇÃO DE RECEITA"
@@ -647,6 +669,7 @@ public class PdfAnamnese{
                     + " NO HOSPITAL.", fontePergunta));
 
             documento.add(new Paragraph("SALINAS, ____ DE __________ DE 201__.", fontePergunta));
+            documento.add(new Paragraph("\n"));
             Paragraph campoAssinatura = new Paragraph("_____________________________________", fontePergunta);
             Paragraph assinatura = new Paragraph("ASSINATURA DO ALUNO OU RESPONSÁVEL", fontePergunta);
             campoAssinatura.setAlignment(Element.ALIGN_CENTER);

@@ -23,7 +23,6 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
 
     Connection conn = null;
     public int controleInserir = 0;
-    public int controleMensagens = 0;
     public String controleCpf = "";
 
     /**
@@ -373,9 +372,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             pstmt.setString(16, tfIdPaciente.getText());
             pstmt.executeUpdate();
 
-            if (controleMensagens != 0) {
                 JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-            }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar aqui: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -435,9 +432,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             pstmt.setString(9, tfIdPaciente.getText());
             pstmt.executeUpdate();
 
-            if(controleMensagens != 0){
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-            }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -564,9 +559,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             pstmt.setString(20, tfIdPaciente.getText());
             pstmt.executeUpdate();
 
-            if(controleMensagens !=0){
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-            }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -591,9 +584,7 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             pstmt.setString(7, tfIdPaciente.getText());
             pstmt.executeUpdate();
 
-            if(controleMensagens !=0){
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-            }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -642,9 +633,8 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             pstmt.setString(9, tfIdPaciente.getText());
             pstmt.executeUpdate();
 
-            if(controleMensagens !=0){
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-            }
+            
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -2787,14 +2777,6 @@ public class TelaCadastroPaciente extends javax.swing.JFrame {
             } else {
 
                 this.inserirIdentificacao();
-                if (controleMensagens == 0) {
-                    this.inserirHistoriaPregressa();
-                    this.inserirHistoriaFamiliar();
-                    this.inserirHistoriaDoencaAtual();
-                    this.inserirQuestionario1();
-                    this.inserirQuestionario2();
-                    controleMensagens = 1;
-                }
                 tpCadastroPaciente.setSelectedIndex(1);
             }
 
