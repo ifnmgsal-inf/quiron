@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tela para que o usúario (servidor) recurpere sua senha de acesso.
  */
 package login;
 
@@ -107,74 +105,83 @@ public class TelaEsqueceuSenha extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlPrincipal = new javax.swing.JPanel();
         pnlEsqueceuSenha = new javax.swing.JPanel();
+        lblLogoQuiron = new javax.swing.JLabel();
+        lblTextoQuiron = new javax.swing.JLabel();
         lblNomeCompleto = new javax.swing.JLabel();
         lblMatricula = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
         lblConfirmaSenha = new javax.swing.JLabel();
-        lblImagemUsuario = new javax.swing.JLabel();
-        lblImagemLapis = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
         tfMatricula = new javax.swing.JTextField();
-        btnAlterar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         tfSenha = new javax.swing.JPasswordField();
         tfConfirmaSenha = new javax.swing.JPasswordField();
-        lblFundo = new javax.swing.JLabel();
+        btnAlterar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        sNome = new javax.swing.JSeparator();
+        sMatricula = new javax.swing.JSeparator();
+        sSenha = new javax.swing.JSeparator();
+        sSenhaNovamente = new javax.swing.JSeparator();
+        pnlImagem = new javax.swing.JPanel();
+        lblImagemFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Esqueceu a Senha");
+        setBackground(new java.awt.Color(255, 255, 255));
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/Quiron.png")).getImage());
+        setPreferredSize(new java.awt.Dimension(700, 500));
+        setResizable(false);
+
+        pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPrincipal.setPreferredSize(new java.awt.Dimension(700, 500));
 
         pnlEsqueceuSenha.setBackground(new java.awt.Color(255, 255, 255));
-        pnlEsqueceuSenha.setLayout(null);
+        pnlEsqueceuSenha.setPreferredSize(new java.awt.Dimension(355, 500));
 
-        lblNomeCompleto.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblNomeCompleto.setForeground(new java.awt.Color(255, 255, 255));
+        lblLogoQuiron.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogoQuiron.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Quiron P.png"))); // NOI18N
+
+        lblTextoQuiron.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        lblTextoQuiron.setForeground(new java.awt.Color(102, 102, 102));
+        lblTextoQuiron.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTextoQuiron.setText("QUÍRON");
+
+        lblNomeCompleto.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblNomeCompleto.setForeground(new java.awt.Color(102, 102, 102));
         lblNomeCompleto.setText("Nome Completo");
-        pnlEsqueceuSenha.add(lblNomeCompleto);
-        lblNomeCompleto.setBounds(40, 200, 98, 17);
 
-        lblMatricula.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblMatricula.setForeground(new java.awt.Color(255, 255, 255));
+        lblMatricula.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblMatricula.setForeground(new java.awt.Color(102, 102, 102));
         lblMatricula.setText("Nº Matrícula");
-        pnlEsqueceuSenha.add(lblMatricula);
-        lblMatricula.setBounds(60, 240, 77, 17);
 
-        lblSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblSenha.setForeground(new java.awt.Color(255, 255, 255));
+        lblSenha.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblSenha.setForeground(new java.awt.Color(102, 102, 102));
         lblSenha.setText("Nova Senha");
-        pnlEsqueceuSenha.add(lblSenha);
-        lblSenha.setBounds(60, 280, 72, 17);
 
-        lblConfirmaSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblConfirmaSenha.setForeground(new java.awt.Color(255, 255, 255));
+        lblConfirmaSenha.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblConfirmaSenha.setForeground(new java.awt.Color(102, 102, 102));
         lblConfirmaSenha.setText("Confirme a senha");
-        pnlEsqueceuSenha.add(lblConfirmaSenha);
-        lblConfirmaSenha.setBounds(20, 320, 110, 17);
 
-        lblImagemUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Usuário M.png"))); // NOI18N
-        pnlEsqueceuSenha.add(lblImagemUsuario);
-        lblImagemUsuario.setBounds(150, 70, 110, 110);
+        tfNome.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        tfNome.setForeground(new java.awt.Color(102, 102, 102));
+        tfNome.setBorder(null);
 
-        lblImagemLapis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Lápis P.png"))); // NOI18N
-        pnlEsqueceuSenha.add(lblImagemLapis);
-        lblImagemLapis.setBounds(260, 130, 50, 50);
+        tfMatricula.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        tfMatricula.setForeground(new java.awt.Color(102, 102, 102));
+        tfMatricula.setBorder(null);
 
-        tfNome.setBackground(new java.awt.Color(153, 153, 153));
-        tfNome.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfNome.setForeground(new java.awt.Color(255, 255, 255));
-        pnlEsqueceuSenha.add(tfNome);
-        tfNome.setBounds(160, 200, 200, 20);
+        tfSenha.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        tfSenha.setForeground(new java.awt.Color(102, 102, 102));
+        tfSenha.setBorder(null);
 
-        tfMatricula.setBackground(new java.awt.Color(153, 153, 153));
-        tfMatricula.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfMatricula.setForeground(new java.awt.Color(255, 255, 255));
-        pnlEsqueceuSenha.add(tfMatricula);
-        tfMatricula.setBounds(160, 240, 200, 20);
+        tfConfirmaSenha.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        tfConfirmaSenha.setForeground(new java.awt.Color(102, 102, 102));
+        tfConfirmaSenha.setBorder(null);
 
+        btnAlterar.setBackground(new java.awt.Color(204, 204, 204));
         btnAlterar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAlterar.setForeground(new java.awt.Color(102, 102, 102));
         btnAlterar.setText("Alterar");
         btnAlterar.setBorderPainted(false);
         btnAlterar.setContentAreaFilled(false);
@@ -192,11 +199,10 @@ public class TelaEsqueceuSenha extends javax.swing.JDialog {
                 btnAlterarActionPerformed(evt);
             }
         });
-        pnlEsqueceuSenha.add(btnAlterar);
-        btnAlterar.setBounds(220, 440, 120, 30);
 
+        btnCancelar.setBackground(new java.awt.Color(204, 204, 204));
         btnCancelar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setForeground(new java.awt.Color(102, 102, 102));
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorderPainted(false);
         btnCancelar.setContentAreaFilled(false);
@@ -214,34 +220,142 @@ public class TelaEsqueceuSenha extends javax.swing.JDialog {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlEsqueceuSenha.add(btnCancelar);
-        btnCancelar.setBounds(70, 440, 120, 31);
 
-        tfSenha.setBackground(new java.awt.Color(153, 153, 153));
-        tfSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfSenha.setForeground(new java.awt.Color(255, 255, 255));
-        pnlEsqueceuSenha.add(tfSenha);
-        tfSenha.setBounds(160, 280, 200, 20);
+        sNome.setForeground(new java.awt.Color(51, 51, 51));
 
-        tfConfirmaSenha.setBackground(new java.awt.Color(153, 153, 153));
-        tfConfirmaSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfConfirmaSenha.setForeground(new java.awt.Color(255, 255, 255));
-        pnlEsqueceuSenha.add(tfConfirmaSenha);
-        tfConfirmaSenha.setBounds(160, 320, 200, 20);
+        sMatricula.setForeground(new java.awt.Color(51, 51, 51));
 
-        lblFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Usuario.png"))); // NOI18N
-        pnlEsqueceuSenha.add(lblFundo);
-        lblFundo.setBounds(0, 0, 420, 557);
+        sSenha.setForeground(new java.awt.Color(51, 51, 51));
+
+        sSenhaNovamente.setForeground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout pnlEsqueceuSenhaLayout = new javax.swing.GroupLayout(pnlEsqueceuSenha);
+        pnlEsqueceuSenha.setLayout(pnlEsqueceuSenhaLayout);
+        pnlEsqueceuSenhaLayout.setHorizontalGroup(
+            pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEsqueceuSenhaLayout.createSequentialGroup()
+                .addGroup(pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEsqueceuSenhaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblLogoQuiron, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTextoQuiron, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(pnlEsqueceuSenhaLayout.createSequentialGroup()
+                        .addGroup(pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlEsqueceuSenhaLayout.createSequentialGroup()
+                                .addGap(44, 44, 44)
+                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlEsqueceuSenhaLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblConfirmaSenha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                                    .addComponent(lblNomeCompleto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                                    .addComponent(tfMatricula)
+                                    .addComponent(tfSenha)
+                                    .addComponent(tfConfirmaSenha, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(sSenhaNovamente)
+                                    .addComponent(sSenha)
+                                    .addComponent(sMatricula)
+                                    .addComponent(sNome))))
+                        .addGap(22, 22, 22)))
+                .addContainerGap())
+        );
+        pnlEsqueceuSenhaLayout.setVerticalGroup(
+            pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEsqueceuSenhaLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(lblLogoQuiron)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTextoQuiron)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNomeCompleto, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addComponent(sNome, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addGroup(pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sSenhaNovamente, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addGroup(pnlEsqueceuSenhaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAlterar)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(84, 84, 84))
+        );
+
+        pnlImagem.setBackground(new java.awt.Color(255, 255, 255));
+        pnlImagem.setPreferredSize(new java.awt.Dimension(345, 500));
+
+        lblImagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/LowPoly.jpg"))); // NOI18N
+        lblImagemFundo.setPreferredSize(new java.awt.Dimension(345, 500));
+
+        javax.swing.GroupLayout pnlImagemLayout = new javax.swing.GroupLayout(pnlImagem);
+        pnlImagem.setLayout(pnlImagemLayout);
+        pnlImagemLayout.setHorizontalGroup(
+            pnlImagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlImagemLayout.createSequentialGroup()
+                .addComponent(lblImagemFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pnlImagemLayout.setVerticalGroup(
+            pnlImagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlImagemLayout.createSequentialGroup()
+                .addComponent(lblImagemFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
+        pnlPrincipal.setLayout(pnlPrincipalLayout);
+        pnlPrincipalLayout.setHorizontalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addComponent(pnlImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlEsqueceuSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
+        );
+        pnlPrincipalLayout.setVerticalGroup(
+            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlImagem, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                .addComponent(pnlEsqueceuSenha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlEsqueceuSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlEsqueceuSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -324,13 +438,19 @@ public class TelaEsqueceuSenha extends javax.swing.JDialog {
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel lblConfirmaSenha;
-    private javax.swing.JLabel lblFundo;
-    private javax.swing.JLabel lblImagemLapis;
-    private javax.swing.JLabel lblImagemUsuario;
+    private javax.swing.JLabel lblImagemFundo;
+    private javax.swing.JLabel lblLogoQuiron;
     private javax.swing.JLabel lblMatricula;
     private javax.swing.JLabel lblNomeCompleto;
     private javax.swing.JLabel lblSenha;
+    private javax.swing.JLabel lblTextoQuiron;
     private javax.swing.JPanel pnlEsqueceuSenha;
+    private javax.swing.JPanel pnlImagem;
+    private javax.swing.JPanel pnlPrincipal;
+    private javax.swing.JSeparator sMatricula;
+    private javax.swing.JSeparator sNome;
+    private javax.swing.JSeparator sSenha;
+    private javax.swing.JSeparator sSenhaNovamente;
     private javax.swing.JPasswordField tfConfirmaSenha;
     private javax.swing.JTextField tfMatricula;
     private javax.swing.JTextField tfNome;

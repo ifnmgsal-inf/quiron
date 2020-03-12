@@ -1,32 +1,33 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tela Principal (Inical), onde possui todas as ações do sistema.
  */
+//Tamanho desejado [1370, 710]
+//pnl [1000, 550]
 package principal;
 
 import bancodedados.MysqlConnect;
-import cursos.TelaCursos;
-import gerenciarpacientes.TelaCadastroPaciente;
-import gerenciarusuarios.TelaAlteraUsuario;
-import gerenciarusuarios.TelaCadastroUsuario;
-import gerenciarusuarios.TelaAtivarUsuario;
-import hospital.TelaEncaminhamentos;
+import cursos.pnlGerenciarCursos;
+import gerenciarpacientes.pnlCadastroPaciente;
+import gerenciarusuarios.pnlAlterarUsuario;
+import gerenciarusuarios.pnlAtivarUsuario;
+import gerenciarusuarios.pnlCadastrarUsuarios;
+import hospital.pnlEncaminhamentoHospital;
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import login.TelaLogin;
-import relatorio.TelaRelatorios;
+import relatorio.pnlRelatorios;
 
 /**
  *
  * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
-public class TelaPrincipal extends javax.swing.JFrame {
+public final class TelaPrincipal extends javax.swing.JFrame {
 
     Connection conn = null;
     public int administradorBD;
@@ -39,8 +40,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         initComponents();
         try {
             conn = MysqlConnect.connectDB();
-            //this.verificaAdministrador();
-            //JOptionPane.showMessageDialog(null, "Conexao bem sucedida");
+            this.verificaAdministrador();
+            lblNomeUsuario.setText(TelaLogin.nomeUsuario);
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -51,7 +52,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             btnAdicionarUsuario.setEnabled(false);
             btnAtivarUsuario.setEnabled(false);
             btnGerenciarCursos.setEnabled(false);
-            lblImagemCursos.setEnabled(false);
+            //lblImagemCursos.setEnabled(false);
             lblGerenciaCursos.setEnabled(false);
         }
     }
@@ -74,6 +75,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }
 
+    public static void abrirJPainel(JPanel meuPainel) {
+        meuPainel.setSize(1000, 550);
+        //meuPainel.setLocation(5,5);
+        pnlTelaAtual.removeAll();
+        pnlTelaAtual.add(meuPainel, BorderLayout.CENTER);
+        pnlTelaAtual.revalidate();
+        pnlTelaAtual.repaint();
+        pnlTelaAtual.setVisible(true);
+    }
+
+    public static void voltarHome() {
+        pnlTelaAtual.setVisible(false);
+        lblTextoAtual.setText("");
+        //abrirJPainel(pnlHome);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,92 +100,141 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         pnlPrincipal = new javax.swing.JPanel();
-        btnAdicionarUsuario = new javax.swing.JButton();
-        btnAtivarUsuario = new javax.swing.JButton();
-        btnAdicionarPaciente = new javax.swing.JButton();
-        btnRelatorio = new javax.swing.JButton();
-        btnEditarCartao = new javax.swing.JButton();
-        btnAlterarPaciente = new javax.swing.JButton();
-        btnAlterarUsuario = new javax.swing.JButton();
+        lblTextoAtual = new javax.swing.JLabel();
+        pnlMenuVertical = new javax.swing.JPanel();
+        lblLogoQuiron = new javax.swing.JLabel();
+        lblTextoQuiron = new javax.swing.JLabel();
+        sSeparador1 = new javax.swing.JSeparator();
+        lblAtendimento = new javax.swing.JLabel();
         btnFichas = new javax.swing.JButton();
         btnEncaminhamentos = new javax.swing.JButton();
-        btnGerenciarCursos = new javax.swing.JButton();
-        lblAtendimento = new javax.swing.JLabel();
+        sSeparador2 = new javax.swing.JSeparator();
+        btnAdicionarPaciente = new javax.swing.JButton();
+        sSeparador3 = new javax.swing.JSeparator();
+        lblCartaoVacina = new javax.swing.JLabel();
+        btnEditarCartao = new javax.swing.JButton();
+        sSeparador4 = new javax.swing.JSeparator();
+        lblRelatorios = new javax.swing.JLabel();
+        btnRelatorio = new javax.swing.JButton();
+        sSeparador5 = new javax.swing.JSeparator();
+        lblGerenciaUsuarios = new javax.swing.JLabel();
+        btnAdicionarUsuario = new javax.swing.JButton();
+        btnAlterarUsuario = new javax.swing.JButton();
+        btnAtivarUsuario = new javax.swing.JButton();
+        sSeparador6 = new javax.swing.JSeparator();
         lblGerenciaCursos = new javax.swing.JLabel();
+        btnGerenciarCursos = new javax.swing.JButton();
         lblGerenciarPacientes = new javax.swing.JLabel();
         lblImagemAtendimento = new javax.swing.JLabel();
         lblImagemPacientes = new javax.swing.JLabel();
-        lblImagemGerenciaUsuarios = new javax.swing.JLabel();
-        lblCartaoVacina = new javax.swing.JLabel();
-        lblGerenciaUsuarios = new javax.swing.JLabel();
-        lblRelatorios = new javax.swing.JLabel();
+        btnAdcionarServidor = new javax.swing.JButton();
+        btnAlterarPaciente = new javax.swing.JButton();
         lblImagemRelatorios = new javax.swing.JLabel();
-        lblImagemCursos = new javax.swing.JLabel();
         lblImagemCartaoVacina = new javax.swing.JLabel();
-        lblImagemFundo = new javax.swing.JLabel();
+        lblImagemGerenciaUsuarios = new javax.swing.JLabel();
+        lblImagemCursos = new javax.swing.JLabel();
+        lblFundoVertical = new javax.swing.JLabel();
+        pnlMenuHorizontal = new javax.swing.JPanel();
+        lblNomeUsuario = new javax.swing.JLabel();
+        lblLogoIf = new javax.swing.JLabel();
+        lblFundoHorizontal = new javax.swing.JLabel();
+        pnlTelaAtual = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Tela Principal");
+        setExtendedState(MAXIMIZED_BOTH);
         setIconImage(new javax.swing.ImageIcon(getClass().getResource("/imagens/Quiron.png")).getImage());
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
-        pnlPrincipal.setLayout(null);
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        btnAdicionarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnAdicionarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdicionarUsuario.setText("Adicionar Usuario");
-        btnAdicionarUsuario.setBorderPainted(false);
-        btnAdicionarUsuario.setContentAreaFilled(false);
-        btnAdicionarUsuario.setFocusPainted(false);
-        btnAdicionarUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnAdicionarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTextoAtual.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        lblTextoAtual.setForeground(new java.awt.Color(96, 173, 224));
+        pnlPrincipal.add(lblTextoAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 80, 350, 60));
+
+        pnlMenuVertical.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMenuVertical.setForeground(new java.awt.Color(102, 102, 102));
+        pnlMenuVertical.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblLogoQuiron.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogoQuiron.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Quiron P.png"))); // NOI18N
+        pnlMenuVertical.add(lblLogoQuiron, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 12, 294, -1));
+
+        lblTextoQuiron.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblTextoQuiron.setForeground(new java.awt.Color(102, 102, 102));
+        lblTextoQuiron.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTextoQuiron.setText("QUÍRON");
+        pnlMenuVertical.add(lblTextoQuiron, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 119, 294, -1));
+
+        sSeparador1.setForeground(new java.awt.Color(102, 102, 102));
+        pnlMenuVertical.add(sSeparador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 147, 290, 10));
+
+        lblAtendimento.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblAtendimento.setForeground(new java.awt.Color(96, 173, 224));
+        lblAtendimento.setText("Atendimento");
+        pnlMenuVertical.add(lblAtendimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 163, 169, -1));
+
+        btnFichas.setBackground(new java.awt.Color(102, 102, 102));
+        btnFichas.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnFichas.setForeground(new java.awt.Color(51, 51, 51));
+        btnFichas.setText("Fichas                  ");
+        btnFichas.setBorderPainted(false);
+        btnFichas.setContentAreaFilled(false);
+        btnFichas.setFocusable(false);
+        btnFichas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnFichas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAdicionarUsuarioMouseEntered(evt);
+                btnFichasMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAdicionarUsuarioMouseExited(evt);
+                btnFichasMouseExited(evt);
             }
         });
-        btnAdicionarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btnFichas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdicionarUsuarioActionPerformed(evt);
+                btnFichasActionPerformed(evt);
             }
         });
-        pnlPrincipal.add(btnAdicionarUsuario);
-        btnAdicionarUsuario.setBounds(580, 290, 150, 30);
+        pnlMenuVertical.add(btnFichas, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 191, -1, 30));
 
-        btnAtivarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnAtivarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        btnAtivarUsuario.setText("Ativar/Inativar");
-        btnAtivarUsuario.setBorderPainted(false);
-        btnAtivarUsuario.setContentAreaFilled(false);
-        btnAtivarUsuario.setFocusPainted(false);
-        btnAtivarUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnAtivarUsuario.setPreferredSize(new java.awt.Dimension(255, 109));
-        btnAtivarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEncaminhamentos.setBackground(new java.awt.Color(102, 102, 102));
+        btnEncaminhamentos.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnEncaminhamentos.setForeground(new java.awt.Color(51, 51, 51));
+        btnEncaminhamentos.setText("Encamin. ao Hospital");
+        btnEncaminhamentos.setBorderPainted(false);
+        btnEncaminhamentos.setContentAreaFilled(false);
+        btnEncaminhamentos.setFocusable(false);
+        btnEncaminhamentos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnEncaminhamentos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAtivarUsuarioMouseEntered(evt);
+                btnEncaminhamentosMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAtivarUsuarioMouseExited(evt);
+                btnEncaminhamentosMouseExited(evt);
             }
         });
-        btnAtivarUsuario.addActionListener(new java.awt.event.ActionListener() {
+        btnEncaminhamentos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtivarUsuarioActionPerformed(evt);
+                btnEncaminhamentosActionPerformed(evt);
             }
         });
-        pnlPrincipal.add(btnAtivarUsuario);
-        btnAtivarUsuario.setBounds(580, 350, 150, 30);
+        pnlMenuVertical.add(btnEncaminhamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 227, -1, 30));
 
-        btnAdicionarPaciente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnAdicionarPaciente.setForeground(new java.awt.Color(255, 255, 255));
+        sSeparador2.setForeground(new java.awt.Color(102, 102, 102));
+        pnlMenuVertical.add(sSeparador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 267, 290, 10));
+
+        btnAdicionarPaciente.setBackground(new java.awt.Color(102, 102, 102));
+        btnAdicionarPaciente.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnAdicionarPaciente.setForeground(new java.awt.Color(51, 51, 51));
         btnAdicionarPaciente.setText("Adicionar Paciente");
         btnAdicionarPaciente.setBorderPainted(false);
         btnAdicionarPaciente.setContentAreaFilled(false);
@@ -188,35 +254,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 btnAdicionarPacienteActionPerformed(evt);
             }
         });
-        pnlPrincipal.add(btnAdicionarPaciente);
-        btnAdicionarPaciente.setBounds(240, 290, 150, 30);
+        pnlMenuVertical.add(btnAdicionarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 311, 188, 30));
 
-        btnRelatorio.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnRelatorio.setForeground(new java.awt.Color(255, 255, 255));
-        btnRelatorio.setText("Gerar Relatório     ");
-        btnRelatorio.setBorderPainted(false);
-        btnRelatorio.setContentAreaFilled(false);
-        btnRelatorio.setFocusPainted(false);
-        btnRelatorio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnRelatorio.setPreferredSize(new java.awt.Dimension(255, 109));
-        btnRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRelatorioMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnRelatorioMouseExited(evt);
-            }
-        });
-        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRelatorioActionPerformed(evt);
-            }
-        });
-        pnlPrincipal.add(btnRelatorio);
-        btnRelatorio.setBounds(580, 160, 160, 30);
+        sSeparador3.setForeground(new java.awt.Color(102, 102, 102));
+        pnlMenuVertical.add(sSeparador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 423, 290, 10));
 
-        btnEditarCartao.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnEditarCartao.setForeground(new java.awt.Color(255, 255, 255));
+        lblCartaoVacina.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblCartaoVacina.setForeground(new java.awt.Color(96, 173, 224));
+        lblCartaoVacina.setText("Cartão de Vacinação");
+        pnlMenuVertical.add(lblCartaoVacina, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 439, 188, 20));
+
+        btnEditarCartao.setBackground(new java.awt.Color(102, 102, 102));
+        btnEditarCartao.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnEditarCartao.setForeground(new java.awt.Color(51, 51, 51));
         btnEditarCartao.setText("Gerenciar Cartões     ");
         btnEditarCartao.setBorderPainted(false);
         btnEditarCartao.setContentAreaFilled(false);
@@ -236,11 +286,186 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 btnEditarCartaoActionPerformed(evt);
             }
         });
-        pnlPrincipal.add(btnEditarCartao);
-        btnEditarCartao.setBounds(230, 450, 170, 30);
+        pnlMenuVertical.add(btnEditarCartao, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 465, 190, 30));
 
-        btnAlterarPaciente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnAlterarPaciente.setForeground(new java.awt.Color(255, 255, 255));
+        sSeparador4.setForeground(new java.awt.Color(102, 102, 102));
+        pnlMenuVertical.add(sSeparador4, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 535, 290, 10));
+
+        lblRelatorios.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblRelatorios.setForeground(new java.awt.Color(96, 173, 224));
+        lblRelatorios.setText("Relatórios");
+        pnlMenuVertical.add(lblRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 551, 188, -1));
+
+        btnRelatorio.setBackground(new java.awt.Color(102, 102, 102));
+        btnRelatorio.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnRelatorio.setForeground(new java.awt.Color(51, 51, 51));
+        btnRelatorio.setText("Gerar Relatório     ");
+        btnRelatorio.setBorderPainted(false);
+        btnRelatorio.setContentAreaFilled(false);
+        btnRelatorio.setFocusPainted(false);
+        btnRelatorio.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnRelatorio.setPreferredSize(new java.awt.Dimension(255, 109));
+        btnRelatorio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRelatorioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnRelatorioMouseExited(evt);
+            }
+        });
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
+        pnlMenuVertical.add(btnRelatorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 579, 188, 30));
+
+        sSeparador5.setForeground(new java.awt.Color(102, 102, 102));
+        pnlMenuVertical.add(sSeparador5, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 659, 290, 10));
+
+        lblGerenciaUsuarios.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblGerenciaUsuarios.setForeground(new java.awt.Color(96, 173, 224));
+        lblGerenciaUsuarios.setText("Gerenciar Usuarios");
+        pnlMenuVertical.add(lblGerenciaUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 675, 188, -1));
+
+        btnAdicionarUsuario.setBackground(new java.awt.Color(102, 102, 102));
+        btnAdicionarUsuario.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnAdicionarUsuario.setForeground(new java.awt.Color(51, 51, 51));
+        btnAdicionarUsuario.setText("Adicionar Usuario");
+        btnAdicionarUsuario.setBorderPainted(false);
+        btnAdicionarUsuario.setContentAreaFilled(false);
+        btnAdicionarUsuario.setFocusPainted(false);
+        btnAdicionarUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAdicionarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAdicionarUsuarioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAdicionarUsuarioMouseExited(evt);
+            }
+        });
+        btnAdicionarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarUsuarioActionPerformed(evt);
+            }
+        });
+        pnlMenuVertical.add(btnAdicionarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 703, 188, -1));
+
+        btnAlterarUsuario.setBackground(new java.awt.Color(102, 102, 102));
+        btnAlterarUsuario.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnAlterarUsuario.setForeground(new java.awt.Color(51, 51, 51));
+        btnAlterarUsuario.setText("Alterar                ");
+        btnAlterarUsuario.setBorderPainted(false);
+        btnAlterarUsuario.setContentAreaFilled(false);
+        btnAlterarUsuario.setFocusable(false);
+        btnAlterarUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAlterarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAlterarUsuarioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAlterarUsuarioMouseExited(evt);
+            }
+        });
+        btnAlterarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarUsuarioActionPerformed(evt);
+            }
+        });
+        pnlMenuVertical.add(btnAlterarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 739, 188, 30));
+
+        btnAtivarUsuario.setBackground(new java.awt.Color(102, 102, 102));
+        btnAtivarUsuario.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnAtivarUsuario.setForeground(new java.awt.Color(51, 51, 51));
+        btnAtivarUsuario.setText("Ativar/Inativar");
+        btnAtivarUsuario.setBorderPainted(false);
+        btnAtivarUsuario.setContentAreaFilled(false);
+        btnAtivarUsuario.setFocusPainted(false);
+        btnAtivarUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAtivarUsuario.setPreferredSize(new java.awt.Dimension(255, 109));
+        btnAtivarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAtivarUsuarioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAtivarUsuarioMouseExited(evt);
+            }
+        });
+        btnAtivarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtivarUsuarioActionPerformed(evt);
+            }
+        });
+        pnlMenuVertical.add(btnAtivarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 775, 188, 30));
+
+        sSeparador6.setForeground(new java.awt.Color(102, 102, 102));
+        pnlMenuVertical.add(sSeparador6, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 811, 290, 10));
+
+        lblGerenciaCursos.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblGerenciaCursos.setForeground(new java.awt.Color(96, 173, 224));
+        lblGerenciaCursos.setText("Cursos");
+        pnlMenuVertical.add(lblGerenciaCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 827, 188, -1));
+
+        btnGerenciarCursos.setBackground(new java.awt.Color(102, 102, 102));
+        btnGerenciarCursos.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnGerenciarCursos.setForeground(new java.awt.Color(51, 51, 51));
+        btnGerenciarCursos.setText("Gerenciar Cursos");
+        btnGerenciarCursos.setBorderPainted(false);
+        btnGerenciarCursos.setContentAreaFilled(false);
+        btnGerenciarCursos.setFocusPainted(false);
+        btnGerenciarCursos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnGerenciarCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGerenciarCursosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGerenciarCursosMouseExited(evt);
+            }
+        });
+        btnGerenciarCursos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerenciarCursosActionPerformed(evt);
+            }
+        });
+        pnlMenuVertical.add(btnGerenciarCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 855, 188, -1));
+
+        lblGerenciarPacientes.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblGerenciarPacientes.setForeground(new java.awt.Color(96, 173, 224));
+        lblGerenciarPacientes.setText("Gerenciar Pacientes");
+        pnlMenuVertical.add(lblGerenciarPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 283, 188, -1));
+
+        lblImagemAtendimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Médico P.png"))); // NOI18N
+        pnlMenuVertical.add(lblImagemAtendimento, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 163, -1, -1));
+
+        lblImagemPacientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Enfermeira P.png"))); // NOI18N
+        pnlMenuVertical.add(lblImagemPacientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 283, -1, 134));
+
+        btnAdcionarServidor.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnAdcionarServidor.setForeground(new java.awt.Color(51, 51, 51));
+        btnAdcionarServidor.setText("Adicionar Servidor");
+        btnAdcionarServidor.setBorderPainted(false);
+        btnAdcionarServidor.setContentAreaFilled(false);
+        btnAdcionarServidor.setFocusPainted(false);
+        btnAdcionarServidor.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnAdcionarServidor.setPreferredSize(new java.awt.Dimension(255, 109));
+        btnAdcionarServidor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAdcionarServidorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAdcionarServidorMouseExited(evt);
+            }
+        });
+        btnAdcionarServidor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdcionarServidorActionPerformed(evt);
+            }
+        });
+        pnlMenuVertical.add(btnAdcionarServidor, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 347, 190, 30));
+
+        btnAlterarPaciente.setBackground(new java.awt.Color(102, 102, 102));
+        btnAlterarPaciente.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        btnAlterarPaciente.setForeground(new java.awt.Color(51, 51, 51));
         btnAlterarPaciente.setText("Pesquisar");
         btnAlterarPaciente.setBorderPainted(false);
         btnAlterarPaciente.setContentAreaFilled(false);
@@ -263,180 +488,73 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 btnAlterarPacienteActionPerformed(evt);
             }
         });
-        pnlPrincipal.add(btnAlterarPaciente);
-        btnAlterarPaciente.setBounds(240, 320, 150, 30);
-
-        btnAlterarUsuario.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnAlterarUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        btnAlterarUsuario.setText("Alterar                ");
-        btnAlterarUsuario.setBorderPainted(false);
-        btnAlterarUsuario.setContentAreaFilled(false);
-        btnAlterarUsuario.setFocusable(false);
-        btnAlterarUsuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnAlterarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAlterarUsuarioMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAlterarUsuarioMouseExited(evt);
-            }
-        });
-        btnAlterarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarUsuarioActionPerformed(evt);
-            }
-        });
-        pnlPrincipal.add(btnAlterarUsuario);
-        btnAlterarUsuario.setBounds(580, 320, 150, 30);
-
-        btnFichas.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnFichas.setForeground(new java.awt.Color(255, 255, 255));
-        btnFichas.setText("Fichas                  ");
-        btnFichas.setBorderPainted(false);
-        btnFichas.setContentAreaFilled(false);
-        btnFichas.setFocusable(false);
-        btnFichas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnFichas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnFichasMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnFichasMouseExited(evt);
-            }
-        });
-        btnFichas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFichasActionPerformed(evt);
-            }
-        });
-        pnlPrincipal.add(btnFichas);
-        btnFichas.setBounds(240, 160, 150, 30);
-
-        btnEncaminhamentos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnEncaminhamentos.setForeground(new java.awt.Color(255, 255, 255));
-        btnEncaminhamentos.setText("Encaminhamentos ao Hospital");
-        btnEncaminhamentos.setBorderPainted(false);
-        btnEncaminhamentos.setContentAreaFilled(false);
-        btnEncaminhamentos.setFocusable(false);
-        btnEncaminhamentos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnEncaminhamentos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEncaminhamentosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEncaminhamentosMouseExited(evt);
-            }
-        });
-        btnEncaminhamentos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEncaminhamentosActionPerformed(evt);
-            }
-        });
-        pnlPrincipal.add(btnEncaminhamentos);
-        btnEncaminhamentos.setBounds(240, 190, 220, 30);
-
-        btnGerenciarCursos.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btnGerenciarCursos.setForeground(new java.awt.Color(255, 255, 255));
-        btnGerenciarCursos.setText("Gerenciar Cursos");
-        btnGerenciarCursos.setBorderPainted(false);
-        btnGerenciarCursos.setContentAreaFilled(false);
-        btnGerenciarCursos.setFocusPainted(false);
-        btnGerenciarCursos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnGerenciarCursos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGerenciarCursosMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGerenciarCursosMouseExited(evt);
-            }
-        });
-        btnGerenciarCursos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerenciarCursosActionPerformed(evt);
-            }
-        });
-        pnlPrincipal.add(btnGerenciarCursos);
-        btnGerenciarCursos.setBounds(580, 450, 150, 25);
-
-        lblAtendimento.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblAtendimento.setForeground(new java.awt.Color(153, 255, 153));
-        lblAtendimento.setText("Atendimento");
-        pnlPrincipal.add(lblAtendimento);
-        lblAtendimento.setBounds(240, 130, 160, 22);
-
-        lblGerenciaCursos.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblGerenciaCursos.setForeground(new java.awt.Color(153, 255, 153));
-        lblGerenciaCursos.setText("Cursos");
-        pnlPrincipal.add(lblGerenciaCursos);
-        lblGerenciaCursos.setBounds(590, 410, 150, 22);
-
-        lblGerenciarPacientes.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblGerenciarPacientes.setForeground(new java.awt.Color(153, 255, 153));
-        lblGerenciarPacientes.setText("Gerenciar Pacientes");
-        pnlPrincipal.add(lblGerenciarPacientes);
-        lblGerenciarPacientes.setBounds(240, 260, 160, 22);
-
-        lblImagemAtendimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Médico P.png"))); // NOI18N
-        pnlPrincipal.add(lblImagemAtendimento);
-        lblImagemAtendimento.setBounds(130, 130, 280, 100);
-
-        lblImagemPacientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Enfermeira P.png"))); // NOI18N
-        pnlPrincipal.add(lblImagemPacientes);
-        lblImagemPacientes.setBounds(130, 260, 280, 130);
-
-        lblImagemGerenciaUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Usuário P Azul.png"))); // NOI18N
-        pnlPrincipal.add(lblImagemGerenciaUsuarios);
-        lblImagemGerenciaUsuarios.setBounds(470, 260, 270, 130);
-
-        lblCartaoVacina.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblCartaoVacina.setForeground(new java.awt.Color(153, 255, 153));
-        lblCartaoVacina.setText("Cartão de Vacinação");
-        pnlPrincipal.add(lblCartaoVacina);
-        lblCartaoVacina.setBounds(240, 410, 170, 20);
-
-        lblGerenciaUsuarios.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblGerenciaUsuarios.setForeground(new java.awt.Color(153, 255, 153));
-        lblGerenciaUsuarios.setText("Gerenciar Usuarios");
-        pnlPrincipal.add(lblGerenciaUsuarios);
-        lblGerenciaUsuarios.setBounds(580, 260, 170, 22);
-
-        lblRelatorios.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblRelatorios.setForeground(new java.awt.Color(153, 255, 153));
-        lblRelatorios.setText("Relatórios");
-        pnlPrincipal.add(lblRelatorios);
-        lblRelatorios.setBounds(580, 130, 90, 22);
+        pnlMenuVertical.add(btnAlterarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 383, 190, 30));
 
         lblImagemRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Relatório Médico P.png"))); // NOI18N
-        pnlPrincipal.add(lblImagemRelatorios);
-        lblImagemRelatorios.setBounds(470, 110, 280, 130);
-
-        lblImagemCursos.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblImagemCursos.setForeground(new java.awt.Color(255, 255, 255));
-        lblImagemCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Relatório P.png"))); // NOI18N
-        pnlPrincipal.add(lblImagemCursos);
-        lblImagemCursos.setBounds(470, 400, 280, 112);
+        pnlMenuVertical.add(lblImagemRelatorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 551, -1, -1));
 
         lblImagemCartaoVacina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Exames P.png"))); // NOI18N
         lblImagemCartaoVacina.setMaximumSize(new java.awt.Dimension(100, 98));
         lblImagemCartaoVacina.setMinimumSize(new java.awt.Dimension(100, 98));
-        pnlPrincipal.add(lblImagemCartaoVacina);
-        lblImagemCartaoVacina.setBounds(130, 400, 280, 130);
+        pnlMenuVertical.add(lblImagemCartaoVacina, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 439, -1, -1));
 
-        lblImagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo principal.png"))); // NOI18N
-        pnlPrincipal.add(lblImagemFundo);
-        lblImagemFundo.setBounds(0, 0, 874, 620);
+        lblImagemGerenciaUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Usuário P Azul.png"))); // NOI18N
+        pnlMenuVertical.add(lblImagemGerenciaUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 675, -1, 130));
+
+        lblImagemCursos.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblImagemCursos.setForeground(new java.awt.Color(255, 255, 255));
+        lblImagemCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Relatório P.png"))); // NOI18N
+        pnlMenuVertical.add(lblImagemCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 827, -1, -1));
+
+        lblFundoVertical.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Low Poly branco recortado.jpg"))); // NOI18N
+        pnlMenuVertical.add(lblFundoVertical, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 940));
+
+        pnlPrincipal.add(pnlMenuVertical, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        pnlMenuHorizontal.setBackground(new java.awt.Color(255, 255, 255));
+        pnlMenuHorizontal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblNomeUsuario.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblNomeUsuario.setForeground(new java.awt.Color(102, 102, 102));
+        lblNomeUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblNomeUsuario.setText("Usuário");
+        pnlMenuHorizontal.add(lblNomeUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 21, 300, -1));
+
+        lblLogoIf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Icone IF P.png"))); // NOI18N
+        pnlMenuHorizontal.add(lblLogoIf, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 11, -1, -1));
+
+        lblFundoHorizontal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Low Poly branco horizontal.jpg"))); // NOI18N
+        pnlMenuHorizontal.add(lblFundoHorizontal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, -1));
+
+        pnlPrincipal.add(pnlMenuHorizontal, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 0, 1050, -1));
+
+        pnlTelaAtual.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout pnlTelaAtualLayout = new javax.swing.GroupLayout(pnlTelaAtual);
+        pnlTelaAtual.setLayout(pnlTelaAtualLayout);
+        pnlTelaAtualLayout.setHorizontalGroup(
+            pnlTelaAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
+        );
+        pnlTelaAtualLayout.setVerticalGroup(
+            pnlTelaAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 548, Short.MAX_VALUE)
+        );
+
+        pnlPrincipal.add(pnlTelaAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 146, -1, -1));
+        pnlTelaAtual.setVisible(false);
+
+        jScrollPane1.setViewportView(pnlPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 874, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1338, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE)
         );
 
         pack();
@@ -485,8 +603,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
         // TODO add your handling code here:
-        TelaRelatorios relatorios = new TelaRelatorios();
-        relatorios.setVisible(true);
+        lblTextoAtual.setText("Gerar Relatórios");
+        pnlRelatorios pnlRelatorios = new pnlRelatorios();
+        TelaPrincipal.abrirJPainel(pnlRelatorios);
+        //TelaRelatorios relatorios = new TelaRelatorios();
+        //relatorios.setVisible(true);
     }//GEN-LAST:event_btnRelatorioActionPerformed
 
     private void btnAlterarPacienteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarPacienteMouseEntered
@@ -511,14 +632,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnAtivarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtivarUsuarioActionPerformed
         // TODO add your handling code here:
-        TelaAtivarUsuario alteraRemoveUsuario = new TelaAtivarUsuario();
-        alteraRemoveUsuario.setVisible(true);
+        lblTextoAtual.setText("Ativar / Inativar Usuarios");
+        pnlAtivarUsuario pnlAtivarUsuario = new pnlAtivarUsuario();
+        TelaPrincipal.abrirJPainel(pnlAtivarUsuario);
+        //TelaAtivarUsuario alteraRemoveUsuario = new TelaAtivarUsuario();
+        //alteraRemoveUsuario.setVisible(true);
     }//GEN-LAST:event_btnAtivarUsuarioActionPerformed
 
     private void btnAdicionarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarUsuarioActionPerformed
         // TODO add your handling code here:
-        TelaCadastroUsuario cadastroUsuario = new TelaCadastroUsuario();
-        cadastroUsuario.setVisible(true);
+        lblTextoAtual.setText("Cadastrar Usuário");
+        pnlCadastrarUsuarios pnlCadastrarUsuario = new pnlCadastrarUsuarios();
+        TelaPrincipal.abrirJPainel(pnlCadastrarUsuario);
+        //TelaCadastroUsuario cadastroUsuario = new TelaCadastroUsuario();
+        //cadastroUsuario.setVisible(true);
     }//GEN-LAST:event_btnAdicionarUsuarioActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -531,8 +658,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnAlterarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarUsuarioActionPerformed
         // TODO add your handling code here:
-        TelaAlteraUsuario alteraUsuario = new TelaAlteraUsuario();
-        alteraUsuario.setVisible(true);
+        lblTextoAtual.setText("Alterar Usuários");
+        pnlAlterarUsuario pnlAlterarUsuario = new pnlAlterarUsuario();
+        TelaPrincipal.abrirJPainel(pnlAlterarUsuario);
+        //TelaAlteraUsuario alteraUsuario = new TelaAlteraUsuario();
+        //alteraUsuario.setVisible(true);
     }//GEN-LAST:event_btnAlterarUsuarioActionPerformed
 
     private void btnAlterarUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarUsuarioMouseEntered
@@ -564,8 +694,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnAdicionarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarPacienteActionPerformed
         // TODO add your handling code here:
-        TelaCadastroPaciente cadastroPacientes = new TelaCadastroPaciente();
-        cadastroPacientes.setVisible(true);
+        //TelaCadastroPaciente cadastroPacientes = new TelaCadastroPaciente(); 
+        lblTextoAtual.setText("Cadastrar Paciente");
+        pnlCadastroPaciente cadastroPaciente = new pnlCadastroPaciente();
+        TelaPrincipal.abrirJPainel(cadastroPaciente);
     }//GEN-LAST:event_btnAdicionarPacienteActionPerformed
 
     private void btnGerenciarCursosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGerenciarCursosMouseEntered
@@ -580,8 +712,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnGerenciarCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarCursosActionPerformed
         // TODO add your handling code here:
-        TelaCursos cursos = new TelaCursos();
-        cursos.setVisible(true);
+        lblTextoAtual.setText("Gerenciar Cursos");
+        pnlGerenciarCursos pnlCursos = new pnlGerenciarCursos();
+        TelaPrincipal.abrirJPainel(pnlCursos);
+        //TelaCursos cursos = new TelaCursos();
+        //cursos.setVisible(true);
     }//GEN-LAST:event_btnGerenciarCursosActionPerformed
 
     private void btnAlterarPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlterarPacienteMouseClicked
@@ -614,9 +749,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnEncaminhamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncaminhamentosActionPerformed
         // TODO add your handling code here:
-        TelaEncaminhamentos encaminhamentos = new TelaEncaminhamentos();
-        encaminhamentos.setVisible(true);
+        lblTextoAtual.setText("Encaminhamentos ao Hospital");
+        pnlEncaminhamentoHospital pnlEncaminhamentoHospital = new pnlEncaminhamentoHospital();
+        TelaPrincipal.abrirJPainel(pnlEncaminhamentoHospital);
+        //TelaEncaminhamentos encaminhamentos = new TelaEncaminhamentos();
+        //encaminhamentos.setVisible(true);
     }//GEN-LAST:event_btnEncaminhamentosActionPerformed
+
+    private void btnAdcionarServidorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdcionarServidorMouseEntered
+        // TODO add your handling code here:
+        this.entraMouse(btnAdcionarServidor);
+    }//GEN-LAST:event_btnAdcionarServidorMouseEntered
+
+    private void btnAdcionarServidorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdcionarServidorMouseExited
+        // TODO add your handling code here:
+        this.saiMouse(btnAdcionarServidor);
+    }//GEN-LAST:event_btnAdcionarServidorMouseExited
+
+    private void btnAdcionarServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdcionarServidorActionPerformed
+        // TODO add your handling code here:
+        //TelaAtivarUsuario alteraRemoveUsuario = new TelaAtivarUsuario();
+        //alteraRemoveUsuario.setVisible(true);
+    }//GEN-LAST:event_btnAdcionarServidorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -654,6 +808,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdcionarServidor;
     private javax.swing.JButton btnAdicionarPaciente;
     private javax.swing.JButton btnAdicionarUsuario;
     private javax.swing.JButton btnAlterarPaciente;
@@ -664,20 +819,36 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnFichas;
     private javax.swing.JButton btnGerenciarCursos;
     private javax.swing.JButton btnRelatorio;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAtendimento;
     private javax.swing.JLabel lblCartaoVacina;
+    private javax.swing.JLabel lblFundoHorizontal;
+    private javax.swing.JLabel lblFundoVertical;
     private javax.swing.JLabel lblGerenciaCursos;
     private javax.swing.JLabel lblGerenciaUsuarios;
     private javax.swing.JLabel lblGerenciarPacientes;
     private javax.swing.JLabel lblImagemAtendimento;
     private javax.swing.JLabel lblImagemCartaoVacina;
     private javax.swing.JLabel lblImagemCursos;
-    private javax.swing.JLabel lblImagemFundo;
     private javax.swing.JLabel lblImagemGerenciaUsuarios;
     private javax.swing.JLabel lblImagemPacientes;
     private javax.swing.JLabel lblImagemRelatorios;
+    private javax.swing.JLabel lblLogoIf;
+    private javax.swing.JLabel lblLogoQuiron;
+    private javax.swing.JLabel lblNomeUsuario;
     private javax.swing.JLabel lblRelatorios;
+    public static javax.swing.JLabel lblTextoAtual;
+    private javax.swing.JLabel lblTextoQuiron;
+    private javax.swing.JPanel pnlMenuHorizontal;
+    private javax.swing.JPanel pnlMenuVertical;
     private javax.swing.JPanel pnlPrincipal;
+    public static javax.swing.JPanel pnlTelaAtual;
+    private javax.swing.JSeparator sSeparador1;
+    private javax.swing.JSeparator sSeparador2;
+    private javax.swing.JSeparator sSeparador3;
+    private javax.swing.JSeparator sSeparador4;
+    private javax.swing.JSeparator sSeparador5;
+    private javax.swing.JSeparator sSeparador6;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -1,15 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tela para pesquisar pacientes já cadastrados.
  */
 package principal;
 
 import bancodedados.MysqlConnect;
-import cartaovacina.AlterarCartao;
+import cartaovacina.pnlAlterarCartao;
 import com.itextpdf.text.DocumentException;
-import fichaatendimento.FichasAtendimento;
-import gerenciarpacientes.TelaAlterarPaciente;
+import fichaatendimento.pnlFichaAtendimento;
+import gerenciarpacientes.pnlAlterarPaciente;
+import hospital.pnlEncaminhamentoHospital;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
@@ -38,16 +37,26 @@ public class PesquisaPaciente extends javax.swing.JDialog {
 
     /**
      * Creates new form PesquisaPaciente
+     * @param parent
+     * @param modal
      */
     public PesquisaPaciente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
         try {
             conn = MysqlConnect.connectDB();
             this.preencheTabela();
             this.controlePesquisa();
-            //JOptionPane.showMessageDialog(null, "Conexao bem sucedida");
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    public PesquisaPaciente(boolean modal) {
+        initComponents();
+        try {
+            conn = MysqlConnect.connectDB();
+            this.preencheTabela();
+            this.controlePesquisa();
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -164,8 +173,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             }
         }
     }*/
-    
-    public void pesquisaNome(){
+    public void pesquisaNome() {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         DefaultTableModel tabelaPacientes = (DefaultTableModel) tblPacientes.getModel();
@@ -182,8 +190,8 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public void pesquisaDtNascimento(){
+
+    public void pesquisaDtNascimento() {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         DefaultTableModel tabelaPacientes = (DefaultTableModel) tblPacientes.getModel();
@@ -474,9 +482,12 @@ public class PesquisaPaciente extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Não há pacientes registrados");
             } else {
                 id = tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString();
+                TelaPrincipal.lblTextoAtual.setText("Alterar Paciente");
+                pnlAlterarPaciente alterarPaciente = new pnlAlterarPaciente();
+                TelaPrincipal.abrirJPainel(alterarPaciente);
                 this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-                TelaAlterarPaciente alteraPaciente = new TelaAlterarPaciente();
-                alteraPaciente.setVisible(true);
+                //TelaAlterarPaciente alteraPaciente = new TelaAlterarPaciente();
+                //alteraPaciente.setVisible(true);
 
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
@@ -503,17 +514,26 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             } else {
                 this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
                 id = tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString();
-                if (TelaPrincipal.controlePesquisa == 1) {
-                    FichasAtendimento fichas = new FichasAtendimento();
-                    fichas.setVisible(true);
-                } else if (TelaPrincipal.controlePesquisa == 2) {
-                    //encaminhamentos ao hospital
-                    this.dispose();
-                } else if (TelaPrincipal.controlePesquisa == 3) {
-                    AlterarCartao alteraCartao = new AlterarCartao();
-                    alteraCartao.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "ERRO", "ERRO", JOptionPane.ERROR_MESSAGE);
+                switch (TelaPrincipal.controlePesquisa) {
+                    case 1:
+                        TelaPrincipal.lblTextoAtual.setText("Ficha de Atendimento");
+                        pnlFichaAtendimento pnlFichaAtendimento = new pnlFichaAtendimento();
+                        TelaPrincipal.abrirJPainel(pnlFichaAtendimento);
+                        break;
+                    case 2:
+                        pnlEncaminhamentoHospital.tfPaciente.setText(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 0).toString());
+                        pnlEncaminhamentoHospital.tfCpf.setText(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 1).toString());
+                        pnlEncaminhamentoHospital.tfIdPaciente.setText(id);
+                        this.dispose();
+                        break;
+                    case 3:
+                        TelaPrincipal.lblTextoAtual.setText("Gerenciar Cartão");
+                        pnlAlterarCartao alterarCartao = new pnlAlterarCartao();
+                        TelaPrincipal.abrirJPainel(alterarCartao);
+                        break;
+                    default:
+                        JOptionPane.showMessageDialog(null, "ERRO", "ERRO", JOptionPane.ERROR_MESSAGE);
+                        break;
                 }
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
@@ -523,7 +543,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
 
     private void btnPdfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPdfActionPerformed
         // TODO add your handling code here:
-        
+
         try {
             if (tblPacientes.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(null, "Não há pacientes registrados");
@@ -539,7 +559,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
                         PdfFichaAtendimento meuPdfFicha = new PdfFichaAtendimento();
                         meuPdfFicha.pdfFichaAtendimento(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
                         //meuPdf.pdfFicha(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
-                        break;    
+                        break;
                     case 3:
                         int idSelecionado3 = Integer.parseInt(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
                         PdfCartaoVacina meuCartaoVacina = new PdfCartaoVacina();
@@ -565,12 +585,12 @@ public class PesquisaPaciente extends javax.swing.JDialog {
 
     private void tfNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfNomeKeyPressed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_tfNomeKeyPressed
 
     private void tfDtNascimentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDtNascimentoKeyPressed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_tfDtNascimentoKeyPressed
 
     private void tfDtNascimentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDtNascimentoKeyReleased

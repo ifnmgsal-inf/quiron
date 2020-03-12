@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe que gera o PDF da ficha de atendimento médico.
  */
 package pdf;
 
@@ -19,7 +17,8 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import fichaatendimento.FichasAtendimento;
+import fichaatendimento.pnlFichaAtendimento;
+//import fichaatendimento.FichasAtendimento;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,7 +38,7 @@ import principal.PesquisaPaciente;
 
 /**
  *
- * @author roger
+ * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
 public class PdfFichaAtendimento {
 
@@ -71,7 +70,7 @@ public class PdfFichaAtendimento {
             reportDate = dfDMA.format(enteredDate);
             reportDate.replace('-', '/');
         } catch (ParseException ex) {
-            Logger.getLogger(FichasAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(pnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
         }
         //String reportDate = df.format(enteredDate);
         return reportDate;
