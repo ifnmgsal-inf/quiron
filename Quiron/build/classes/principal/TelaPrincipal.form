@@ -64,7 +64,7 @@
             <Component class="javax.swing.JLabel" name="lblTextoAtual">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Times New Roman" size="24" style="0"/>
+                  <Font name="Times New Roman" size="36" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="e0" green="ad" red="60" type="rgb"/>
@@ -75,7 +75,7 @@
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="313" y="80" width="350" height="60"/>
+                  <AbsoluteConstraints x="313" y="80" width="1010" height="60"/>
                 </Constraint>
               </Constraints>
             </Component>

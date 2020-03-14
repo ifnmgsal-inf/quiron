@@ -63,7 +63,7 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
         if (!(Arrays.equals(tfSenha.getPassword(), tfConfirmaSenha.getPassword()))) {
             JOptionPane.showMessageDialog(null, "Senhas não coincidem!", "ERRO", JOptionPane.ERROR_MESSAGE);
         } else {
-            String qryStr = "INSERT INTO usuarios(matricula, nome, cpf, telefone, senha, administrador, ativado)" + "VALUES (?,?,?,?,?,?, ?)";
+            String qryStr = "INSERT INTO usuarios(matricula, nome, cpf, telefone, senha, administrador, ativado)" + "VALUES (?,?,?,?,AES_ENCRYPT(?,?),?,?)";
 
             try (PreparedStatement pstmt = conn.prepareStatement(qryStr)) {
                 pstmt.setString(1, matricula);
@@ -71,12 +71,14 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
                 pstmt.setString(3, cpf);
                 pstmt.setString(4, telefone);
                 pstmt.setString(5, String.valueOf(tfSenha.getPassword()));
+                pstmt.setString(6, "Quiron");
                 if (rbAdministrador.isSelected()) {
-                    pstmt.setInt(6, 1);
+                    pstmt.setInt(7, 1);
                 } else {
-                    pstmt.setInt(6, 0);
+                    pstmt.setInt(7, 0);
                 }
-                pstmt.setInt(7, 1);
+                pstmt.setInt(8, 1);
+                
 
                 int qtd = pstmt.executeUpdate();
 
@@ -87,7 +89,7 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Erro ao Registrar", "ERRO", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro: Matrícula já registrada", "ERRO", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Erro: Matrícula já registrada: "+ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

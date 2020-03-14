@@ -315,13 +315,14 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        String qryLogin = "Select nome, cpf, senha, administrador, ativado FROM usuarios";
+        String qryLogin = "Select nome, cpf, aes_decrypt(senha, 'Quiron'), administrador, ativado FROM usuarios";
 
         try (Statement stmt = conn.createStatement()) {
             try (ResultSet rs = stmt.executeQuery(qryLogin)) {
                 while (rs.next()) {
                     cpfBD = rs.getString("cpf");
-                    senhaBD = rs.getString("senha");
+                    senhaBD = rs.getString("aes_decrypt(senha, 'Quiron')");
+                    System.out.println(senhaBD);
                     administradorBD = rs.getInt("administrador");
                     ativadoBD = rs.getInt("ativado");
 

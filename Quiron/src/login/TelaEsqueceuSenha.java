@@ -7,6 +7,7 @@ import bancodedados.MysqlConnect;
 import java.awt.Color;
 import java.awt.event.WindowEvent;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -78,11 +79,12 @@ public class TelaEsqueceuSenha extends javax.swing.JDialog {
         } else if (!(Arrays.equals(tfSenha.getPassword(), tfConfirmaSenha.getPassword()))) {
             JOptionPane.showMessageDialog(this, "Senhas não coincidem!", "ERRO", JOptionPane.ERROR_MESSAGE);
         } else {
-            String qryAtualiza = "UPDATE usuarios SET senha= \"" + String.valueOf(tfSenha.getPassword()) + "\" WHERE matricula= " + minhaMatricula + " AND nome= " + meuNome;
+            String qryAtualiza = "UPDATE usuarios SET senha= AES_ENCRYPT(?,?) WHERE matricula= " + minhaMatricula + " AND nome= " + meuNome;
 
-            try (Statement pstmt = conn.createStatement()) {
-
-                int qtd = pstmt.executeUpdate(qryAtualiza);
+            try (PreparedStatement pstmt = conn.prepareStatement(qryAtualiza)) {
+                pstmt.setString(1, String.valueOf(tfSenha.getPassword()));
+                pstmt.setString(2, "Quiron");
+                int qtd = pstmt.executeUpdate();
 
                 if (qtd > 0) {
                     JOptionPane.showMessageDialog(this, "Atualizado!");

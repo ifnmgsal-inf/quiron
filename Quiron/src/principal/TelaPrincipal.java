@@ -41,6 +41,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
         try {
             conn = MysqlConnect.connectDB();
             this.verificaAdministrador();
+            this.voltarHome();
             lblNomeUsuario.setText(TelaLogin.nomeUsuario);
         } catch (SQLException sqle) {
             JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -87,8 +88,9 @@ public final class TelaPrincipal extends javax.swing.JFrame {
 
     public static void voltarHome() {
         pnlTelaAtual.setVisible(false);
-        lblTextoAtual.setText("");
-        //abrirJPainel(pnlHome);
+        lblTextoAtual.setText("Bem Vindo(a)");
+        pnlInicial pnlInicial = new pnlInicial();
+        abrirJPainel(pnlInicial);
     }
 
     /**
@@ -157,9 +159,9 @@ public final class TelaPrincipal extends javax.swing.JFrame {
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
         pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTextoAtual.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        lblTextoAtual.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         lblTextoAtual.setForeground(new java.awt.Color(96, 173, 224));
-        pnlPrincipal.add(lblTextoAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 80, 350, 60));
+        pnlPrincipal.add(lblTextoAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 80, 1010, 60));
 
         pnlMenuVertical.setBackground(new java.awt.Color(255, 255, 255));
         pnlMenuVertical.setForeground(new java.awt.Color(102, 102, 102));

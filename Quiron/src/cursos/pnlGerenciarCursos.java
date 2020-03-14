@@ -18,7 +18,7 @@ import principal.TelaPrincipal;
  *
  * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
-public class pnlGerenciarCursos extends javax.swing.JPanel {
+public final class pnlGerenciarCursos extends javax.swing.JPanel {
 
     Connection conn = null;
 
@@ -60,7 +60,9 @@ public class pnlGerenciarCursos extends javax.swing.JPanel {
             rs = pstmt.executeQuery(qry);
 
             while (rs.next()) {
-                lista.addRow(new String[]{"" + rs.getInt(1), rs.getString("curso"), rs.getString("nivel")});
+                if (!"Servidor".equals(rs.getString("curso"))) {
+                    lista.addRow(new String[]{"" + rs.getInt(1), rs.getString("curso"), rs.getString("nivel")});
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);

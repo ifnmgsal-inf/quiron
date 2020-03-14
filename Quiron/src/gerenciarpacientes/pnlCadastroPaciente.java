@@ -68,7 +68,9 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                cbCurso.addItem(rs.getString("curso"));
+                if (!"Servidor".equals(rs.getString("curso"))) {
+                    cbCurso.addItem(rs.getString("curso"));
+                }
             }
 
         } catch (SQLException ex) {

@@ -157,19 +157,20 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Senhas não coincidem!", "ERRO", JOptionPane.ERROR_MESSAGE);
         } else {
             String qryAtualiza = "UPDATE usuarios SET matricula= ?, nome= ?, cpf= ?,"
-                    + " telefone= ?, senha= ?, administrador= ? WHERE matricula= ?";
+                    + " telefone= ?, senha= AES_ENCRYPT(?,?), administrador= ? WHERE matricula= ?";
             try (PreparedStatement pstmt = conn.prepareStatement(qryAtualiza)) {
                 pstmt.setString(1, matricula);
                 pstmt.setString(2, nome);
                 pstmt.setString(3, cpf);
                 pstmt.setString(4, telefone);
                 pstmt.setString(5, String.valueOf(tfSenha.getPassword()));
+                pstmt.setString(6, "Quiron");
                 if (rbAdministrador.isSelected()) {
-                    pstmt.setInt(6, 1);
+                    pstmt.setInt(7, 1);
                 } else {
-                    pstmt.setInt(6, 0);
+                    pstmt.setInt(7, 0);
                 }
-                pstmt.setString(7, jcbUsuarios.getSelectedItem().toString());
+                pstmt.setString(8, jcbUsuarios.getSelectedItem().toString());
 
                 pstmt.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");

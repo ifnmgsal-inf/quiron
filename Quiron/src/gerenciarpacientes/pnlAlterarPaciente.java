@@ -68,7 +68,9 @@ public final class pnlAlterarPaciente extends javax.swing.JPanel {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                cbCurso.addItem(rs.getString("curso"));
+                if (!"Servidor".equals(rs.getString("curso"))) {
+                    cbCurso.addItem(rs.getString("curso"));
+                }
             }
 
         } catch (SQLException ex) {
@@ -735,7 +737,6 @@ public final class pnlAlterarPaciente extends javax.swing.JPanel {
             pstmt.executeUpdate();
 
             //JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
-
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
             JOptionPane.showMessageDialog(null, "CPF existente localizado", "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -842,7 +843,6 @@ public final class pnlAlterarPaciente extends javax.swing.JPanel {
             pstmt.executeUpdate();
 
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -902,7 +902,6 @@ public final class pnlAlterarPaciente extends javax.swing.JPanel {
             pstmt.executeUpdate();
 
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -1029,7 +1028,6 @@ public final class pnlAlterarPaciente extends javax.swing.JPanel {
             pstmt.executeUpdate();
 
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
@@ -1054,7 +1052,6 @@ public final class pnlAlterarPaciente extends javax.swing.JPanel {
             pstmt.executeUpdate();
 
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
         }
