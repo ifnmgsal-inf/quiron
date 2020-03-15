@@ -96,9 +96,9 @@ public final class pnlInicial extends javax.swing.JPanel {
     }
 
     public void qtdSuperior() {
-        String qry = "SELECT COUNT(idPaciente) FROM pacientes WHERE curso!= 'Servidor' OR "
-                + "curso!= 'Técnico em Agroindústria - Integrado' OR "
-                + "curso!= 'Técnico em Agropecuária - Integrado' OR "
+        String qry = "SELECT COUNT(idPaciente) FROM pacientes WHERE curso!= 'Servidor' AND "
+                + "curso!= 'Técnico em Agroindústria - Integrado' AND "
+                + "curso!= 'Técnico em Agropecuária - Integrado' AND "
                 + "curso!= 'Técnico em Informática - Integrado'";
 
         try (Statement stmt = conn.prepareStatement(qry)) {

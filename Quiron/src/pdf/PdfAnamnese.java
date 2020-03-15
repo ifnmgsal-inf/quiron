@@ -108,7 +108,7 @@ public class PdfAnamnese{
                 this.criarParagrafo("NOME: ", rs.getString("nome"));
                 this.criarParagrafo("DATA NASC.: ", rs.getString("dtNascimento"));
                 this.criarParagrafo("CURSO: ", rs.getString("curso"));
-                this.criarParagrafo("TURMA/PERÍODO: ", rs.getString("turma"));
+                this.criarParagrafo("TURMA/ANO: ", rs.getString("turma"));
                 //Endereço
                 //String ederecoP = (" Rua: "+rs.getString("rua") +" Nº "+rs.getString("numero") +" Bairro: "+rs.getString("bairro") +" Municipio: "+rs.getString("municipio") +" UF: "+ rs.getString("uf"));
                 this.criarParagrafo("ENDEREÇO: ", (" Rua: " + rs.getString("rua") + ", Nº " + rs.getString("numero") + ", Bairro: " + rs.getString("bairro") + ", Municipio: " + rs.getString("municipio") + ", UF: " + rs.getString("uf")));

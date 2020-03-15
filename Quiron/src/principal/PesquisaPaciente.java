@@ -8,6 +8,7 @@ import cartaovacina.pnlAlterarCartao;
 import com.itextpdf.text.DocumentException;
 import fichaatendimento.pnlFichaAtendimento;
 import gerenciarpacientes.pnlAlterarPaciente;
+import gerenciarservidores.pnlAlterarServidor;
 import hospital.pnlEncaminhamentoHospital;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
@@ -23,6 +24,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pdf.PdfAnamnese;
+import pdf.PdfAnamneseServidor;
 import pdf.PdfCartaoVacina;
 import pdf.PdfFichaAtendimento;
 
@@ -37,6 +39,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
 
     /**
      * Creates new form PesquisaPaciente
+     *
      * @param parent
      * @param modal
      */
@@ -51,6 +54,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     public PesquisaPaciente(boolean modal) {
         initComponents();
         try {
@@ -96,16 +100,14 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         ResultSet rs = null;
         DefaultTableModel tabelaPacientes = (DefaultTableModel) tblPacientes.getModel();
         tabelaPacientes.setNumRows(0);
-        String qry = "SELECT idPaciente, nome, cpf, dtNascimento FROM pacientes order by nome";
+        String qry = "SELECT idPaciente, nome, cpf, dtNascimento, curso FROM pacientes order by nome";
 
         try {
             pstmt = conn.prepareStatement(qry);
             rs = pstmt.executeQuery(qry);
 
             while (rs.next()) {
-
-                tabelaPacientes.addRow(new String[]{rs.getString("nome"), rs.getString("cpf"), rs.getString("dtNascimento"), rs.getString("idPaciente")});
-
+                tabelaPacientes.addRow(new String[]{rs.getString("nome"), rs.getString("cpf"), rs.getString("dtNascimento"), rs.getString("idPaciente"), rs.getString("curso")});
             }
 
         } catch (SQLException ex) {
@@ -263,7 +265,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             }
         });
         pnlPesquisa.add(btnAlterar);
-        btnAlterar.setBounds(400, 370, 150, 30);
+        btnAlterar.setBounds(410, 370, 150, 30);
 
         tfDtNascimento.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tfDtNascimento.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -275,7 +277,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             }
         });
         pnlPesquisa.add(tfDtNascimento);
-        tfDtNascimento.setBounds(460, 100, 80, 20);
+        tfDtNascimento.setBounds(470, 100, 80, 20);
 
         tfNome.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tfNome.addActionListener(new java.awt.event.ActionListener() {
@@ -292,19 +294,19 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             }
         });
         pnlPesquisa.add(tfNome);
-        tfNome.setBounds(150, 100, 150, 20);
+        tfNome.setBounds(160, 100, 150, 20);
 
         lblDtNascimento.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblDtNascimento.setForeground(new java.awt.Color(255, 255, 255));
         lblDtNascimento.setText("DT. NASCIMENTO:");
         pnlPesquisa.add(lblDtNascimento);
-        lblDtNascimento.setBounds(330, 100, 130, 17);
+        lblDtNascimento.setBounds(340, 100, 130, 17);
 
         lblNome.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblNome.setForeground(new java.awt.Color(255, 255, 255));
         lblNome.setText("NOME:");
         pnlPesquisa.add(lblNome);
-        lblNome.setBounds(90, 100, 60, 17);
+        lblNome.setBounds(100, 100, 60, 17);
 
         btnPdf.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnPdf.setForeground(new java.awt.Color(255, 255, 255));
@@ -326,7 +328,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             }
         });
         pnlPesquisa.add(btnPdf);
-        btnPdf.setBounds(80, 370, 150, 30);
+        btnPdf.setBounds(90, 370, 150, 30);
 
         tblPacientes.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tblPacientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -334,11 +336,11 @@ public class PesquisaPaciente extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Nome", "CPF", "Data de Nascimento", "ID_PACIENTE"
+                "Nome", "CPF", "Data de Nascimento", "ID_PACIENTE", "Curso"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -358,7 +360,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         }
 
         pnlPesquisa.add(jScrollPane1);
-        jScrollPane1.setBounds(80, 150, 470, 150);
+        jScrollPane1.setBounds(90, 150, 470, 150);
 
         btnRemover.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnRemover.setForeground(new java.awt.Color(255, 255, 255));
@@ -380,7 +382,7 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             }
         });
         pnlPesquisa.add(btnRemover);
-        btnRemover.setBounds(240, 370, 150, 30);
+        btnRemover.setBounds(250, 370, 150, 30);
 
         btnSelecionar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnSelecionar.setForeground(new java.awt.Color(255, 255, 255));
@@ -403,11 +405,11 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         });
         btnSelecionar.setVisible(false);
         pnlPesquisa.add(btnSelecionar);
-        btnSelecionar.setBounds(230, 320, 170, 30);
+        btnSelecionar.setBounds(240, 320, 170, 30);
 
         lblImagemFundo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Fundo Pesquisa.png"))); // NOI18N
         pnlPesquisa.add(lblImagemFundo);
-        lblImagemFundo.setBounds(-10, 0, 650, 462);
+        lblImagemFundo.setBounds(0, 0, 640, 462);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -482,13 +484,17 @@ public class PesquisaPaciente extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Não há pacientes registrados");
             } else {
                 id = tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString();
-                TelaPrincipal.lblTextoAtual.setText("Alterar Paciente");
-                pnlAlterarPaciente alterarPaciente = new pnlAlterarPaciente();
-                TelaPrincipal.abrirJPainel(alterarPaciente);
-                this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-                //TelaAlterarPaciente alteraPaciente = new TelaAlterarPaciente();
-                //alteraPaciente.setVisible(true);
 
+                if ("Servidor".equals(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 4).toString())) {
+                    TelaPrincipal.lblTextoAtual.setText("Alterar Servidor");
+                    pnlAlterarServidor pnlAlterarServidor = new pnlAlterarServidor();
+                    TelaPrincipal.abrirJPainel(pnlAlterarServidor);
+                } else {
+                    TelaPrincipal.lblTextoAtual.setText("Alterar Paciente");
+                    pnlAlterarPaciente alterarPaciente = new pnlAlterarPaciente();
+                    TelaPrincipal.abrirJPainel(alterarPaciente);
+                }
+                this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(null, "Selecione um paciente!", "ERRO", JOptionPane.ERROR_MESSAGE);
@@ -550,15 +556,17 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             } else {
                 switch (TelaPrincipal.controlePesquisa) {
                     case 0:
-                        int idSelecionado0 = Integer.parseInt(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
-                        PdfAnamnese meuPdf = new PdfAnamnese();
-                        meuPdf.pdfAnamnese(idSelecionado0);
+                        if ("Servidor".equals(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 4).toString())) {
+                            PdfAnamneseServidor meuPdfServidor = new PdfAnamneseServidor();
+                            meuPdfServidor.pdfAnamnese(Integer.parseInt(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString()));
+                        } else {
+                            PdfAnamnese meuPdf = new PdfAnamnese();
+                            meuPdf.pdfAnamnese(Integer.parseInt(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString()));
+                        }
                         break;
                     case 1:
-                        //int idSelecionado1 = Integer.parseInt(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
                         PdfFichaAtendimento meuPdfFicha = new PdfFichaAtendimento();
                         meuPdfFicha.pdfFichaAtendimento(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
-                        //meuPdf.pdfFicha(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());
                         break;
                     case 3:
                         int idSelecionado3 = Integer.parseInt(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString());

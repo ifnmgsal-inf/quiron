@@ -58,7 +58,7 @@ public class PdfFichaAtendimento {
             JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public String getDatDate(String dataDMA) {
         String reportDate = "";
         // Converte a data no formato yyyy-MM-dd
@@ -135,7 +135,11 @@ public class PdfFichaAtendimento {
                 minhaTabela.addCell(rs.getString("nome"));
                 this.criarCel1Coluna("DATA NASCIMENTO: ", rs.getString("dtNascimento"), minhaTabela);
                 this.criarCel1Coluna("NÚMERO CARTÃO SUS: ", rs.getString("cartaoSus"), minhaTabela);
-                minhaTabela.addCell("CURSO");
+                if ("Servidor".equals(rs.getString("cuso"))) {
+                    minhaTabela.addCell("CARGO");
+                } else {
+                    minhaTabela.addCell("CURSO");
+                }
                 minhaTabela.addCell(rs.getString("curso"));
                 this.criarCel2Coluna("ENDEREÇO: ", "Rua: " + rs.getString("rua") + " Nº: " + rs.getString("numero") + " Bairro: " + rs.getString("bairro") + " Município: " + rs.getString("municipio"), minhaTabela);
             }
@@ -153,7 +157,7 @@ public class PdfFichaAtendimento {
             pstmt.setString(1, idPaciente);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                
+
                 minhaTabela.addCell(this.getDatDate(rs.getString("data")));
                 minhaTabela.addCell(rs.getString("anamnese"));
                 minhaTabela.addCell(rs.getString("prescricao"));
@@ -178,7 +182,7 @@ public class PdfFichaAtendimento {
             logoSecretaria.scaleToFit(200, 171);
             logoSecretaria.setAlignment(Image.ALIGN_CENTER);
             documento.add(logoSecretaria);
-            
+
             Image logoIf = Image.getInstance(getClass().getResource("/imagens/Logo IF G.jpg"));
             logoIf.scaleToFit(150, 51);
             logoIf.setAlignment(Image.ALIGN_LEFT);

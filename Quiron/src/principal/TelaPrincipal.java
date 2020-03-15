@@ -8,6 +8,7 @@ package principal;
 import bancodedados.MysqlConnect;
 import cursos.pnlGerenciarCursos;
 import gerenciarpacientes.pnlCadastroPaciente;
+import gerenciarservidores.pnlCadastroServidor;
 import gerenciarusuarios.pnlAlterarUsuario;
 import gerenciarusuarios.pnlAtivarUsuario;
 import gerenciarusuarios.pnlCadastrarUsuarios;
@@ -770,8 +771,8 @@ public final class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnAdcionarServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdcionarServidorActionPerformed
         // TODO add your handling code here:
-        //TelaAtivarUsuario alteraRemoveUsuario = new TelaAtivarUsuario();
-        //alteraRemoveUsuario.setVisible(true);
+        pnlCadastroServidor pnlCadastroServidor= new pnlCadastroServidor();
+        TelaPrincipal.abrirJPainel(pnlCadastroServidor);
     }//GEN-LAST:event_btnAdcionarServidorActionPerformed
 
     /**

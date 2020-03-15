@@ -83,6 +83,11 @@ public class pnlFichaAtendimento extends javax.swing.JPanel {
                 tfNome.setText(rs.getString("nome"));
                 tfDtNasc.setText(rs.getString("dtNascimento"));
                 tfCurso.setText(rs.getString("curso"));
+                if("Servidor".equals(rs.getString("curso"))){
+                    lblCurso.setVisible(false);
+                    tfCurso.setVisible(false);
+                    sSeparador5.setVisible(false);
+                }
                 tfRua.setText(rs.getString("rua"));
                 tfNCasa.setText(rs.getString("numero"));
                 tfBairro.setText(rs.getString("bairro"));
@@ -386,12 +391,14 @@ public class pnlFichaAtendimento extends javax.swing.JPanel {
         lblIdPaciente.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblIdPaciente.setForeground(new java.awt.Color(102, 102, 102));
         lblIdPaciente.setText("ID");
+        lblIdPaciente.setVisible(false);
 
         tfIdPaciente.setEditable(false);
         tfIdPaciente.setBackground(new java.awt.Color(255, 255, 255));
         tfIdPaciente.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tfIdPaciente.setForeground(new java.awt.Color(102, 102, 102));
         tfIdPaciente.setBorder(null);
+        tfIdPaciente.setVisible(false);
 
         lblRua.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblRua.setForeground(new java.awt.Color(102, 102, 102));
@@ -518,8 +525,10 @@ public class pnlFichaAtendimento extends javax.swing.JPanel {
                                 .addComponent(lblCurso)
                                 .addGap(18, 18, 18)
                                 .addGroup(pnlFichasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sSeparador5)))
+                                    .addComponent(sSeparador5)
+                                    .addGroup(pnlFichasLayout.createSequentialGroup()
+                                        .addComponent(tfCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(pnlFichasLayout.createSequentialGroup()
                                 .addGroup(pnlFichasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(sSeparador1)
