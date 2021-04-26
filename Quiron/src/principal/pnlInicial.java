@@ -468,7 +468,7 @@ public final class pnlInicial extends javax.swing.JPanel {
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("O Quíron foi desenvolvido para servir de suporte\n à Enfermaria do IFNMG - CAMPUS SALINAS\n\nDesenvolvedores:\n   -Franciele Alves Barbosa\n   -Rogério Costa Negro Rocha\t\nDocente Responsável:\n   -Leonardo Humberto Guimarães Silva\n\n© 2020 IFNMG. Todos os direitos reservados.");
+        jTextArea1.setText("O Quíron foi desenvolvido para servir de suporte\n à Enfermaria do IFNMG - CAMPUS SALINAS\n\nDesenvolvedores:\n   -Franciele Alves Barbosa\n   -Rogério Costa Negro Rocha\t\nDocente Responsável:\n   -Leonardo Humberto Guimarães Silva\n\n© 2021 IFNMG. Todos os direitos reservados.");
         jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -490,7 +490,7 @@ public final class pnlInicial extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
         );
 
@@ -522,7 +522,7 @@ public final class pnlInicial extends javax.swing.JPanel {
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTextArea2.setRows(5);
-        jTextArea2.setText("- O sistema começou como um trabalho da disciplina \n Programação Orientada a Objetos II, do curso \n Bacharelado em Sistemas de Informação\n\n- Quíron, na mitologia grega, foi um centauro\n considerado superior por seus próprios pares, sendo\n cérebre por seu conhecimento e habilidade com a \n medicina");
+        jTextArea2.setText("- O sistema foi desenvolvido como um trabalho \n  da disciplina  Programação Orientada a Objetos II,\n  do curso Bacharelado em Sistemas de Informação\n\n- Quíron, na mitologia grega, foi um centauro\n  considerado superior por seus próprios pares, \n  sendo cérebre por seu conhecimento e habilidade\n com a medicina");
         jScrollPane2.setViewportView(jTextArea2);
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -540,7 +540,7 @@ public final class pnlInicial extends javax.swing.JPanel {
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
 
@@ -675,6 +675,7 @@ public final class pnlInicial extends javax.swing.JPanel {
             .addGroup(pnlPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlPrincipalLayout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(29, 29, 29)
@@ -691,18 +692,18 @@ public final class pnlInicial extends javax.swing.JPanel {
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(26, 26, 26)
                         .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
+                                .addGap(34, 34, 34)
                                 .addComponent(lblMesAtual)
                                 .addGap(18, 18, 18)
                                 .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(115, Short.MAX_VALUE))
+                            .addGroup(pnlPrincipalLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

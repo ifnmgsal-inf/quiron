@@ -105,7 +105,9 @@ public final class TelaPrincipal extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         pnlPrincipal = new javax.swing.JPanel();
-        lblTextoAtual = new javax.swing.JLabel();
+        pnlMenuHorizontal = new javax.swing.JPanel();
+        lblLogoIf = new javax.swing.JLabel();
+        lblNomeUsuario = new javax.swing.JLabel();
         pnlMenuVertical = new javax.swing.JPanel();
         lblLogoQuiron = new javax.swing.JLabel();
         lblTextoQuiron = new javax.swing.JLabel();
@@ -138,11 +140,8 @@ public final class TelaPrincipal extends javax.swing.JFrame {
         lblImagemCartaoVacina = new javax.swing.JLabel();
         lblImagemGerenciaUsuarios = new javax.swing.JLabel();
         lblImagemCursos = new javax.swing.JLabel();
-        lblFundoVertical = new javax.swing.JLabel();
-        pnlMenuHorizontal = new javax.swing.JPanel();
-        lblNomeUsuario = new javax.swing.JLabel();
-        lblLogoIf = new javax.swing.JLabel();
-        lblFundoHorizontal = new javax.swing.JLabel();
+        pnlAtualExterno = new javax.swing.JPanel();
+        lblTextoAtual = new javax.swing.JLabel();
         pnlTelaAtual = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -155,16 +154,28 @@ public final class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         pnlPrincipal.setBackground(new java.awt.Color(255, 255, 255));
-        pnlPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlPrincipal.setLayout(new java.awt.BorderLayout());
 
-        lblTextoAtual.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        lblTextoAtual.setForeground(new java.awt.Color(96, 173, 224));
-        pnlPrincipal.add(lblTextoAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 80, 1010, 60));
+        pnlMenuHorizontal.setPreferredSize(new java.awt.Dimension(101, 50));
+        pnlMenuHorizontal.setLayout(new java.awt.BorderLayout());
 
-        pnlMenuVertical.setBackground(new java.awt.Color(255, 255, 255));
+        lblLogoIf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogoIf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Icone IF P.png"))); // NOI18N
+        lblLogoIf.setPreferredSize(new java.awt.Dimension(50, 50));
+        pnlMenuHorizontal.add(lblLogoIf, java.awt.BorderLayout.LINE_END);
+
+        lblNomeUsuario.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblNomeUsuario.setForeground(new java.awt.Color(102, 102, 102));
+        lblNomeUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblNomeUsuario.setText("Usuário");
+        pnlMenuHorizontal.add(lblNomeUsuario, java.awt.BorderLayout.CENTER);
+
+        pnlPrincipal.add(pnlMenuHorizontal, java.awt.BorderLayout.PAGE_START);
+
         pnlMenuVertical.setForeground(new java.awt.Color(102, 102, 102));
         pnlMenuVertical.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -509,27 +520,16 @@ public final class TelaPrincipal extends javax.swing.JFrame {
         lblImagemCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Ícone Relatório P.png"))); // NOI18N
         pnlMenuVertical.add(lblImagemCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 827, -1, -1));
 
-        lblFundoVertical.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Low Poly branco recortado.jpg"))); // NOI18N
-        pnlMenuVertical.add(lblFundoVertical, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 940));
+        pnlPrincipal.add(pnlMenuVertical, java.awt.BorderLayout.LINE_START);
 
-        pnlPrincipal.add(pnlMenuVertical, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        pnlAtualExterno.setBackground(new java.awt.Color(255, 255, 255));
+        pnlAtualExterno.setLayout(new java.awt.BorderLayout());
 
-        pnlMenuHorizontal.setBackground(new java.awt.Color(255, 255, 255));
-        pnlMenuHorizontal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblNomeUsuario.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        lblNomeUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        lblNomeUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblNomeUsuario.setText("Usuário");
-        pnlMenuHorizontal.add(lblNomeUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 21, 300, -1));
-
-        lblLogoIf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Icone IF P.png"))); // NOI18N
-        pnlMenuHorizontal.add(lblLogoIf, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 11, -1, -1));
-
-        lblFundoHorizontal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Low Poly branco horizontal.jpg"))); // NOI18N
-        pnlMenuHorizontal.add(lblFundoHorizontal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1050, -1));
-
-        pnlPrincipal.add(pnlMenuHorizontal, new org.netbeans.lib.awtextra.AbsoluteConstraints(293, 0, 1050, -1));
+        lblTextoAtual.setBackground(new java.awt.Color(255, 255, 255));
+        lblTextoAtual.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        lblTextoAtual.setForeground(new java.awt.Color(96, 173, 224));
+        lblTextoAtual.setText("Bem Vindo(a)");
+        pnlAtualExterno.add(lblTextoAtual, java.awt.BorderLayout.PAGE_START);
 
         pnlTelaAtual.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -537,15 +537,17 @@ public final class TelaPrincipal extends javax.swing.JFrame {
         pnlTelaAtual.setLayout(pnlTelaAtualLayout);
         pnlTelaAtualLayout.setHorizontalGroup(
             pnlTelaAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGap(0, 647, Short.MAX_VALUE)
         );
         pnlTelaAtualLayout.setVerticalGroup(
             pnlTelaAtualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 548, Short.MAX_VALUE)
+            .addGap(0, 947, Short.MAX_VALUE)
         );
 
-        pnlPrincipal.add(pnlTelaAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 146, -1, -1));
+        pnlAtualExterno.add(pnlTelaAtual, java.awt.BorderLayout.CENTER);
         pnlTelaAtual.setVisible(false);
+
+        pnlPrincipal.add(pnlAtualExterno, java.awt.BorderLayout.CENTER);
 
         jScrollPane1.setViewportView(pnlPrincipal);
 
@@ -825,8 +827,6 @@ public final class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAtendimento;
     private javax.swing.JLabel lblCartaoVacina;
-    private javax.swing.JLabel lblFundoHorizontal;
-    private javax.swing.JLabel lblFundoVertical;
     private javax.swing.JLabel lblGerenciaCursos;
     private javax.swing.JLabel lblGerenciaUsuarios;
     private javax.swing.JLabel lblGerenciarPacientes;
@@ -842,6 +842,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblRelatorios;
     public static javax.swing.JLabel lblTextoAtual;
     private javax.swing.JLabel lblTextoQuiron;
+    private javax.swing.JPanel pnlAtualExterno;
     private javax.swing.JPanel pnlMenuHorizontal;
     private javax.swing.JPanel pnlMenuVertical;
     private javax.swing.JPanel pnlPrincipal;

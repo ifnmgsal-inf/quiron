@@ -109,7 +109,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -127,10 +128,9 @@
                               <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
                               <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                   <Component id="lblMesAtual" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
@@ -138,12 +138,14 @@
                                       <Component id="jPanel16" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="jPanel14" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <Component id="jPanel12" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="115" max="32767" attributes="0"/>
+                  <EmptySpace pref="93" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -526,7 +528,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" pref="236" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="258" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -603,7 +605,7 @@
                       <Font name="Times New Roman" size="14" style="0"/>
                     </Property>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="O Qu&#xed;ron foi desenvolvido para servir de suporte&#xa; &#xe0; Enfermaria do IFNMG - CAMPUS SALINAS&#xa;&#xa;Desenvolvedores:&#xa;   -Franciele Alves Barbosa&#xa;   -Rog&#xe9;rio Costa Negro Rocha&#x9;&#xa;Docente Respons&#xe1;vel:&#xa;   -Leonardo Humberto Guimar&#xe3;es Silva&#xa;&#xa;&#xa9; 2020 IFNMG. Todos os direitos reservados."/>
+                    <Property name="text" type="java.lang.String" value="O Qu&#xed;ron foi desenvolvido para servir de suporte&#xa; &#xe0; Enfermaria do IFNMG - CAMPUS SALINAS&#xa;&#xa;Desenvolvedores:&#xa;   -Franciele Alves Barbosa&#xa;   -Rog&#xe9;rio Costa Negro Rocha&#x9;&#xa;Docente Respons&#xe1;vel:&#xa;   -Leonardo Humberto Guimar&#xe3;es Silva&#xa;&#xa;&#xa9; 2021 IFNMG. Todos os direitos reservados."/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -628,7 +630,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="150" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -694,7 +696,7 @@
                       <Font name="Times New Roman" size="14" style="0"/>
                     </Property>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="- O sistema come&#xe7;ou como um trabalho da disciplina &#xa; Programa&#xe7;&#xe3;o Orientada a Objetos II, do curso &#xa; Bacharelado em Sistemas de Informa&#xe7;&#xe3;o&#xa;&#xa;- Qu&#xed;ron, na mitologia grega, foi um centauro&#xa; considerado superior por seus pr&#xf3;prios pares, sendo&#xa; c&#xe9;rebre por seu conhecimento e habilidade com a &#xa; medicina"/>
+                    <Property name="text" type="java.lang.String" value="- O sistema foi desenvolvido como um trabalho &#xa;  da disciplina  Programa&#xe7;&#xe3;o Orientada a Objetos II,&#xa;  do curso Bacharelado em Sistemas de Informa&#xe7;&#xe3;o&#xa;&#xa;- Qu&#xed;ron, na mitologia grega, foi um centauro&#xa;  considerado superior por seus pr&#xf3;prios pares, &#xa;  sendo c&#xe9;rebre por seu conhecimento e habilidade&#xa; com a medicina"/>
                   </Properties>
                 </Component>
               </SubComponents>
