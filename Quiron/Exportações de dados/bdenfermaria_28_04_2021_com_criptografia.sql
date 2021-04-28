@@ -135,11 +135,6 @@ CREATE TABLE `cartaovacina` (
 -- Extraindo dados da tabela `cartaovacina`
 --
 
-INSERT INTO `cartaovacina` (`idPaciente`, `cpf`, `nome`, `dn`, `tipoSanguineo`, `rua`, `numero`, `bairro`, `municipio`, `uf`, `telefone`, `grs`, `dose1`, `lote1`, `validade1`, `dose2`, `lote2`, `validade2`, `dose3`, `lote3`, `validade3`, `reforco`, `loteReforco`, `validadeReforco`, `influenza1`, `loteInfluenza1`, `valInfluenza1`, `influenza2`, `loteInfluenza2`, `valInfluenza2`, `influenza3`, `loteInfluenza3`, `valInfluenza3`, `influenza4`, `loteInfluenza4`, `valInfluenza4`, `influenza5`, `loteInfluenza5`, `valInfluenza5`, `influenza6`, `loteInfluenza6`, `valInfluenza6`, `influenza7`, `loteInfluenza7`, `valInfluenza7`, `influenza8`, `loteInfluenza8`, `valInfluenza8`, `febre1`, `loteFebre1`, `valFebre1`, `febre2`, `loteFebre2`, `valFebre2`, `febre3`, `loteFebre3`, `valFebre3`, `febre4`, `loteFebre4`, `valFebre4`, `febre5`, `loteFebre5`, `valFebre5`, `febre6`, `loteFebre6`, `valFebre6`, `febre7`, `loteFebre7`, `valFebre7`, `febre8`, `loteFebre8`, `valFebre8`, `duplaViral1`, `loteDupla1`, `valDupla1`, `duplaViral2`, `loteDupla2`, `valDupla2`, `triplice1`, `loteTriplice1`, `valTriplice1`, `triplice2`, `loteTriplice2`, `valTriplice2`, `outra1`, `dtOutra1`, `loteOutra1`, `valOutra1`, `outra1d2`, `dtOutra1d2`, `loteOutra1d2`, `valOutra1d2`, `outra2`, `dtOutra2`, `loteOutra2`, `valOutra2`, `outra2d2`, `dtOutra2d2`, `loteOutra2d2`, `valOutra2d2`) VALUES
-(1, '070.935.286-78', 'Rogério Costa Negro Rocha', '08/10/1998', 'B+', 'Minas Gerais', '730', 'São Jorge', 'Francisco Sá', 'MG', '(38)9 9122-4430', '', '01/01/2000', '1', '11/11/1112', '02/01/2000', '2', '22/22/2221', '03/01/2000', '3', '33/33/3331', '04/01/2000', '4', '33/33/3331', '11/11/1111', '1', '11/11/1111', '11/11/1111', '1', '11/11/1111', '11/11/1111', '1', '11/11/1111', '11/11/1111', '1', '11/11/1111', '11/11/1111', '1', '11/11/1111', '11/11/1111', '1', '11/11/1111', '11/11/1111', '1', '11/11/1111', '11/11/1111', '1', '11/11/1111', '11/11/1111', '1', '11/11/1111', '11/11/1111', '1', '11/11/1111', '11/11/1111', '1', '11/11/1111', '11/11/1111', '1', '11/11/1111', '11/11/1111', '23', '22/22/2222', '22/22/2222', '232', '76/54/3213', '22/22/2222', '2', '33/33/3333', '22/22/2222', '213', '22/22/2222', '22/22/2222', '2', '22/22/2222', '22/22/2222', '2', '22/22/2222', '22/22/2222', '2', '22/22/2222', '22/22/2222', '2', '22/22/2222', 'P', '11/11/1111', '2', '34/55/5555', 'q', '13/33/3333', '2', '11/11/1111', 'nxkjn', '34/22/2222', '2', '11/11/1111', 'skn', '35/32/2222', '2', '11/11/1111'),
-(2, '   .   .   -  ', 'Franciele Alves', '12/12/1996', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, '   .   .   -  ', 'Jurema', '05/07/2010', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -190,8 +185,6 @@ CREATE TABLE `encaminhamentoshospital` (
 -- Extraindo dados da tabela `encaminhamentoshospital`
 --
 
-INSERT INTO `encaminhamentoshospital` (`idEncaminhamentos`, `idPaciente`, `data`, `nomePaciente`, `cpfPaciente`) VALUES
-(2, 1, '2020-03-10', 'Rogério Costa Negro Rocha', '070.935.286-78');
 
 -- --------------------------------------------------------
 
@@ -212,10 +205,6 @@ CREATE TABLE `fichas` (
 -- Extraindo dados da tabela `fichas`
 --
 
-INSERT INTO `fichas` (`idFichas`, `idPaciente`, `data`, `anamnese`, `prescricao`, `atendente`) VALUES
-(15, 1, '2020-03-01', 'Problemas', 'Remédio', 'ROGER'),
-(16, 1, '2020-03-02', 'Mais Problemas', 'Rivotril', 'Fran'),
-(17, 1, '2019-11-02', 'x', 'x', 'x');
 
 -- --------------------------------------------------------
 
@@ -315,11 +304,6 @@ CREATE TABLE `pacientes` (
 -- Extraindo dados da tabela `pacientes`
 --
 
-INSERT INTO `pacientes` (`idPaciente`, `cpf`, `nome`, `dtNascimento`, `matricula`, `curso`, `turma`, `rua`, `numero`, `bairro`, `municipio`, `uf`, `telefone`, `nomeMae`, `telefoneMae`, `nomePai`, `telefonePai`, `nomeResponsavel`, `telefoneResponsavel`, `sexo`, `peso`, `altura`, `tipoSanguineo`, `mora`, `regime`, `planoSaude`, `cartaoSus`, `vacinasInfancia`, `vacinasAdolescencia`, `vacinaFaltando`, `doencaInfanciaAdolescencia`, `catapora`, `caxumba`, `dengue`, `hepatite`, `meningite`, `pneumonia`, `rubeola`, `sarampo`, `cirurgiaRealizada`, `alergiaMedicamentosa`, `alergiaAlimentar`, `cancer`, `cardiopatias`, `diabetes`, `hipertensaoArterial`, `oftalmologico`, `renal`, `mental`, `doencaEspecifica`, `nenhumaDificuldadeRegistrada`, `doencaCronica`, `deficienciaAuditiva`, `deficienciaFisica`, `deficienciaVisual`, `dificuldadeConcentracao`, `dificuldadeEscrita`, `dificuldadeLeitura`, `superdotacao`, `transtornoDesenvolvimento`, `nenhumaEspecifica`, `protese`, `asma`, `bronquite`, `cronicaDiabetes`, `pressaoAlta`, `problemaCardiaco`, `problemaRenal`, `rinite`, `doencaCronicaOutros`, `acompanhamentoProblema`, `medicamentoContinuo`, `desmaios`, `epistaxe`, `pressaoArterial`, `cefaleia`, `diarreia`, `colica`, `psicologico`, `fonaudiologo`, `fisioterapia`, `terapiaOcupacional`, `acompanhamentoEspecializadoOutro`, `anotacaoRelevante`, `contatoEmergencia`) VALUES
-(1, '070.935.286-78', 'Rogério Costa Negro Rocha', '08/10/1998', '12345', 'Bacharelado em Sistemas de Informação', '2017', 'Minas Gerais', '730', 'São Jorge', 'Francisco Sá', 'MG', '(38)9 9122-4430', 'Adriana Gonçalves Rocha', '(38)9 9889-5707', 'Geraldo Magella Costa Fernandes', '(38)9 9841-9241', '', '', 'M', '64', '1,78', 'B+', 'República', 'Externo', 'São Lucas', 'Não possui', 'Incompleto', 'Incompleto', '', '', 'Sim', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Não', 'Não', 'Não', 'Sim', 'Sim', 'Sim', 'Sim', 'Sim', 'Sim', 'Não', 'Não', NULL, NULL, 'Não', 'Não', 'Não', 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', '', '', '', '', '', '', 'Não', 'Não', 'Não', 'Não', 'Não', '', 'Adriana '),
-(2, '   .   .   -  ', 'Franciele Alves', '12/12/1996', '', 'Bacharelado em Sistemas de Informação', '', '', '', '', '', '', '', '', '', '', '', '', '', 'F', '', '', '', 'Pais', 'Externo', 'Não', 'Não possui', NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', NULL, NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', 'Não', '', '', '', '', '', '', '', 'Não', 'Não', 'Não', 'Não', 'Sim', '', ''),
-(7, '   .   .   -  ', 'Jurema', '05/07/2010', '', 'Técnico em Informática - Integrado', '2020', '', '', '', '', '', '', '', '', '', '', '', '', 'F', '', '', '', 'Pais', 'Externo', 'Não', 'Não possui', 'Completo', 'Completo', '', '', 'Sim', NULL, 'Sim', NULL, NULL, NULL, NULL, NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', NULL, NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', '', '', '', '', '', '', 'Não', 'Não', 'Não', 'Não', 'Não', '', '');
-
 -- --------------------------------------------------------
 
 --
@@ -339,9 +323,6 @@ CREATE TABLE `usuarios` (
 --
 -- Extraindo dados da tabela `usuarios`
 --
-
-INSERT INTO `usuarios` (`matricula`, `nome`, `cpf`, `telefone`, `senha`, `administrador`, `ativado`) VALUES
-(142396, 'Rogério Costa Negro Rocha', '070.935.286-78', '(38)9 9122-4430', 0x33f7ef75b23d2cfed555d0d762a8c34f, 1, 1);
 
 --
 -- Índices para tabelas despejadas

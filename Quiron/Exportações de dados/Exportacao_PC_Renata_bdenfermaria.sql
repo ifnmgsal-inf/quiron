@@ -120,7 +120,6 @@ CREATE TABLE `cartaovacina` (
 --
 
 INSERT INTO `cartaovacina` (`idPaciente`, `cpf`, `nome`, `dn`, `tipoSanguineo`, `rua`, `numero`, `bairro`, `municipio`, `uf`, `telefone`, `grs`, `dose1`, `lote1`, `validade1`, `dose2`, `lote2`, `validade2`, `dose3`, `lote3`, `validade3`, `reforco`, `loteReforco`, `validadeReforco`, `influenza1`, `loteInfluenza1`, `valInfluenza1`, `influenza2`, `loteInfluenza2`, `valInfluenza2`, `influenza3`, `loteInfluenza3`, `valInfluenza3`, `influenza4`, `loteInfluenza4`, `valInfluenza4`, `influenza5`, `loteInfluenza5`, `valInfluenza5`, `influenza6`, `loteInfluenza6`, `valInfluenza6`, `influenza7`, `loteInfluenza7`, `valInfluenza7`, `influenza8`, `loteInfluenza8`, `valInfluenza8`, `hepatite1`, `loteHepatite1`, `valHepatite1`, `hepatite2`, `loteHepatite2`, `valHepatite2`, `hepatite3`, `loteHepatite3`, `valHepatite3`, `hepatite4`, `loteHepatite4`, `valHepatite4`, `hepatite5`, `loteHepatite5`, `valHepatite5`, `hepatite6`, `loteHepatite6`, `valHepatite6`, `hepatite7`, `loteHepatite7`, `valHepatite7`, `hepatite8`, `loteHepatite8`, `valHepatite8`, `doseInicial`, `loteFebre`, `valFebre`, `revacinacao`, `loteRevacinacao`, `valRevacinacao`, `triplice1`, `loteTriplice1`, `valTriplice1`, `triplice2`, `loteTriplice2`, `valTriplice2`) VALUES
-(1, '   .   .   -  ', 'Rogério Costa', '08/10/1998', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2, '141.020.126-05', 'GABRIEL RIBEIRO SANTOS', '11/12/2005', '', 'RUA PORFÍRIO SOUTO', '367', '', 'NOVORIZONTE', 'MG', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, '079.870.081-50', 'WEVERTON CLEIDSON RIBEIRO', '05/09/2004', '', 'SANTA ISABEL', '12', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (4, '176.698.416-99', 'VICTOR GABRIEL OLIVEIRA LOPES', '22/12/2003', '', 'AVENIDA DO CONTORNO', '1695', '', 'TAIOBEIRAS', 'MG', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -195,8 +194,6 @@ CREATE TABLE `fichas` (
 -- Extraindo dados da tabela `fichas`
 --
 
-INSERT INTO `fichas` (`idFichas`, `idPaciente`, `data`, `anamnese`, `prescricao`, `atendente`) VALUES
-(3, 1, '2020-03-11', 'x', 'y', 'Maria');
 
 -- --------------------------------------------------------
 
@@ -297,7 +294,6 @@ CREATE TABLE `pacientes` (
 --
 
 INSERT INTO `pacientes` (`idPaciente`, `cpf`, `nome`, `dtNascimento`, `matricula`, `curso`, `turma`, `rua`, `numero`, `bairro`, `municipio`, `uf`, `telefone`, `nomeMae`, `telefoneMae`, `nomePai`, `telefonePai`, `nomeResponsavel`, `telefoneResponsavel`, `sexo`, `peso`, `altura`, `tipoSanguineo`, `mora`, `regime`, `planoSaude`, `cartaoSus`, `vacinasInfancia`, `vacinasAdolescencia`, `vacinaFaltando`, `doencaInfanciaAdolescencia`, `catapora`, `caxumba`, `dengue`, `hepatite`, `meningite`, `pneumonia`, `rubeola`, `sarampo`, `cirurgiaRealizada`, `alergiaMedicamentosa`, `alergiaAlimentar`, `cancer`, `cardiopatias`, `diabetes`, `hipertensaoArterial`, `oftalmologico`, `renal`, `mental`, `doencaEspecifica`, `nenhumaDificuldadeRegistrada`, `doencaCronica`, `deficienciaAuditiva`, `deficienciaFisica`, `deficienciaVisual`, `dificuldadeConcentracao`, `dificuldadeEscrita`, `dificuldadeLeitura`, `superdotacao`, `transtornoDesenvolvimento`, `nenhumaEspecifica`, `protese`, `asma`, `bronquite`, `cronicaDiabetes`, `pressaoAlta`, `problemaCardiaco`, `problemaRenal`, `rinite`, `doencaCronicaOutros`, `acompanhamentoProblema`, `medicamentoContinuo`, `desmaios`, `epistaxe`, `pressaoArterial`, `cefaleia`, `diarreia`, `colica`, `psicologico`, `fonaudiologo`, `fisioterapia`, `terapiaOcupacional`, `acompanhamentoEspecializadoOutro`, `anotacaoRelevante`, `contatoEmergencia`) VALUES
-(1, '   .   .   -  ', 'Rogério Costa', '08/10/1998', '', 'Bacharelado em Sistemas de Informação', '', '', '', '', '', '', '', '', '', '', '', '', '', 'M', '', '', '', 'República', 'Externo', 'Não', 'Não possui', NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', NULL, NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', 'Não', '', '', '', '', '', '', '', 'Não', 'Não', 'Não', 'Não', 'Sim', '', ''),
 (2, '141.020.126-05', 'GABRIEL RIBEIRO SANTOS', '11/12/2005', '', 'Técnico em Agropecuária - Integrado', '1º A', 'RUA PORFÍRIO SOUTO', '367', '', 'NOVORIZONTE', 'MG', '', 'JANE GRAZIELE SANTOS', '997492803', 'DARLEY RIBEIRO DOS SANTOS', '999235248', '', '', 'M', '', '', '', 'Escola', 'Interno', 'Não', '705200430260877', 'Completo', 'Completo', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Sim', 'Não', 'Não', 'Não', 'Não', NULL, NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', 'NÃO', 'NÃO', '', 'NÃO', 'NÃO', '', 'Não', 'Não', 'Não', 'Não', 'Não', '', 'JANE(MÃE) 997492803'),
 (3, '079.870.081-50', 'WEVERTON CLEIDSON RIBEIRO', '05/09/2004', '', 'Técnico em Agropecuária - Integrado', '1º A', 'SANTA ISABEL', '12', '', '', '', '', 'VIRLEIDE VIRGEM ROSÁRIO LIMA', '', 'LAÉRCIO APARECIDO RIBEIRO', '99907474', 'LENICE', '999603919', 'M', '', '', '', 'Escola', 'Interno', 'COPASA E UNIMED', '898000464891754', 'Completo', 'Completo', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', NULL, NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Sim', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', 'NÃO', 'NÃO', '', 'SIM. DIPIRONA', 'NÃO', '', 'Não', 'Não', 'Não', 'Não', 'Não', '', 'PAI - 99907474'),
 (4, '176.698.416-99', 'VICTOR GABRIEL OLIVEIRA LOPES', '22/12/2003', '', 'Técnico em Agropecuária - Integrado', '1º A', 'AVENIDA DO CONTORNO', '1695', '', 'TAIOBEIRAS', 'MG', '', 'ANA CLÉIA DE OLIVEIRA', '991031566', 'VLADENIR LOPES', '91146678', 'FÁBIO', '998184322', 'M', '64', '1,60', '', 'Escola', 'Interno', 'Não', '89800310965739', 'Completo', 'Completo', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'CORAÇÃO', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', NULL, NULL, 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', 'Não', '', '', '', '', '', '', '', 'Não', 'Não', 'Não', 'Não', 'Não', '', ''),
@@ -319,7 +315,7 @@ CREATE TABLE `usuarios` (
   `nome` varchar(45) NOT NULL,
   `cpf` varchar(45) NOT NULL,
   `telefone` varchar(45) NOT NULL,
-  `senha` varchar(45) NOT NULL,
+  `senha` varbinary(32) NOT NULL,
   `administrador` int(11) DEFAULT NULL,
   `ativado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -327,9 +323,6 @@ CREATE TABLE `usuarios` (
 --
 -- Extraindo dados da tabela `usuarios`
 --
-
-INSERT INTO `usuarios` (`matricula`, `nome`, `cpf`, `telefone`, `senha`, `administrador`, `ativado`) VALUES
-(123, 'IFNMG', '111.111.111-11', '', '', 1, 1);
 
 --
 -- Índices para tabelas despejadas
