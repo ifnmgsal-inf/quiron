@@ -401,7 +401,7 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
-                    .addComponent(btnCadastrar))
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -419,7 +419,7 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(110, 110, 110)
                 .addComponent(pnlNovoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
