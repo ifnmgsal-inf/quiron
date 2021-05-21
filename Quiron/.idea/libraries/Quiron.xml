@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Quiron">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/Quiron.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
