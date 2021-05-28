@@ -192,7 +192,6 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
 
         bgUsuario = new javax.swing.ButtonGroup();
         pnlAlterarUsuario = new javax.swing.JPanel();
-        lblImagemUsuario = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         lblMatricula = new javax.swing.JLabel();
         lblCpf = new javax.swing.JLabel();
@@ -218,6 +217,8 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
         sSeparador4 = new javax.swing.JSeparator();
         sSeparador5 = new javax.swing.JSeparator();
         sSeparador6 = new javax.swing.JSeparator();
+        pnlLateral = new javax.swing.JPanel();
+        lblLateral = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1000, 550));
@@ -225,9 +226,6 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1000, 550));
 
         pnlAlterarUsuario.setBackground(new java.awt.Color(255, 255, 255));
-
-        lblImagemUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblImagemUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Icon Face Id.png"))); // NOI18N
 
         lblNome.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblNome.setForeground(new java.awt.Color(102, 102, 102));
@@ -254,27 +252,21 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
         lblConfirmaSenha.setText("Confirme a senha");
 
         tfNome.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfNome.setForeground(new java.awt.Color(102, 102, 102));
         tfNome.setBorder(null);
 
         tfMatricula.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfMatricula.setForeground(new java.awt.Color(102, 102, 102));
         tfMatricula.setBorder(null);
 
         tfTelefone.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfTelefone.setForeground(new java.awt.Color(102, 102, 102));
         tfTelefone.setBorder(null);
 
         tfSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfSenha.setForeground(new java.awt.Color(102, 102, 102));
         tfSenha.setBorder(null);
 
         tfConfirmaSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfConfirmaSenha.setForeground(new java.awt.Color(102, 102, 102));
         tfConfirmaSenha.setBorder(null);
 
         tfCpf.setBorder(null);
-        tfCpf.setForeground(new java.awt.Color(102, 102, 102));
         try {
             tfCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
@@ -376,128 +368,145 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
         pnlAlterarUsuario.setLayout(pnlAlterarUsuarioLayout);
         pnlAlterarUsuarioLayout.setHorizontalGroup(
             pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlterarUsuarioLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblImagemUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
-                .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAlterarUsuarioLayout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(lblSenha)
+                .addContainerGap()
+                .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(lblConfirmaSenha))
+                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
+                        .addComponent(sSeparador5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(sSeparador6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
+                            .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblSenha)
+                                .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
+                                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(tfConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGap(8, 8, 8))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlterarUsuarioLayout.createSequentialGroup()
+                            .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
+                                    .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblTipoUsuario)
+                                        .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
+                                            .addComponent(rbAdministrador)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(rbPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGap(99, 99, 99))
+                                .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
+                                    .addComponent(btnSair)
+                                    .addGap(18, 18, 18)))
+                            .addComponent(btnAlterar))))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
+                .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sSeparador1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
-                                .addComponent(sSeparador5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(sSeparador6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap()
+                                .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
+                                        .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblCpf))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblMatricula)))
+                                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
+                                        .addComponent(sSeparador3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(sSeparador2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
-                                .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblConfirmaSenha)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfConfirmaSenha))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAlterarUsuarioLayout.createSequentialGroup()
-                        .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAlterarUsuarioLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
-                                        .addComponent(lblUsuarios)
-                                        .addGap(8, 8, 8)
-                                        .addComponent(jcbUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
-                                        .addComponent(lblNome)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(sSeparador1)
-                                            .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
-                                        .addComponent(lblCpf)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(sSeparador3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(31, 31, 31)
-                                .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
-                                        .addComponent(lblMatricula)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfMatricula)
-                                            .addComponent(sSeparador2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(sSeparador4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
-                                        .addComponent(lblTelefone)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlAlterarUsuarioLayout.createSequentialGroup()
-                                .addGap(98, 98, 98)
-                                .addComponent(lblTipoUsuario)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbAdministrador)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(rbPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(0, 10, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAlterarUsuarioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSair)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAlterar)
-                .addGap(290, 290, 290))
+                                .addContainerGap()
+                                .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jcbUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfTelefone)
+                            .addComponent(lblTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(sSeparador4))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlAlterarUsuarioLayout.setVerticalGroup(
             pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblImagemUsuario)
+                .addComponent(lblUsuarios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jcbUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblUsuarios)
-                    .addComponent(jcbUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNome)
-                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
-                        .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sSeparador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlAlterarUsuarioLayout.createSequentialGroup()
-                        .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblMatricula)
-                            .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sSeparador2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(lblNome)
+                .addGap(18, 18, 18)
+                .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sSeparador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCpf)
+                    .addComponent(lblMatricula))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCpf)
-                    .addComponent(lblTelefone)
-                    .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sSeparador3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sSeparador4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sSeparador2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTelefone)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sSeparador4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSenha)
+                    .addComponent(lblConfirmaSenha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSenha)
-                    .addComponent(lblConfirmaSenha)
                     .addComponent(tfConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sSeparador5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sSeparador6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGap(18, 18, 18)
+                .addComponent(lblTipoUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTipoUsuario)
                     .addComponent(rbAdministrador)
                     .addComponent(rbPadrao))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlAlterarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAlterar)
                     .addComponent(btnSair))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        pnlLateral.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblLateral.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLateral.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Quiron_lateral.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnlLateralLayout = new javax.swing.GroupLayout(pnlLateral);
+        pnlLateral.setLayout(pnlLateralLayout);
+        pnlLateralLayout.setHorizontalGroup(
+            pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblLateral, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        pnlLateralLayout.setVerticalGroup(
+            pnlLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblLateral, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -505,16 +514,18 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(132, Short.MAX_VALUE)
+                .addComponent(pnlLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlAlterarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131))
+                .addGap(0, 206, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
-                .addComponent(pnlAlterarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlLateral, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlAlterarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -574,7 +585,7 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jcbUsuarios;
     private javax.swing.JLabel lblConfirmaSenha;
     private javax.swing.JLabel lblCpf;
-    private javax.swing.JLabel lblImagemUsuario;
+    private javax.swing.JLabel lblLateral;
     private javax.swing.JLabel lblMatricula;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblSenha;
@@ -582,6 +593,7 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
     private javax.swing.JLabel lblTipoUsuario;
     private javax.swing.JLabel lblUsuarios;
     private javax.swing.JPanel pnlAlterarUsuario;
+    private javax.swing.JPanel pnlLateral;
     private javax.swing.JRadioButton rbAdministrador;
     private javax.swing.JRadioButton rbPadrao;
     private javax.swing.JSeparator sSeparador1;

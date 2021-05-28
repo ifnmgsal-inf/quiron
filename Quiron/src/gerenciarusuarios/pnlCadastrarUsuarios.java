@@ -104,100 +104,61 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
     private void initComponents() {
 
         bgUsuario = new javax.swing.ButtonGroup();
-        pnlNovoUsuario = new javax.swing.JPanel();
-        lblNome = new javax.swing.JLabel();
-        lblMatricula = new javax.swing.JLabel();
-        lblCpf = new javax.swing.JLabel();
-        lblTelefone = new javax.swing.JLabel();
-        lblSenha = new javax.swing.JLabel();
-        lblConfirmaSenha = new javax.swing.JLabel();
-        tfMatricula = new javax.swing.JTextField();
-        tfTelefone = new javax.swing.JTextField();
-        tfSenha = new javax.swing.JPasswordField();
-        tfConfirmaSenha = new javax.swing.JPasswordField();
-        tfCpf = new javax.swing.JFormattedTextField();
+        pnlLateralEsquerda = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        pnlFormulario = new javax.swing.JPanel();
         btnCadastrar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        lblNome = new javax.swing.JLabel();
+        tfNome = new javax.swing.JTextField();
+        sSeparador1 = new javax.swing.JSeparator();
+        lblMatricula = new javax.swing.JLabel();
+        tfMatricula = new javax.swing.JTextField();
+        sSeparador2 = new javax.swing.JSeparator();
+        lblCpf = new javax.swing.JLabel();
+        tfCpf = new javax.swing.JFormattedTextField();
+        sSeparador3 = new javax.swing.JSeparator();
+        lblTelefone = new javax.swing.JLabel();
+        tfTelefone = new javax.swing.JTextField();
+        sSeparador4 = new javax.swing.JSeparator();
+        lblSenha = new javax.swing.JLabel();
+        tfSenha = new javax.swing.JPasswordField();
+        sSeparador5 = new javax.swing.JSeparator();
+        lblConfirmaSenha = new javax.swing.JLabel();
+        tfConfirmaSenha = new javax.swing.JPasswordField();
+        sSeparador6 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
         rbAdministrador = new javax.swing.JRadioButton();
         rbPadrao = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
-        sSeparador1 = new javax.swing.JSeparator();
-        sSeparador2 = new javax.swing.JSeparator();
-        sSeparador3 = new javax.swing.JSeparator();
-        sSeparador4 = new javax.swing.JSeparator();
-        sSeparador5 = new javax.swing.JSeparator();
-        sSeparador6 = new javax.swing.JSeparator();
-        lblFaceId = new javax.swing.JLabel();
-        tfNome = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1000, 550));
         setMinimumSize(new java.awt.Dimension(1000, 550));
 
-        pnlNovoUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Quiron_lateral.png"))); // NOI18N
 
-        lblNome.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblNome.setForeground(new java.awt.Color(102, 102, 102));
-        lblNome.setText("Nome Completo *");
+        javax.swing.GroupLayout pnlLateralEsquerdaLayout = new javax.swing.GroupLayout(pnlLateralEsquerda);
+        pnlLateralEsquerda.setLayout(pnlLateralEsquerdaLayout);
+        pnlLateralEsquerdaLayout.setHorizontalGroup(
+            pnlLateralEsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLateralEsquerdaLayout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        pnlLateralEsquerdaLayout.setVerticalGroup(
+            pnlLateralEsquerdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLateralEsquerdaLayout.createSequentialGroup()
+                .addComponent(jLabel3)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
-        lblMatricula.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblMatricula.setForeground(new java.awt.Color(102, 102, 102));
-        lblMatricula.setText("Nº Matrícula *");
-
-        lblCpf.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblCpf.setForeground(new java.awt.Color(102, 102, 102));
-        lblCpf.setText("CPF *");
-
-        lblTelefone.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblTelefone.setForeground(new java.awt.Color(102, 102, 102));
-        lblTelefone.setText("Telefone");
-
-        lblSenha.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblSenha.setForeground(new java.awt.Color(102, 102, 102));
-        lblSenha.setText("Senha");
-
-        lblConfirmaSenha.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblConfirmaSenha.setForeground(new java.awt.Color(102, 102, 102));
-        lblConfirmaSenha.setText("Confirme a senha");
-
-        tfMatricula.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfMatricula.setForeground(new java.awt.Color(102, 102, 102));
-        tfMatricula.setBorder(null);
-
-        tfTelefone.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfTelefone.setForeground(new java.awt.Color(102, 102, 102));
-        tfTelefone.setBorder(null);
-
-        tfSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfSenha.setForeground(new java.awt.Color(102, 102, 102));
-        tfSenha.setBorder(null);
-
-        tfConfirmaSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfConfirmaSenha.setForeground(new java.awt.Color(102, 102, 102));
-        tfConfirmaSenha.setBorder(null);
-        tfConfirmaSenha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfConfirmaSenhaActionPerformed(evt);
-            }
-        });
-
-        tfCpf.setBorder(null);
-        tfCpf.setForeground(new java.awt.Color(102, 102, 102));
-        try {
-            tfCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        tfCpf.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        tfCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfCpfActionPerformed(evt);
-            }
-        });
+        pnlFormulario.setBackground(new java.awt.Color(255, 255, 255));
 
         btnCadastrar.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnCadastrar.setForeground(new java.awt.Color(102, 102, 102));
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(5, 220, 0), 1, true));
         btnCadastrar.setBorderPainted(false);
         btnCadastrar.setContentAreaFilled(false);
         btnCadastrar.setFocusPainted(false);
@@ -235,6 +196,84 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
             }
         });
 
+        lblNome.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblNome.setForeground(new java.awt.Color(102, 102, 102));
+        lblNome.setText("Nome Completo *");
+
+        tfNome.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfNome.setBorder(null);
+        tfNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfNomeActionPerformed(evt);
+            }
+        });
+
+        sSeparador1.setForeground(new java.awt.Color(51, 51, 51));
+
+        lblMatricula.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblMatricula.setForeground(new java.awt.Color(102, 102, 102));
+        lblMatricula.setText("Nº Matrícula *");
+
+        tfMatricula.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfMatricula.setBorder(null);
+
+        sSeparador2.setForeground(new java.awt.Color(51, 51, 51));
+
+        lblCpf.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblCpf.setForeground(new java.awt.Color(102, 102, 102));
+        lblCpf.setText("CPF *");
+
+        tfCpf.setBorder(null);
+        try {
+            tfCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tfCpf.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        tfCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCpfActionPerformed(evt);
+            }
+        });
+
+        sSeparador3.setForeground(new java.awt.Color(51, 51, 51));
+
+        lblTelefone.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblTelefone.setForeground(new java.awt.Color(102, 102, 102));
+        lblTelefone.setText("Telefone");
+
+        tfTelefone.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfTelefone.setBorder(null);
+
+        sSeparador4.setForeground(new java.awt.Color(51, 51, 51));
+
+        lblSenha.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblSenha.setForeground(new java.awt.Color(102, 102, 102));
+        lblSenha.setText("Senha");
+
+        tfSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfSenha.setBorder(null);
+
+        sSeparador5.setForeground(new java.awt.Color(51, 51, 51));
+
+        lblConfirmaSenha.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblConfirmaSenha.setForeground(new java.awt.Color(102, 102, 102));
+        lblConfirmaSenha.setText("Confirme a senha");
+
+        tfConfirmaSenha.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        tfConfirmaSenha.setBorder(null);
+        tfConfirmaSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfConfirmaSenhaActionPerformed(evt);
+            }
+        });
+
+        sSeparador6.setForeground(new java.awt.Color(51, 51, 51));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel1.setText("Usuário");
+
         rbAdministrador.setBackground(new java.awt.Color(255, 255, 255));
         bgUsuario.add(rbAdministrador);
         rbAdministrador.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -259,150 +298,104 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel1.setText("Usuário");
-
-        sSeparador1.setForeground(new java.awt.Color(51, 51, 51));
-
-        sSeparador2.setForeground(new java.awt.Color(51, 51, 51));
-
-        sSeparador3.setForeground(new java.awt.Color(51, 51, 51));
-
-        sSeparador4.setForeground(new java.awt.Color(51, 51, 51));
-
-        sSeparador5.setForeground(new java.awt.Color(51, 51, 51));
-
-        sSeparador6.setForeground(new java.awt.Color(51, 51, 51));
-
-        lblFaceId.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFaceId.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Icon Face Id.png"))); // NOI18N
-
-        tfNome.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfNome.setForeground(new java.awt.Color(102, 102, 102));
-        tfNome.setBorder(null);
-        tfNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNomeActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnlNovoUsuarioLayout = new javax.swing.GroupLayout(pnlNovoUsuario);
-        pnlNovoUsuario.setLayout(pnlNovoUsuarioLayout);
-        pnlNovoUsuarioLayout.setHorizontalGroup(
-            pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlNovoUsuarioLayout.createSequentialGroup()
-                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlNovoUsuarioLayout.createSequentialGroup()
-                        .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnlNovoUsuarioLayout.createSequentialGroup()
-                                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNovoUsuarioLayout.createSequentialGroup()
-                                        .addGap(83, 83, 83)
-                                        .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(lblSenha))
-                                        .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pnlNovoUsuarioLayout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(rbAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(rbPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(pnlNovoUsuarioLayout.createSequentialGroup()
-                                                .addGap(22, 22, 22)
-                                                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(sSeparador5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                    .addGroup(pnlNovoUsuarioLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(lblNome)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(sSeparador1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                            .addComponent(sSeparador3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tfNome))))
-                                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(pnlNovoUsuarioLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblConfirmaSenha))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNovoUsuarioLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(lblMatricula))))
-                            .addGroup(pnlNovoUsuarioLayout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(lblCpf)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblTelefone)))
+        javax.swing.GroupLayout pnlFormularioLayout = new javax.swing.GroupLayout(pnlFormulario);
+        pnlFormulario.setLayout(pnlFormularioLayout);
+        pnlFormularioLayout.setHorizontalGroup(
+            pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFormularioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addComponent(rbAdministrador, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfTelefone)
-                            .addComponent(sSeparador4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sSeparador2)
-                            .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfConfirmaSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(sSeparador6))
+                        .addComponent(rbPadrao, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNovoUsuarioLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblFaceId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnCancelar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCadastrar))
+                    .addComponent(tfNome)
+                    .addComponent(sSeparador1)
+                    .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(sSeparador5, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sSeparador4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfTelefone, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblMatricula, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                                    .addComponent(tfMatricula, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sSeparador2, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addComponent(lblTelefone)
+                                .addComponent(lblSenha)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblConfirmaSenha)
+                            .addComponent(lblCpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfCpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                            .addComponent(sSeparador3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfConfirmaSenha)
+                            .addComponent(sSeparador6))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNovoUsuarioLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCancelar)
-                .addGap(18, 18, 18)
-                .addComponent(btnCadastrar)
-                .addGap(302, 302, 302))
         );
-        pnlNovoUsuarioLayout.setVerticalGroup(
-            pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlNovoUsuarioLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(lblFaceId)
+        pnlFormularioLayout.setVerticalGroup(
+            pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFormularioLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(lblNome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sSeparador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(lblMatricula)
-                    .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sSeparador1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sSeparador2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCpf)
-                    .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTelefone)
-                    .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sSeparador3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sSeparador4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSenha)
-                    .addComponent(lblConfirmaSenha)
-                    .addComponent(tfConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sSeparador5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sSeparador6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlNovoUsuarioLayout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel1))
-                    .addGroup(pnlNovoUsuarioLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbAdministrador)
-                            .addComponent(rbPadrao))))
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addComponent(lblMatricula)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sSeparador2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addComponent(lblCpf)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sSeparador3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(pnlNovoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(lblTelefone)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sSeparador4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addComponent(lblSenha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sSeparador5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlFormularioLayout.createSequentialGroup()
+                        .addComponent(lblConfirmaSenha)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfConfirmaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sSeparador6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbAdministrador)
+                    .addComponent(rbPadrao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGroup(pnlFormularioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadastrar)
+                    .addComponent(btnCancelar))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -410,16 +403,18 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addComponent(pnlNovoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addComponent(pnlLateralEsquerda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(pnlNovoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlLateralEsquerda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -484,14 +479,15 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lblConfirmaSenha;
     private javax.swing.JLabel lblCpf;
-    private javax.swing.JLabel lblFaceId;
     private javax.swing.JLabel lblMatricula;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblSenha;
     private javax.swing.JLabel lblTelefone;
-    private javax.swing.JPanel pnlNovoUsuario;
+    private javax.swing.JPanel pnlFormulario;
+    private javax.swing.JPanel pnlLateralEsquerda;
     private javax.swing.JRadioButton rbAdministrador;
     private javax.swing.JRadioButton rbPadrao;
     private javax.swing.JSeparator sSeparador1;

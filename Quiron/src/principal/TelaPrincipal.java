@@ -181,6 +181,11 @@ public final class TelaPrincipal extends javax.swing.JFrame {
 
         lblLogoQuiron.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLogoQuiron.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Quiron P.png"))); // NOI18N
+        lblLogoQuiron.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLogoQuironMouseClicked(evt);
+            }
+        });
         pnlMenuVertical.add(lblLogoQuiron, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 12, 294, -1));
 
         lblTextoQuiron.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -528,6 +533,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
         lblTextoAtual.setBackground(new java.awt.Color(255, 255, 255));
         lblTextoAtual.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         lblTextoAtual.setForeground(new java.awt.Color(96, 173, 224));
+        lblTextoAtual.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblTextoAtual.setText("Bem Vindo(a)");
         pnlAtualExterno.add(lblTextoAtual, java.awt.BorderLayout.PAGE_START);
 
@@ -776,6 +782,12 @@ public final class TelaPrincipal extends javax.swing.JFrame {
         pnlCadastroServidor pnlCadastroServidor= new pnlCadastroServidor();
         TelaPrincipal.abrirJPainel(pnlCadastroServidor);
     }//GEN-LAST:event_btnAdcionarServidorActionPerformed
+
+    private void lblLogoQuironMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoQuironMouseClicked
+        // TODO add your handling code here:
+        pnlInicial pnlInicial= new pnlInicial();
+        TelaPrincipal.abrirJPainel(pnlInicial);
+    }//GEN-LAST:event_lblLogoQuironMouseClicked
 
     /**
      * @param args the command line arguments
