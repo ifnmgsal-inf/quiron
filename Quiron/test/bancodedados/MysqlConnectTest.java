@@ -7,6 +7,7 @@ package bancodedados;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,7 +21,7 @@ import static org.junit.Assert.*;
  */
 public class MysqlConnectTest {
     
-    private MysqlConnect conexao;
+    //private MysqlConnect conexao;
     
     public MysqlConnectTest() {
     }
@@ -43,11 +44,15 @@ public class MysqlConnectTest {
 
     /**
      * Test of connectDB method, of class MysqlConnect.
-     * @throws java.lang.Exception
      */
     @Test
-    public void testConnectDB() throws Exception {
-        assertEquals("com.mysql.jdbc.JDBC4Connection@6f79caec", conexao.connectDB());
+    public void testConnectDB() {
+        try {
+            Connection conn = MysqlConnect.connectDB();
+            assertNotEquals(null, conn);
+        } catch (SQLException sqle) {
+            System.out.println("Erro ao conectar com o Banco de Dados " + sqle.getMessage());
+        }    
     }
     
 }
