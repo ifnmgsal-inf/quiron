@@ -59,7 +59,10 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tpCadastroPaciente" min="-2" pref="550" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="tpCadastroPaciente" min="-2" pref="550" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -141,243 +144,217 @@
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblNome" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jSeparator1" min="-2" pref="240" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="208" max="-2" attributes="0"/>
-                                                  <Component id="jSeparator11" min="-2" pref="80" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="tfNome" min="-2" pref="240" max="-2" attributes="0"/>
-                                                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="lblDtNasc" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="tfDtNasc" min="-2" pref="80" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                                  <Component id="jSeparator2" min="-2" pref="101" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="jSeparator1" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                                          <Component id="lblNome" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="tfNome" alignment="0" pref="240" max="32767" attributes="0"/>
+                                                      </Group>
+                                                  </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="jSeparator11" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="lblDtNasc" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="tfDtNasc" alignment="0" min="-2" pref="186" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="tfCpf" max="32767" attributes="0"/>
+                                                      <Component id="lblCpf" max="32767" attributes="0"/>
+                                                      <Component id="jSeparator2" min="-2" pref="101" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Component id="lblMatricula" max="32767" attributes="0"/>
+                                                      <Component id="tfMatricula" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="jSeparator5" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                                  <Component id="lblCpf" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                                  <Component id="tfCpf" min="-2" pref="101" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="lblRua" alignment="0" pref="240" max="32767" attributes="0"/>
+                                                      <Component id="jSeparator7" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="tfRua" alignment="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Component id="jSeparator8" min="-2" pref="40" max="-2" attributes="0"/>
+                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                          <Component id="jSeparator9" min="-2" pref="150" max="-2" attributes="0"/>
+                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                          <Component id="sSeparador10" pref="150" max="32767" attributes="0"/>
+                                                      </Group>
+                                                      <Group type="102" alignment="0" attributes="0">
+                                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                              <Component id="lblNumero" max="32767" attributes="0"/>
+                                                              <Component id="tfNCasa" pref="40" max="32767" attributes="0"/>
+                                                          </Group>
+                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                              <Component id="tfBairro" pref="150" max="32767" attributes="0"/>
+                                                              <Component id="lblBairro" max="32767" attributes="0"/>
+                                                          </Group>
+                                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                              <Component id="lblCidade" pref="150" max="32767" attributes="0"/>
+                                                              <Component id="tfCidade" max="32767" attributes="0"/>
+                                                          </Group>
+                                                      </Group>
+                                                  </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lblUf" min="-2" pref="30" max="-2" attributes="0"/>
+                                                      <Component id="tfUf" min="-2" pref="40" max="-2" attributes="0"/>
+                                                      <Component id="sSeparador11" min="-2" pref="40" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="lblIdPaciente" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="tfIdPaciente" min="-2" pref="86" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblPlanoSaude" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
-                                          <Component id="rbPlanoSaudeNao" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
-                                          <Component id="rbPlanoSaudeSim" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
-                                          <Component id="lblQualPlanoSaude" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="tfPlanoSaude" min="-2" pref="90" max="-2" attributes="0"/>
-                                              <Component id="sSeparador21" min="-2" pref="90" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="tfTelefone" max="32767" attributes="0"/>
+                                              <Component id="lblTelefone" max="32767" attributes="0"/>
+                                              <Component id="jSeparator3" min="-2" pref="130" max="-2" attributes="0"/>
+                                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                                  <Component id="tfIdPaciente" min="-2" pref="86" max="-2" attributes="0"/>
+                                                  <Component id="lblIdPaciente" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblSus" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lblSexo" max="32767" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="rbFeminino" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="rbMasculino" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="rbSusNao" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="5" pref="5" max="-2" attributes="0"/>
-                                          <Component id="rbSusSim" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="9" pref="9" max="-2" attributes="0"/>
-                                          <Component id="lblNSus" min="-2" pref="20" max="-2" attributes="0"/>
-                                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="sSeparador22" min="-2" pref="70" max="-2" attributes="0"/>
-                                              <Component id="tfNSus" min="-2" pref="70" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="sSeparador18" min="-2" pref="50" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="sSeparador19" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                      <Component id="lblPeso" max="32767" attributes="0"/>
+                                                      <Component id="tfPeso" pref="50" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="lblAltura" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="tfAltura" min="-2" pref="72" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lblSangue" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="sSeparador20" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="tfSangue" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
                                       </Group>
                                   </Group>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblTelefone" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jSeparator3" max="32767" attributes="0"/>
-                                      <Component id="tfTelefone" min="-2" pref="130" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblMatricula" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                          <Component id="tfMatricula" min="-2" pref="100" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
-                                          <Component id="jSeparator5" min="-2" pref="100" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                                  <Component id="lblRua" min="-2" pref="40" max="-2" attributes="0"/>
-                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                  <Component id="tfRua" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                  <Component id="lblNumero" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                  <Component id="tfNCasa" min="-2" pref="40" max="-2" attributes="0"/>
-                                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                  <Component id="lblBairro" min="-2" pref="70" max="-2" attributes="0"/>
-                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                  <Component id="tfBairro" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                  <Component id="lblCidade" min="-2" pref="70" max="-2" attributes="0"/>
-                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                  <Component id="tfCidade" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
-                                  <Component id="lblUf" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                  <Component id="tfUf" min="-2" pref="40" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="54" pref="54" max="-2" attributes="0"/>
-                                  <Component id="jSeparator7" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <EmptySpace min="42" pref="42" max="-2" attributes="0"/>
-                                  <Component id="jSeparator8" min="-2" pref="40" max="-2" attributes="0"/>
-                                  <EmptySpace min="92" pref="92" max="-2" attributes="0"/>
-                                  <Component id="jSeparator9" min="-2" pref="150" max="-2" attributes="0"/>
-                                  <EmptySpace min="92" pref="92" max="-2" attributes="0"/>
-                                  <Component id="sSeparador10" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace min="52" pref="52" max="-2" attributes="0"/>
-                                  <Component id="sSeparador11" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="lblSexo" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="rbFeminino" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
-                                  <Component id="rbMasculino" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblPeso" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                          <Component id="tfPeso" min="-2" pref="50" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                                          <Component id="sSeparador18" min="-2" pref="50" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblAltura" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                          <Component id="tfAltura" min="-2" pref="50" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                                          <Component id="sSeparador19" min="-2" pref="50" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblSangue" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                          <Component id="tfSangue" min="-2" pref="100" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
-                                          <Component id="sSeparador20" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Component id="sSeparador22" min="-2" pref="70" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lblPlanoSaude" max="32767" attributes="0"/>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="rbPlanoSaudeNao" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="rbPlanoSaudeSim" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="lblQualPlanoSaude" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="sSeparador21" min="-2" pref="90" max="-2" attributes="0"/>
+                                                      <Component id="tfPlanoSaude" min="-2" pref="90" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="rbSusNao" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="rbSusSim" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="lblNSus" min="-2" pref="20" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="tfNSus" min="-2" pref="70" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Component id="lblSus" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="106" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lblDtNasc" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfDtNasc" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="lblCpf" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="tfCpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblIdPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfIdPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblDtNasc" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMatricula" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tfNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfDtNasc" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfMatricula" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfTelefone" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jSeparator1" alignment="0" min="-2" pref="10" max="-2" attributes="0"/>
-                              <Component id="jSeparator11" alignment="0" min="-2" pref="10" max="-2" attributes="0"/>
-                              <Component id="jSeparator2" alignment="0" min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="jSeparator11" min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblRua" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblNumero" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblBairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblUf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblIdPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblTelefone" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="tfTelefone" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="16" pref="16" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jSeparator3" alignment="1" min="-2" pref="10" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblMatricula" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfMatricula" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                                  <Component id="jSeparator5" min="-2" pref="10" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="tfRua" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfNCasa" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfBairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfUf" alignment="1" min="-2" pref="17" max="-2" attributes="0"/>
+                              <Component id="tfIdPaciente" alignment="3" min="-2" pref="17" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblRua" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblNumero" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblBairro" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCidade" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblUf" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="tfRua" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfNCasa" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfBairro" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfCidade" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfUf" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jSeparator7" min="-2" pref="10" max="-2" attributes="0"/>
                               <Component id="jSeparator8" min="-2" pref="10" max="-2" attributes="0"/>
@@ -386,78 +363,46 @@
                               <Component id="sSeparador11" min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblSexo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPeso" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblAltura" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblSangue" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="rbFeminino" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                              <Component id="rbMasculino" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfPeso" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfAltura" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfSangue" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblSexo" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                                  <Component id="rbFeminino" min="-2" pref="23" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="rbMasculino" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblPeso" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfPeso" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                                  <Component id="sSeparador18" min="-2" pref="10" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblSangue" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                              <Component id="tfSangue" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                      <Component id="sSeparador20" min="-2" pref="10" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblAltura" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                              <Component id="tfAltura" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                      <Component id="sSeparador19" min="-2" pref="10" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="sSeparador18" min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="sSeparador19" min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="sSeparador20" min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lblPlanoSaude" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rbPlanoSaudeNao" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rbPlanoSaudeSim" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblQualPlanoSaude" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="tfPlanoSaude" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-                                  <Component id="sSeparador21" min="-2" pref="10" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblPlanoSaude" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblSus" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="rbPlanoSaudeNao" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rbPlanoSaudeSim" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblQualPlanoSaude" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfPlanoSaude" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rbSusNao" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rbSusSim" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblNSus" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
+                              <Component id="tfNSus" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblSus" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="rbSusNao" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="rbSusSim" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                          <Component id="tfNSus" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblNSus" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                                  <Component id="sSeparador22" min="-2" pref="10" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="sSeparador21" min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="sSeparador22" min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="136" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -743,7 +688,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="66" green="66" red="66" type="rgb"/>
                     </Property>
-                    <Property name="horizontalAlignment" type="int" value="4"/>
+                    <Property name="horizontalAlignment" type="int" value="2"/>
                     <Property name="text" type="java.lang.String" value="NOME *"/>
                   </Properties>
                 </Component>
@@ -890,6 +835,9 @@
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[6, 17]"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -2133,16 +2081,11 @@
                                           <EmptySpace min="44" pref="44" max="-2" attributes="0"/>
                                           <Component id="rbHistFamiliarOutro" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="lblEspecificar" min="-2" pref="120" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="sSeparador28" max="32767" attributes="0"/>
-                                              <Component id="tfEspecificar" pref="490" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="lblEspecificar" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="tfEspecificar" min="-2" pref="490" max="-2" attributes="0"/>
+                                      <Component id="sSeparador28" alignment="0" min="-2" pref="490" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="317" max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="455" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -2181,13 +2124,12 @@
                               <Component id="rbHistFamiliarOutro" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblEspecificar" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfEspecificar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblEspecificar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="tfEspecificar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="sSeparador28" min="-2" pref="10" max="-2" attributes="0"/>
-                          <EmptySpace pref="278" max="32767" attributes="0"/>
+                          <EmptySpace pref="255" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnFinalizar3" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnContinuar3" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -2613,12 +2555,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="sSeparador29" min="-2" pref="10" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblAcompanhamento" alignment="3" min="-2" pref="14" max="-2" attributes="0"/>
-                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="rbAcompanhamentoNao" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="rbAcompanhamentoSim" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="lblAcompanhamento" min="-2" pref="14" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="65" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -3177,43 +3119,32 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnFinalizar5" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                          <Component id="sSeparador30" alignment="1" min="-2" pref="350" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Component id="lblMedicamentoContinuo" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="tfMedicamentoContinuo" min="-2" pref="350" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                      <Component id="lblDesmaios" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="lblMedicamentoContinuo" max="32767" attributes="0"/>
                                       <Component id="tfDesmaios" alignment="0" min="-2" pref="610" max="-2" attributes="0"/>
-                                      <Component id="sSeparador31" alignment="0" min="-2" pref="610" max="-2" attributes="0"/>
-                                      <Component id="lblEpistaxe" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="tfEpistaxe" pref="610" max="32767" attributes="0"/>
-                                          <Component id="sSeparador32" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Component id="lblPressaoArterial" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="tfPressaoArterial" alignment="0" min="-2" pref="610" max="-2" attributes="0"/>
-                                      <Component id="sSeparador33" min="-2" pref="610" max="-2" attributes="0"/>
-                                      <Component id="tfCefaleia" min="-2" pref="610" max="-2" attributes="0"/>
-                                      <Component id="lblCefaleia" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="sSeparador34" alignment="0" min="-2" pref="610" max="-2" attributes="0"/>
-                                      <Component id="lblDiarreia" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="tfCefaleia" alignment="0" min="-2" pref="610" max="-2" attributes="0"/>
+                                      <Component id="lblDiarreia" alignment="1" max="32767" attributes="0"/>
                                       <Component id="tfDiarreia" alignment="0" min="-2" pref="610" max="-2" attributes="0"/>
+                                      <Component id="tfMedicamentoContinuo" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador30" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblDesmaios" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador31" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblEpistaxe" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfEpistaxe" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador32" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="lblPressaoArterial" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfPressaoArterial" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador33" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblCefaleia" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador34" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador35" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="sSeparador35" min="-2" pref="610" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -3221,10 +3152,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblMedicamentoContinuo" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfMedicamentoContinuo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblMedicamentoContinuo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="tfMedicamentoContinuo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="sSeparador30" min="-2" pref="10" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -3257,7 +3187,7 @@
                           <Component id="tfDiarreia" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="sSeparador35" min="-2" pref="10" max="-2" attributes="0"/>
-                          <EmptySpace pref="72" max="32767" attributes="0"/>
+                          <EmptySpace pref="49" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnFinalizar5" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnContinuar5" alignment="3" min="-2" max="-2" attributes="0"/>
