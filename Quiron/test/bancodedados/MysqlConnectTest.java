@@ -1,12 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Connection Test -> MySQL DB
  */
 package bancodedados;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -47,12 +44,15 @@ public class MysqlConnectTest {
      */
     @Test
     public void testConnectDB() {
+        Connection conn = null;
         try {
-            Connection conn = MysqlConnect.connectDB();
+            conn = MysqlConnect.connectDB();
             assertNotEquals(null, conn);
+            if (conn != null) conn.close();
         } catch (SQLException sqle) {
             System.out.println("Erro ao conectar com o Banco de Dados " + sqle.getMessage());
-        }    
+            assertNotEquals(null, conn);
+        }   
     }
     
 }
