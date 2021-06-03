@@ -346,13 +346,15 @@
                               <Component id="lblIdPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="tfRua" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfNCasa" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfBairro" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="tfCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="tfUf" alignment="1" min="-2" pref="17" max="-2" attributes="0"/>
-                              <Component id="tfIdPaciente" alignment="3" min="-2" pref="17" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="tfRua" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfNCasa" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfBairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfIdPaciente" alignment="3" min="-2" pref="17" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">

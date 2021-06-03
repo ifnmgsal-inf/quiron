@@ -4,12 +4,12 @@
 package principal;
 
 import bancodedados.MysqlConnect;
-import cartaovacina.pnlAlterarCartao;
+import cartaovacina.PnlAlterarCartao;
 import com.itextpdf.text.DocumentException;
-import fichaatendimento.pnlFichaAtendimento;
-import gerenciarpacientes.pnlAlterarPaciente;
-import gerenciarservidores.pnlAlterarServidor;
-import hospital.pnlEncaminhamentoHospital;
+import fichaatendimento.PnlFichaAtendimento;
+import gerenciarpacientes.PnlAlterarPaciente;
+import gerenciarservidores.PnlAlterarServidor;
+import hospital.PnlEncaminhamentoHospital;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import menssagensalerta.MinhasMenssagens;
 import pdf.PdfAnamnese;
 import pdf.PdfAnamneseServidor;
 import pdf.PdfCartaoVacina;
@@ -51,7 +52,8 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             this.preencheTabela();
             this.controlePesquisa();
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
         }
     }
 
@@ -62,7 +64,8 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             this.preencheTabela();
             this.controlePesquisa();
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
         }
     }
 
@@ -111,7 +114,8 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -123,10 +127,12 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             pstmt = conn.prepareStatement(qry);
             pstmt.setString(1, id);
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso das fichas");
+            //JOptionPane.showMessageDialog(null, "Excluido com sucesso das fichas");
+            MinhasMenssagens.chamarMenssagemSucesso("Paciente excluído com sucesso.");
             this.preencheTabela();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -134,7 +140,8 @@ public class PesquisaPaciente extends javax.swing.JDialog {
 
         PreparedStatement pstmt = null;
         if (tblPacientes.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Não há pacientes registrados");
+            //JOptionPane.showMessageDialog(null, "Não há pacientes registrados");
+            MinhasMenssagens.chamarMenssagemErro("Não há pacientes registrados");
         } else {
             id = tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString();
 
@@ -143,15 +150,17 @@ public class PesquisaPaciente extends javax.swing.JDialog {
             try {
                 pstmt = conn.prepareStatement(qry);
                 pstmt.setString(1, id);
-                int op = JOptionPane.showConfirmDialog(null, "Deseja realmente deletar?\nIsso implicara na exclusão da ficha e do cartão de vacinas do paciente", "ATENÇÃO", JOptionPane.YES_OPTION);
+                //int op = JOptionPane.showConfirmDialog(null, "Deseja realmente deletar?\nIsso implicara na exclusão da ficha e do cartão de vacinas do paciente", "ATENÇÃO", JOptionPane.YES_OPTION);
+                int op = MinhasMenssagens.chamarMenssagemOpcao("Deseja realmente deletar esse paciente?\nIsso implicara na exclusão da ficha e do cartão de vacinas do paciente.");
                 if (op == JOptionPane.YES_OPTION) {
                     //this.deletaDasFichas();
                     pstmt.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Excluido com sucesso");
+                    MinhasMenssagens.chamarMenssagemSucesso("Paciente excluído com sucesso");
                 }
                 this.preencheTabela();
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
             }
         }
     }
@@ -189,7 +198,8 @@ public class PesquisaPaciente extends javax.swing.JDialog {
                 tabelaPacientes.addRow(new String[]{rs.getString("nome"), rs.getString("cpf"), rs.getString("dtNascimento"), rs.getString("idPaciente")});
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -207,7 +217,8 @@ public class PesquisaPaciente extends javax.swing.JDialog {
                 tabelaPacientes.addRow(new String[]{rs.getString("nome"), rs.getString("cpf"), rs.getString("dtNascimento"), rs.getString("idPaciente")});
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -461,7 +472,8 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         try {
             this.deletaDoBD();
         } catch (ArrayIndexOutOfBoundsException ex) {
-            JOptionPane.showMessageDialog(null, "Selecione um paciente!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Selecione um paciente!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Selecione um paciente!");
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
@@ -481,23 +493,25 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             if (tblPacientes.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Não há pacientes registrados");
+                //JOptionPane.showMessageDialog(null, "Não há pacientes registrados");
+                MinhasMenssagens.chamarMenssagemErro("Não há pacientes cadastrados.");
             } else {
                 id = tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString();
 
                 if ("Servidor".equals(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 4).toString())) {
                     TelaPrincipal.lblTextoAtual.setText("Alterar Servidor");
-                    pnlAlterarServidor pnlAlterarServidor = new pnlAlterarServidor();
+                    PnlAlterarServidor pnlAlterarServidor = new PnlAlterarServidor();
                     TelaPrincipal.abrirJPainel(pnlAlterarServidor);
                 } else {
                     TelaPrincipal.lblTextoAtual.setText("Alterar Paciente");
-                    pnlAlterarPaciente alterarPaciente = new pnlAlterarPaciente();
+                    PnlAlterarPaciente alterarPaciente = new PnlAlterarPaciente();
                     TelaPrincipal.abrirJPainel(alterarPaciente);
                 }
                 this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            JOptionPane.showMessageDialog(null, "Selecione um paciente!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Selecione um paciente!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Selecione um paciente!");
         }
 
     }//GEN-LAST:event_btnAlterarActionPerformed
@@ -516,34 +530,37 @@ public class PesquisaPaciente extends javax.swing.JDialog {
         // TODO add your handling code here:
         try {
             if (tblPacientes.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Não há pacientes registrados");
+                //JOptionPane.showMessageDialog(null, "Não há pacientes registrados");
+                MinhasMenssagens.chamarMenssagemErro("Não há pacientes cadastrados.");
             } else {
                 this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
                 id = tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString();
                 switch (TelaPrincipal.controlePesquisa) {
                     case 1:
                         TelaPrincipal.lblTextoAtual.setText("Ficha de Atendimento");
-                        pnlFichaAtendimento pnlFichaAtendimento = new pnlFichaAtendimento();
+                        PnlFichaAtendimento pnlFichaAtendimento = new PnlFichaAtendimento();
                         TelaPrincipal.abrirJPainel(pnlFichaAtendimento);
                         break;
                     case 2:
-                        pnlEncaminhamentoHospital.tfPaciente.setText(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 0).toString());
-                        pnlEncaminhamentoHospital.tfCpf.setText(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 1).toString());
-                        pnlEncaminhamentoHospital.tfIdPaciente.setText(id);
+                        PnlEncaminhamentoHospital.tfPaciente.setText(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 0).toString());
+                        PnlEncaminhamentoHospital.tfCpf.setText(tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 1).toString());
+                        PnlEncaminhamentoHospital.tfIdPaciente.setText(id);
                         this.dispose();
                         break;
                     case 3:
                         TelaPrincipal.lblTextoAtual.setText("Gerenciar Cartão");
-                        pnlAlterarCartao alterarCartao = new pnlAlterarCartao();
+                        PnlAlterarCartao alterarCartao = new PnlAlterarCartao();
                         TelaPrincipal.abrirJPainel(alterarCartao);
                         break;
                     default:
-                        JOptionPane.showMessageDialog(null, "ERRO", "ERRO", JOptionPane.ERROR_MESSAGE);
+                        //JOptionPane.showMessageDialog(null, "ERRO", "ERRO", JOptionPane.ERROR_MESSAGE);
+                        MinhasMenssagens.chamarMenssagemErro("Erro");
                         break;
                 }
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            JOptionPane.showMessageDialog(null, "Selecione um paciente!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Selecione um paciente!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
@@ -552,7 +569,8 @@ public class PesquisaPaciente extends javax.swing.JDialog {
 
         try {
             if (tblPacientes.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Não há pacientes registrados");
+                
+                MinhasMenssagens.chamarMenssagemErro("Não há pacientes cadastrados.");
             } else {
                 switch (TelaPrincipal.controlePesquisa) {
                     case 0:
@@ -574,12 +592,14 @@ public class PesquisaPaciente extends javax.swing.JDialog {
                         meuCartaoVacina.pdfCartao(idSelecionado3);
                         break;
                     default:
-                        JOptionPane.showMessageDialog(null, "Erro no PDF", "ERRO", JOptionPane.ERROR_MESSAGE);
+                        //JOptionPane.showMessageDialog(null, "Erro no PDF", "ERRO", JOptionPane.ERROR_MESSAGE);
+                        MinhasMenssagens.chamarMenssagemErro("Erro no PDF.");
                         break;
                 }
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            JOptionPane.showMessageDialog(null, "Selecione um paciente!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Selecione um paciente!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Selecione um paciente!");
         } catch (DocumentException ex) {
             Logger.getLogger(PesquisaPaciente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

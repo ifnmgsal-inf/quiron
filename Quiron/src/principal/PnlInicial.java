@@ -19,14 +19,14 @@ import javax.swing.JOptionPane;
  *
  * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
-public final class pnlInicial extends javax.swing.JPanel {
+public final class PnlInicial extends javax.swing.JPanel {
 
     Connection conn = null;
 
     /**
      * Creates new form pnlInicial
      */
-    public pnlInicial() {
+    public PnlInicial() {
         initComponents();
         try {
             conn = MysqlConnect.connectDB();

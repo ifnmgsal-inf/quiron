@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import menssagensalerta.MinhasMenssagens;
 import principal.PesquisaPaciente;
 import principal.TelaPrincipal;
 
@@ -18,19 +19,20 @@ import principal.TelaPrincipal;
  *
  * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
-public class pnlAlterarCartao extends javax.swing.JPanel {
+public class PnlAlterarCartao extends javax.swing.JPanel {
 
     Connection conn = null;
     /**
      * Creates new form pnlAlterarCartao
      */
-    public pnlAlterarCartao() {
+    public PnlAlterarCartao() {
         initComponents();
         try {
             conn = MysqlConnect.connectDB();
             this.imprimir();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Erro ao conectar com o Banco de Dados ");
         }
     }
     
@@ -45,7 +47,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
     }
     
     public void sair() {
-        int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        //int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        int op = MinhasMenssagens.chamarMenssagemOpcaoSair();
         if (op == JOptionPane.YES_OPTION) {
             TelaPrincipal.voltarHome();
         }
@@ -59,6 +62,7 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
         this.atualizarDuplaViral();
         this.atualizarTripliceViral();
         this.atualizarOutras();
+        MinhasMenssagens.chamarMenssagemSucesso("Cartão atualizado com sucesso");
         TelaPrincipal.voltarHome();
     }
     
@@ -103,7 +107,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
                 tfGRS.setText(rs.getString("grs"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -134,7 +139,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
                 tfValReforco.setText(rs.getString("validadeReforco"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -184,7 +190,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
 
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -233,7 +240,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
                 tfValFebre8.setText(rs.getString("valFebre8"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -259,7 +267,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
                 tfValDupla2.setText(rs.getString("valDupla2"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -284,7 +293,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
                 tfValTriplice2.setText(rs.getString("valTriplice2"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -322,7 +332,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
 
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -341,7 +352,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -373,7 +385,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -418,7 +431,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -464,7 +478,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -489,7 +504,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -514,7 +530,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -550,10 +567,11 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
 
             pstmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+            //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -1596,40 +1614,37 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
                                     .addGroup(pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(tfValReforco)
                                         .addComponent(sSeparador24)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlDuplaAdultoInternoLayout.createSequentialGroup()
-                                        .addGroup(pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(sSeparador13, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfDose1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(70, 70, 70)
-                                        .addGroup(pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(sSeparador14)
-                                            .addComponent(tfDose2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(80, 80, 80)
-                                        .addGroup(pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfDose3)
-                                            .addComponent(sSeparador15, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(80, 80, 80)
-                                        .addGroup(pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfReforco)
-                                            .addComponent(sSeparador16, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(pnlDuplaAdultoInternoLayout.createSequentialGroup()
-                                        .addComponent(lblDose, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(70, 70, 70)
-                                        .addComponent(lblDose2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(80, 80, 80)
-                                        .addComponent(lblDose3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(80, 80, 80)
-                                        .addComponent(lblReforco)))
+                                .addGroup(pnlDuplaAdultoInternoLayout.createSequentialGroup()
+                                    .addGroup(pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(sSeparador13, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tfDose1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(70, 70, 70)
+                                    .addGroup(pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(sSeparador14)
+                                        .addComponent(tfDose2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(80, 80, 80)
+                                    .addGroup(pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfDose3)
+                                        .addComponent(sSeparador15, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(80, 80, 80)
+                                    .addGroup(pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tfReforco)
+                                        .addComponent(sSeparador16, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDuplaAdultoInternoLayout.createSequentialGroup()
+                                    .addComponent(lblDose, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(70, 70, 70)
+                                    .addComponent(lblDose2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(80, 80, 80)
+                                    .addComponent(lblDose3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(80, 80, 80)
+                                    .addComponent(lblReforco))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDuplaAdultoInternoLayout.createSequentialGroup()
                                     .addGroup(pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(pnlDuplaAdultoInternoLayout.createSequentialGroup()
                                             .addComponent(lblLote, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(0, 0, 0)
                                             .addComponent(tfLote, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pnlDuplaAdultoInternoLayout.createSequentialGroup()
-                                            .addGap(50, 50, 50)
-                                            .addComponent(sSeparador17, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(sSeparador17, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(pnlDuplaAdultoInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(pnlDuplaAdultoInternoLayout.createSequentialGroup()
                                             .addGap(20, 20, 20)
@@ -2109,6 +2124,112 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
             .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblInfluenza)
+                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
+                        .addComponent(lblLoteInfluenza4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sSeparador42, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
+                                .addComponent(tfLoteInfluenza5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(lblLoteInfluenza5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfLoteInfluenza6)
+                                    .addComponent(sSeparador39, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addComponent(lblLoteInfluenza6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(tfLoteInfluenza7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfluenzaInternoLayout.createSequentialGroup()
+                                        .addGap(80, 80, 80)
+                                        .addComponent(sSeparador38, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(20, 20, 20)
+                                .addComponent(lblLoteInfluenza7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(sSeparador37)
+                                    .addComponent(tfLoteInfluenza8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
+                        .addComponent(lblValInfluenza, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sSeparador33)
+                            .addComponent(tfValInfluenza1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addComponent(lblValInfluenza1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfValInfluenza2)
+                            .addComponent(sSeparador31, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(lblValInfluenza2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(tfValInfluenza3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfluenzaInternoLayout.createSequentialGroup()
+                                .addGap(80, 80, 80)
+                                .addComponent(sSeparador30, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(20, 20, 20)
+                        .addComponent(lblValInfluenza3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sSeparador29)
+                            .addComponent(tfValInfluenza4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
+                        .addComponent(lblValInfluenza4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sSeparador47)
+                            .addComponent(tfValInfluenza5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20)
+                        .addComponent(lblValInfluenza5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(sSeparador46)
+                            .addComponent(tfValInfluenza6)
+                            .addComponent(sSeparador43, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(lblValInfluenza6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sSeparador45)
+                            .addComponent(tfValInfluenza7)
+                            .addComponent(sSeparador44, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(sSeparador41, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(lblValInfluenza7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(sSeparador48)
+                                    .addComponent(tfValInfluenza8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
+                        .addComponent(lblLoteInfluenza, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sSeparador32, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
+                                .addComponent(tfLoteInfluenza1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(lblLoteInfluenza1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(tfLoteInfluenza2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(lblLoteInfluenza2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(tfLoteInfluenza3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(lblLoteInfluenza3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(tfLoteInfluenza4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2126,120 +2247,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
                                 .addGap(70, 70, 70)
                                 .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfInfluenza8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sSeparador36, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(375, Short.MAX_VALUE))
-                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblInfluenza)
+                                    .addComponent(sSeparador36, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                .addComponent(lblLoteInfluenza4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                        .addComponent(sSeparador42, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(460, 460, 460))
-                                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                        .addComponent(tfLoteInfluenza5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(20, 20, 20)
-                                        .addComponent(lblLoteInfluenza5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfLoteInfluenza6)
-                                            .addComponent(sSeparador39, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                                .addGap(30, 30, 30)
-                                                .addComponent(lblLoteInfluenza6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, 0)
-                                                .addComponent(tfLoteInfluenza7, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfluenzaInternoLayout.createSequentialGroup()
-                                                .addGap(80, 80, 80)
-                                                .addComponent(sSeparador38, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(20, 20, 20)
-                                        .addComponent(lblLoteInfluenza7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(sSeparador37)
-                                            .addComponent(tfLoteInfluenza8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                .addComponent(lblValInfluenza, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(sSeparador33)
-                                    .addComponent(tfValInfluenza1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(20, 20, 20)
-                                .addComponent(lblValInfluenza1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfValInfluenza2)
-                                    .addComponent(sSeparador31, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addComponent(lblValInfluenza2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(tfValInfluenza3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfluenzaInternoLayout.createSequentialGroup()
-                                        .addGap(80, 80, 80)
-                                        .addComponent(sSeparador30, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(20, 20, 20)
-                                .addComponent(lblValInfluenza3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(sSeparador29)
-                                    .addComponent(tfValInfluenza4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                .addComponent(lblValInfluenza4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(sSeparador47)
-                                    .addComponent(tfValInfluenza5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(20, 20, 20)
-                                .addComponent(lblValInfluenza5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(sSeparador46)
-                                    .addComponent(tfValInfluenza6)
-                                    .addComponent(sSeparador43, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
-                                .addComponent(lblValInfluenza6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(sSeparador45)
-                                    .addComponent(tfValInfluenza7)
-                                    .addComponent(sSeparador44, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                        .addGap(70, 70, 70)
-                                        .addComponent(sSeparador41, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblValInfluenza7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(sSeparador48)
-                                            .addComponent(tfValInfluenza8, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                .addComponent(lblLoteInfluenza, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(sSeparador32, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                        .addComponent(tfLoteInfluenza1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(20, 20, 20)
-                                        .addComponent(lblLoteInfluenza1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(tfLoteInfluenza2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(lblLoteInfluenza2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(tfLoteInfluenza3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(20, 20, 20)
-                                        .addComponent(lblLoteInfluenza3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, 0)
-                                        .addComponent(tfLoteInfluenza4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(pnlInfluenzaInternoLayout.createSequentialGroup()
-                                .addGap(50, 50, 50)
                                 .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(sSeparador25)
                                     .addComponent(tfInfluenza1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -2254,8 +2263,8 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
                                 .addGap(70, 70, 70)
                                 .addGroup(pnlInfluenzaInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tfInfluenza4)
-                                    .addComponent(sSeparador28, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(sSeparador28, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlInfluenzaInternoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar3)
@@ -3478,51 +3487,48 @@ public class pnlAlterarCartao extends javax.swing.JPanel {
             .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
                 .addGroup(pnlTripliceInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(pnlTripliceInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblTriplice))
-                            .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlTripliceInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblTriplice)
+                            .addGroup(pnlTripliceInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
+                                    .addComponent(sSeparador82, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(60, 60, 60)
+                                    .addComponent(sSeparador81, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pnlTripliceInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
-                                        .addComponent(sSeparador82, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(60, 60, 60)
-                                        .addComponent(sSeparador81, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(pnlTripliceInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
-                                            .addComponent(lblLote1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(0, 0, 0)
-                                            .addComponent(tfLoteTriplice1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(10, 10, 10)
-                                            .addComponent(lblLote4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(0, 0, 0)
-                                            .addComponent(tfLoteTriplice2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
-                                            .addComponent(lblVal1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(0, 0, 0)
-                                            .addComponent(tfValTriplice1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(10, 10, 10)
-                                            .addComponent(lblVal4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(0, 0, 0)
-                                            .addComponent(tfValTriplice2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
-                                            .addGap(50, 50, 50)
-                                            .addGroup(pnlTripliceInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(lblDose1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(tfTriplice1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(60, 60, 60)
-                                            .addGroup(pnlTripliceInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(tfTriplice2)
-                                                .addComponent(lblDose4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTripliceInternoLayout.createSequentialGroup()
-                                            .addComponent(sSeparador80, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(60, 60, 60)
-                                            .addComponent(sSeparador79, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(lblLote1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(tfLoteTriplice1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(lblLote4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(tfLoteTriplice2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
-                                        .addComponent(sSeparador83, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblVal1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(tfValTriplice1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(lblVal4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, 0)
+                                        .addComponent(tfValTriplice2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
+                                        .addGap(50, 50, 50)
+                                        .addGroup(pnlTripliceInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblDose1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tfTriplice1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(60, 60, 60)
-                                        .addComponent(sSeparador84, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(pnlTripliceInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tfTriplice2)
+                                            .addComponent(lblDose4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTripliceInternoLayout.createSequentialGroup()
+                                        .addComponent(sSeparador80, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(60, 60, 60)
+                                        .addComponent(sSeparador79, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(pnlTripliceInternoLayout.createSequentialGroup()
+                                    .addComponent(sSeparador83, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(60, 60, 60)
+                                    .addComponent(sSeparador84, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 351, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTripliceInternoLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)

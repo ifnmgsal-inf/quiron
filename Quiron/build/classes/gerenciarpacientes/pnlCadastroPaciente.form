@@ -426,13 +426,15 @@
                               <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblCurso" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblTurma" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblSexo" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblPeso" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblAltura" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblSangue" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblCurso" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTurma" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPeso" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblAltura" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblSangue" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">

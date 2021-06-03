@@ -17,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author leonardosilva
  */
-public class pnlCadastroPacienteTest {
+public class PnlCadastroPacienteTest {
     
-    public pnlCadastroPacienteTest() {
+    public PnlCadastroPacienteTest() {
     }
     
     @BeforeClass
@@ -33,23 +33,25 @@ public class pnlCadastroPacienteTest {
     /**
      * Test of sair method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testSair() {
         System.out.println("sair");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.sair();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    */
 
     /**
-     * Test of entraMouse method, of class pnlCadastroPaciente.
+     * Test of entraMouse method, of class PnlCadastroPaciente.
      */
     @Test
     public void testEntraMouse() {
         System.out.println("entraMouse");
         JButton botao = new JButton();
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         boolean[] prop = new boolean[4];
         boolean[] result = {true, true, true, true};
         instance.entraMouse(botao);
@@ -62,148 +64,168 @@ public class pnlCadastroPacienteTest {
     }
 
     /**
-     * Test of saiMouse method, of class pnlCadastroPaciente.
+     * Test of saiMouse method, of class PnlCadastroPaciente.
      */
     @Test
     public void testSaiMouse() {
         System.out.println("saiMouse");
-        JButton botao = null;
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        JButton botao = new JButton();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
+        boolean[] prop = new boolean[3];
+        boolean[] result = {false, false, false};
         instance.saiMouse(botao);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
+        prop[0] = botao.isOpaque();
+        prop[1] = botao.isContentAreaFilled();
+        prop[2] = botao.isBorderPainted();
+        
+        assertEquals(true, Arrays.equals(prop, result));
     }
 
     /**
      * Test of cursos method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testCursos() {
         System.out.println("cursos");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.cursos();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+    */
     /**
      * Test of botaoFinalizar method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testBotaoFinalizar() {
         System.out.println("botaoFinalizar");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.botaoFinalizar();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    */
 
     /**
      * Test of inserirIdentificacao method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testInserirIdentificacao() {
         System.out.println("inserirIdentificacao");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.inserirIdentificacao();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+    */
     /**
      * Test of atualizarIdentificacao method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testAtualizarIdentificacao() {
         System.out.println("atualizarIdentificacao");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.atualizarIdentificacao();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+    */
     /**
      * Test of inserirHistoriaPregressa method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testInserirHistoriaPregressa() {
         System.out.println("inserirHistoriaPregressa");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.inserirHistoriaPregressa();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+    */
     /**
      * Test of inserirHistoriaFamiliar method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testInserirHistoriaFamiliar() {
         System.out.println("inserirHistoriaFamiliar");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.inserirHistoriaFamiliar();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+    */
     /**
      * Test of inserirHistoriaDoencaAtual method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testInserirHistoriaDoencaAtual() {
         System.out.println("inserirHistoriaDoencaAtual");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.inserirHistoriaDoencaAtual();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+    */
     /**
      * Test of inserirQuestionario1 method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testInserirQuestionario1() {
         System.out.println("inserirQuestionario1");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.inserirQuestionario1();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    */
 
     /**
      * Test of inserirQuestionario2 method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testInserirQuestionario2() {
         System.out.println("inserirQuestionario2");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.inserirQuestionario2();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+    */
     /**
      * Test of inserirCartao method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testInserirCartao() {
         System.out.println("inserirCartao");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.inserirCartao();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-
+    */
     /**
      * Test of atualizarCartao method, of class pnlCadastroPaciente.
      */
+    /*
     @Test
     public void testAtualizarCartao() {
         System.out.println("atualizarCartao");
-        pnlCadastroPaciente instance = new pnlCadastroPaciente();
+        PnlCadastroPaciente instance = new PnlCadastroPaciente();
         instance.atualizarCartao();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    */
     
 }

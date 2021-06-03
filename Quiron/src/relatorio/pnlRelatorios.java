@@ -5,7 +5,7 @@
 package relatorio;
 
 import bancodedados.MysqlConnect;
-import fichaatendimento.pnlFichaAtendimento;
+import fichaatendimento.PnlFichaAtendimento;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import menssagensalerta.MinhasMenssagens;
 import principal.TelaPrincipal;
 
 /**
@@ -35,12 +36,14 @@ public class pnlRelatorios extends javax.swing.JPanel {
         try {
             conn = MysqlConnect.connectDB();
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
         }
     }
     
     public void sair() {
-        int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        //int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        int op = MinhasMenssagens.chamarMenssagemOpcaoSair();
         if (op == JOptionPane.YES_OPTION) {
             TelaPrincipal.voltarHome();
         }
@@ -70,7 +73,7 @@ public class pnlRelatorios extends javax.swing.JPanel {
             enteredDate = dfDMA.parse(dataDMA);
             reportDate = df.format(enteredDate);
         } catch (ParseException ex) {
-            Logger.getLogger(pnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
         }
         //String reportDate = df.format(enteredDate);
         return reportDate;
@@ -87,7 +90,7 @@ public class pnlRelatorios extends javax.swing.JPanel {
             reportDate = dfDMA.format(enteredDate);
             reportDate.replace('-', '/');
         } catch (ParseException ex) {
-            Logger.getLogger(pnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
         }
         return reportDate;
     }
@@ -109,7 +112,8 @@ public class pnlRelatorios extends javax.swing.JPanel {
                 tfEncaminhamentos.setText(rs.getString("COUNT(idEncaminhamentos)"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -130,7 +134,8 @@ public class pnlRelatorios extends javax.swing.JPanel {
                 tfConsultas.setText(rs.getString("COUNT(idFichas)"));
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -410,7 +415,8 @@ public class pnlRelatorios extends javax.swing.JPanel {
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // TODO add your handling code here:
         if(tfDtInicial.getText().replace("/", "").trim().length()==0 || tfDtFinal.getText().replace("/", "").trim().length()==0){
-            JOptionPane.showMessageDialog(null, "Preencha a data inicial e a final", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Preencha a data inicial e a final", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Preencha os campos Data Inicial e Data Final!");
         }
         else{
             this.calculaAtendimentos();

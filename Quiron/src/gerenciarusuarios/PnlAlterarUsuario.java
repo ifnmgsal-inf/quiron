@@ -14,13 +14,14 @@ import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import login.TelaLogin;
+import menssagensalerta.MinhasMenssagens;
 import principal.TelaPrincipal;
 
 /**
  *
  * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
-public class pnlAlterarUsuario extends javax.swing.JPanel {
+public class PnlAlterarUsuario extends javax.swing.JPanel {
 
     private Connection conn = null;
     private String nome, matricula, cpf, telefone, numMatricula;
@@ -29,18 +30,20 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
     /**
      * Creates new form pnlAlterarUsuario
      */
-    public pnlAlterarUsuario() {
+    public PnlAlterarUsuario() {
         initComponents();
         try {
             conn = MysqlConnect.connectDB();
             this.verificaAdministrador();
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
         }
     }
     
     public void sair() {
-        int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        //int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        int op = MinhasMenssagens.chamarMenssagemOpcaoSair();
         if (op == JOptionPane.YES_OPTION) {
             TelaPrincipal.voltarHome();
         }
@@ -79,7 +82,8 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
                 }
 
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
             }
         } else {
             this.caixaUsuario();
@@ -128,7 +132,8 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -146,7 +151,8 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
     
@@ -154,7 +160,8 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
         this.valorCampos();
         numMatricula = (String) jcbUsuarios.getSelectedItem();
         if (!(Arrays.equals(tfSenha.getPassword(), tfConfirmaSenha.getPassword()))) {
-            JOptionPane.showMessageDialog(null, "Senhas não coincidem!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Senhas não coincidem!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Senhas não coincidem!");
         } else {
             String qryAtualiza = "UPDATE usuarios SET matricula= ?, nome= ?, cpf= ?,"
                     + " telefone= ?, senha= AES_ENCRYPT(?,?), administrador= ? WHERE matricula= ?";
@@ -173,10 +180,12 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
                 pstmt.setString(8, jcbUsuarios.getSelectedItem().toString());
 
                 pstmt.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+                
+                MinhasMenssagens.chamarMenssagemSucesso("Atualizado com sucesso.");
 
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao salvar: Verifique os campos" ,"ERRO", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Erro ao salvar: Verifique os campos" ,"ERRO", JOptionPane.ERROR_MESSAGE);
+                MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
             }
         }
     }
@@ -547,7 +556,8 @@ public class pnlAlterarUsuario extends javax.swing.JPanel {
         cpfVazio= cpfVazio.replace("-", "");
         System.out.println(cpfVazio);
         if(tfNome.getText().equals("") || tfMatricula.getText().equals("") || cpfVazio.trim().length()==0){
-            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios (campos com *)", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios (campos com *)", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemCamposObrigatorios();
         }
         else
         this.alterarUsuario();

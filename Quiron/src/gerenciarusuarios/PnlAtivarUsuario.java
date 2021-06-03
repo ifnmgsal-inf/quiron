@@ -12,31 +12,34 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import menssagensalerta.MinhasMenssagens;
 import principal.TelaPrincipal;
 
 /**
  *
  * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
-public class pnlAtivarUsuario extends javax.swing.JPanel {
+public class PnlAtivarUsuario extends javax.swing.JPanel {
 
     Connection conn = null;
     public String numMatricula;
     /**
      * Creates new form pnlAtivarUsuario
      */
-    public pnlAtivarUsuario() {
+    public PnlAtivarUsuario() {
         initComponents();
         try {
             conn = MysqlConnect.connectDB();
             this.caixaUsuario();
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
         }
     }
     
     public void sair() {
-        int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        //int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        int op = MinhasMenssagens.chamarMenssagemOpcaoSair();
         if (op == JOptionPane.YES_OPTION) {
             TelaPrincipal.voltarHome();
         }
@@ -68,7 +71,8 @@ public class pnlAtivarUsuario extends javax.swing.JPanel {
                 }
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -93,7 +97,8 @@ public class pnlAtivarUsuario extends javax.swing.JPanel {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -331,9 +336,11 @@ public class pnlAtivarUsuario extends javax.swing.JPanel {
         // TODO add your handling code here:
         numMatricula = (String) jcbUsuarios.getSelectedItem();
         if (jcbUsuarios.getItemCount() <= 1) {
-            JOptionPane.showMessageDialog(this, "Só há um usuário registrado");
+            //JOptionPane.showMessageDialog(this, "Só há um usuário registrado");
+            MinhasMenssagens.chamarMenssagemErro("Há apenas um usuário registrado.");
         } else {
-            int op = JOptionPane.showConfirmDialog(null, "Deseja realmente inativar?", "ATENÇÃO", JOptionPane.YES_OPTION);
+            //int op = JOptionPane.showConfirmDialog(null, "Deseja realmente inativar?", "ATENÇÃO", JOptionPane.YES_OPTION);
+            int op = MinhasMenssagens.chamarMenssagemOpcao("Deseja realmente inativar esse usuário?");
             if (op == JOptionPane.YES_OPTION) {
 
                 PreparedStatement pstmt = null;
@@ -345,10 +352,12 @@ public class pnlAtivarUsuario extends javax.swing.JPanel {
                     pstmt.setInt(1, 0);
                     pstmt.setString(2, numMatricula);
                     pstmt.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "Inativado com sucesso!");
+                    //JOptionPane.showMessageDialog(null, "Inativado com sucesso!");
+                    MinhasMenssagens.chamarMenssagemSucesso("Usuário inativado com sucesso.");
                     this.caixaUsuario();
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "Erro ao inativar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(null, "Erro ao inativar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                    MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
                 }
             }
         }

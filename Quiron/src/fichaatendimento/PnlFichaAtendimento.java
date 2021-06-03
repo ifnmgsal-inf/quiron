@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
+import menssagensalerta.MinhasMenssagens;
 import principal.PesquisaPaciente;
 import principal.TelaPrincipal;
 
@@ -25,25 +26,27 @@ import principal.TelaPrincipal;
  *
  * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
-public class pnlFichaAtendimento extends javax.swing.JPanel {
+public class PnlFichaAtendimento extends javax.swing.JPanel {
 
     Connection conn;
     /**
      * Creates new form pnlFichaAtendimento
      */
-    public pnlFichaAtendimento() {
+    public PnlFichaAtendimento() {
         initComponents();
         try {
             conn = MysqlConnect.connectDB();
             this.preencherCampos();
             this.preencheTabela();
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
         }
     }
     
     public void sair() {
-        int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        //int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        int op = MinhasMenssagens.chamarMenssagemOpcaoSair();
         if (op == JOptionPane.YES_OPTION) {
             TelaPrincipal.voltarHome();
         }
@@ -97,7 +100,8 @@ public class pnlFichaAtendimento extends javax.swing.JPanel {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -118,7 +122,8 @@ public class pnlFichaAtendimento extends javax.swing.JPanel {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -132,7 +137,7 @@ public class pnlFichaAtendimento extends javax.swing.JPanel {
             enteredDate = dfDMA.parse(dataDMA);
             reportDate = df.format(enteredDate);
         } catch (ParseException ex) {
-            Logger.getLogger(pnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
         }
         //String reportDate = df.format(enteredDate);
         return reportDate;
@@ -149,7 +154,7 @@ public class pnlFichaAtendimento extends javax.swing.JPanel {
             reportDate = dfDMA.format(enteredDate);
             reportDate.replace('-', '/');
         } catch (ParseException ex) {
-            Logger.getLogger(pnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
         }
         //String reportDate = df.format(enteredDate);
         return reportDate;
@@ -175,13 +180,16 @@ public class pnlFichaAtendimento extends javax.swing.JPanel {
                 pstmt.executeUpdate();
 
             }
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+            //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+            MinhasMenssagens.chamarMenssagemSucesso("Salvo com sucesso.");
             this.preencheTabela();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: Data Inválida" /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: Data Inválida" /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Erro ao salvar: DATA INVÁLIDA");
         } catch (NullPointerException npx) {
-            JOptionPane.showMessageDialog(null, "Preencha toda a linha: " + npx.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Preencha toda a linha: " + npx.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Preencha toda a linha!");
         }
     }
 
@@ -195,7 +203,8 @@ public class pnlFichaAtendimento extends javax.swing.JPanel {
             pstmt.executeUpdate();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -690,7 +699,8 @@ public class pnlFichaAtendimento extends javax.swing.JPanel {
             DefaultTableModel tabelaFichas = (DefaultTableModel) tblFicha.getModel();
             tabelaFichas.removeRow(tblFicha.getSelectedRow());
         } catch (ArrayIndexOutOfBoundsException ex) {
-            JOptionPane.showMessageDialog(null, "Selecione uma linha!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Selecione uma linha!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Selecione uma linha!");
         }
     }//GEN-LAST:event_btnRemoverActionPerformed
 

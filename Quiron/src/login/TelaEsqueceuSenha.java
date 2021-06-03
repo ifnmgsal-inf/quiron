@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import menssagensalerta.MinhasMenssagens;
 
 /**
  *
@@ -34,7 +35,8 @@ public class TelaEsqueceuSenha extends javax.swing.JDialog {
             conn = MysqlConnect.connectDB();
             //JOptionPane.showMessageDialog(null, "Conexao bem sucedida");
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
         }
     }
 
@@ -67,7 +69,8 @@ public class TelaEsqueceuSenha extends javax.swing.JDialog {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
         return false;
     }
@@ -75,9 +78,11 @@ public class TelaEsqueceuSenha extends javax.swing.JDialog {
     public void atualizaSenha() {
 
         if (!verificaValidade()) {
-            JOptionPane.showMessageDialog(this, "Dados inválidos", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "Dados inválidos", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Dados inválidos.");
         } else if (!(Arrays.equals(tfSenha.getPassword(), tfConfirmaSenha.getPassword()))) {
-            JOptionPane.showMessageDialog(this, "Senhas não coincidem!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "Senhas não coincidem!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("SENHAS NÃO COINCIDEM.");
         } else {
             String qryAtualiza = "UPDATE usuarios SET senha= AES_ENCRYPT(?,?) WHERE matricula= " + minhaMatricula + " AND nome= " + meuNome;
 
@@ -90,10 +95,12 @@ public class TelaEsqueceuSenha extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Atualizado!");
                     this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
                 } else {
-                    JOptionPane.showMessageDialog(this, "Erro!", "ERRO", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "Erro!", "ERRO", JOptionPane.ERROR_MESSAGE);
+                    MinhasMenssagens.chamarMenssagemErro("Erro.");
                 }
             } catch (SQLException sqle) {
-                JOptionPane.showMessageDialog(this, sqle);
+                //JOptionPane.showMessageDialog(this, sqle);
+                MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
             }
         }
     }

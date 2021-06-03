@@ -1,7 +1,7 @@
 /*
- * Tela para o cadastro de pacientes (anamnese)
+ * Tela para alterar informações (anamnese) de pacientes já cadastrados 
  */
-package gerenciarpacientes;
+package gerenciarservidores;
 
 import bancodedados.MysqlConnect;
 import java.awt.Color;
@@ -9,36 +9,36 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import menssagensalerta.MinhasMenssagens;
+import principal.PesquisaPaciente;
 import principal.TelaPrincipal;
 
 /**
  *
  * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
-public final class pnlCadastroPaciente extends javax.swing.JPanel {
+public final class PnlAlterarServidor extends javax.swing.JPanel {
 
     Connection conn = null;
-    public int controleInserir = 0;
-    public String controleCpf = "";
 
     /**
      * Creates new form teste
      */
-    public pnlCadastroPaciente() {
+    public PnlAlterarServidor() {
         initComponents();
         try {
             conn = MysqlConnect.connectDB();
-            this.cursos();
+            this.imprimir();
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
         }
     }
 
     public void sair() {
-        int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        int op = MinhasMenssagens.chamarMenssagemOpcaoSair();
         if (op == JOptionPane.YES_OPTION) {
             TelaPrincipal.voltarHome();
         }
@@ -58,149 +58,527 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
         botao.setBorderPainted(false);
     }
 
-    public void cursos() {
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        String qry = "SELECT curso FROM cursos order by curso";
-
-        try {
-            pstmt = conn.prepareStatement(qry);
-            rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                if (!"Servidor".equals(rs.getString("curso"))) {
-                    cbCurso.addItem(rs.getString("curso"));
-                }
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
     public void botaoFinalizar() {
-
         if (tfNome.getText().equals("") || tfDtNasc.getText().replace("/", "").trim().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios (campos com *)", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios (campos com *)", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemCamposObrigatorios();
         } else {
-            this.inserirIdentificacao();
-            this.inserirHistoriaPregressa();
-            this.inserirHistoriaFamiliar();
-            this.inserirHistoriaDoencaAtual();
-            this.inserirQuestionario1();
-            this.inserirQuestionario2();
+            this.atualizarIdentificacao();
+            this.atualizarHistoriaPregressa();
+            this.atualizarHistoriaFamiliar();
+            this.atualizarHistoriaDoencaAtual();
+            this.atualizarQuestionario1();
+            this.atualizarQuestionario2();
+
+            this.atualizarIdentificacao();
+            this.atualizarCartao();
             TelaPrincipal.voltarHome();
         }
     }
 
-    public void inserirIdentificacao() {
-        PreparedStatement pstmt = null;
-        ResultSet retornoDoID = null;
+    public void imprimir() {
+        this.imprimirIdentificacao();
+        this.imprimirHistoriaPregressa();
+        this.imprimirHistoricoFamiliar();
+        this.imprimirDoencaAtual();
+        this.imprimirQuestionario1();
+        this.imprimirQuestionario2();
+    }
 
-        String qry = "INSERT INTO pacientes(cpf, nome, dtNascimento, matricula, curso, turma, rua, numero, bairro, municipio, uf,"
-                + " telefone, nomeMae, telefoneMae, nomePai, telefonePai, nomeResponsavel, telefoneResponsavel, sexo, peso, altura,"
-                + "tipoSanguineo, mora, regime, planoSaude, cartaoSus) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    public void imprimirIdentificacao() {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String qry = "SELECT idPaciente, cpf, nome, dtNascimento, matricula,"
+                + " rua, numero, bairro, municipio, uf, telefone, sexo,"
+                + " peso, altura, tipoSanguineo, planoSaude, cartaoSus"
+                + " FROM pacientes WHERE idPaciente= ?";
 
         try {
-            pstmt = conn.prepareStatement(qry, Statement.RETURN_GENERATED_KEYS);
+            pstmt = conn.prepareStatement(qry);
+            pstmt.setString(1, PesquisaPaciente.id);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                tfIdPaciente.setText(rs.getString("idPaciente"));
+                tfCpf.setText(rs.getString("cpf"));
+                tfNome.setText(rs.getString("nome"));
+                tfDtNasc.setText(rs.getString("dtNascimento"));
+                tfMatricula.setText(rs.getString("matricula"));
+                tfRua.setText(rs.getString("rua"));
+                tfNCasa.setText(rs.getString("numero"));
+                tfBairro.setText(rs.getString("bairro"));
+                tfCidade.setText(rs.getString("municipio"));
+                tfUf.setText(rs.getString("uf"));
+                tfTelefone.setText(rs.getString("telefone"));
+                //sexo
+                if (null == rs.getString("sexo")) {
+                    bgSexo.clearSelection();
+                } else {
+                    switch (rs.getString("sexo")) {
+                        case "M":
+                            rbMasculino.setSelected(true);
+                            break;
+                        case "F":
+                            rbFeminino.setSelected(true);
+                            break;
+                        default:
+                            bgSexo.clearSelection();
+                            break;
+                    }
+                }
+                tfPeso.setText(rs.getString("peso"));
+                tfAltura.setText(rs.getString("altura"));
+                tfSangue.setText(rs.getString("tipoSanguineo"));
+                //Plano de saude
+                if (null == rs.getString("planoSaude")) {
+                    bgPlanoSaude.clearSelection();
+                } else {
+                    switch (rs.getString("planoSaude")) {
+                        case "Não":
+                            rbPlanoSaudeNao.setSelected(true);
+                            tfPlanoSaude.setEnabled(false);
+                            lblQualPlanoSaude.setEnabled(false);
+                            break;
+                        default:
+                            rbPlanoSaudeSim.setSelected(true);
+                            tfPlanoSaude.setEnabled(true);
+                            lblQualPlanoSaude.setEnabled(true);
+                            tfPlanoSaude.setText(rs.getString("planoSaude"));
+                            break;
+                    }
+                }
+                //Cartão SUS                
+                if (null == rs.getString("cartaoSus")) {
+                    bgSus.clearSelection();
+                } else {
+                    switch (rs.getString("cartaoSus")) {
+                        case "Não possui":
+                            rbSusNao.setSelected(true);
+                            tfNSus.setEnabled(false);
+                            break;
+                        default:
+                            rbSusSim.setSelected(true);
+                            tfNSus.setEnabled(true);
+                            tfNSus.setText(rs.getString("cartaoSus"));
+                            break;
+                    }
+                }
+
+            }
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
+        }
+    }
+
+    public void imprimirHistoriaPregressa() {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String qry = "SELECT vacinasInfancia, vacinasAdolescencia, vacinaFaltando,"
+                + " doencaInfanciaAdolescencia, catapora, caxumba, dengue,"
+                + " hepatite, meningite, pneumonia, rubeola, sarampo,"
+                + " cirurgiaRealizada, alergiaMedicamentosa, alergiaAlimentar"
+                + " FROM pacientes WHERE idPaciente= ?";
+
+        try {
+            pstmt = conn.prepareStatement(qry);
+            pstmt.setString(1, PesquisaPaciente.id);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                //Vacinas Infância
+                if (null == rs.getString("vacinasInfancia")) {
+                    bgVacinasInfancia.clearSelection();
+                } else {
+                    switch (rs.getString("vacinasInfancia")) {
+                        case "Completo":
+                            rbCartaoInfanciaCompleto.setSelected(true);
+                            break;
+                        case "Incompleto":
+                            rbCartaoInfanciaIncompleto.setSelected(true);
+                            break;
+                        default:
+                            bgVacinasInfancia.clearSelection();
+                            break;
+                    }
+                }
+                //Vacinas na Adolescência
+                if (null == rs.getString("vacinasAdolescencia")) {
+                    bgVacinasAdolescencia.clearSelection();
+                } else {
+                    switch (rs.getString("vacinasAdolescencia")) {
+                        case "Completo":
+                            rbCartaoAdolescenciaCompleto.setSelected(true);
+                            break;
+                        case "Incompleto":
+                            rbCartaoAdolescenciaIncompleto.setSelected(true);
+                            break;
+                        default:
+                            bgVacinasAdolescencia.clearSelection();
+                            break;
+                    }
+                }
+
+                tfVacinaFaltando.setText(rs.getString("vacinaFaltando"));
+                tfDoencas.setText(rs.getString("doencaInfanciaAdolescencia"));
+
+                //Já contrariu alguma dessas doenças            
+                if ("Sim".equals(rs.getString("catapora"))) {
+                    rbCatapora.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("caxumba"))) {
+                    rbCaxumba.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("dengue"))) {
+                    rbDengue.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("hepatite"))) {
+                    rbHepatite.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("meningite"))) {
+                    rbMeningite.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("pneumonia"))) {
+                    rbPneumonia.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("rubeola"))) {
+                    rbRubeola.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("sarampo"))) {
+                    rbSarampo.setSelected(true);
+                }
+
+                //Cirurgias Realizadas
+                if (null == rs.getString("cirurgiaRealizada")) {
+                    bgCirurgiasRealizadas.clearSelection();
+                } else {
+                    switch (rs.getString("cirurgiaRealizada")) {
+                        case "Não":
+                            rbCirurgiasNao.setSelected(true);
+                            tfCirurgiasRealizadas.setEnabled(false);
+                            break;
+                        default:
+                            rbCirurgiasSim.setSelected(true);
+                            tfCirurgiasRealizadas.setEnabled(true);
+                            tfCirurgiasRealizadas.setText(rs.getString("CirurgiaRealizada"));
+                            break;
+                    }
+                }
+
+                //Alergias Medicamentosas
+                if (null == rs.getString("alergiaMedicamentosa")) {
+                    bgCirurgiasRealizadas.clearSelection();
+                } else {
+                    switch (rs.getString("alergiaMedicamentosa")) {
+                        case "Não":
+                            rbAlergiaMedicamentosaNao.setSelected(true);
+                            tfAlergiaMedicamentosa.setEnabled(false);
+                            break;
+                        default:
+                            rbAlergiaMedicamentosaSim.setSelected(true);
+                            tfAlergiaMedicamentosa.setEnabled(true);
+                            tfAlergiaMedicamentosa.setText(rs.getString("alergiaMedicamentosa"));
+                            break;
+                    }
+                }
+
+                //Alergia alimentar
+                if (null == rs.getString("alergiaAlimentar")) {
+                    bgCirurgiasRealizadas.clearSelection();
+                } else {
+                    switch (rs.getString("alergiaAlimentar")) {
+                        case "Não":
+                            rbAlergiaAlimentarNao.setSelected(true);
+                            tfAlergiaAlimentar.setEnabled(false);
+                            break;
+                        default:
+                            rbAlergiaAlimentarSim.setSelected(true);
+                            tfAlergiaAlimentar.setEnabled(true);
+                            tfAlergiaAlimentar.setText(rs.getString("alergiaAlimentar"));
+                            break;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
+        }
+    }
+
+    public void imprimirHistoricoFamiliar() {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String qry = "SELECT cancer, cardiopatias, diabetes,"
+                + " hipertensaoArterial, oftalmologico, renal, mental,"
+                + " doencaEspecifica FROM pacientes"
+                + " WHERE idPaciente= ?";
+
+        try {
+            pstmt = conn.prepareStatement(qry);
+            pstmt.setString(1, PesquisaPaciente.id);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                if ("Sim".equals(rs.getString("cancer"))) {
+                    rbCancer.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("cardiopatias"))) {
+                    rbCardiopatia.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("diabetes"))) {
+                    rbDiabetes.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("hipertensaoArterial"))) {
+                    rbHipertensao.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("oftalmologico"))) {
+                    rbOftalmologico.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("renal"))) {
+                    rbProblemaRenal.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("mental"))) {
+                    rbMental.setSelected(true);
+                }
+                if ("Não".equals(rs.getString("doencaEspecifica")) || rs.getString("doencaEspecifica") == null) {
+                    rbHistFamiliarOutro.setSelected(false);
+                    tfEspecificar.setEnabled(false);
+                } else {
+                    rbHistFamiliarOutro.setSelected(true);
+                    tfEspecificar.setEnabled(true);
+                    tfEspecificar.setText(rs.getString("doencaEspecifica"));
+                }
+            }
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
+        }
+    }
+
+    public void imprimirDoencaAtual() {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String qry = "SELECT deficienciaAuditiva, deficienciaFisica,"
+                + " deficienciaVisual, dificuldadeConcentracao, dificuldadeEscrita,"
+                + " dificuldadeLeitura, superdotacao, transtornoDesenvolvimento,"
+                + " nenhumaEspecifica, protese, asma, bronquite, cronicaDiabetes,"
+                + " pressaoAlta, problemaCardiaco, problemaRenal, rinite,"
+                + " doencaCronicaOutros, acompanhamentoProblema FROM pacientes"
+                + " WHERE idPaciente= ?";
+
+        try {
+            pstmt = conn.prepareStatement(qry);
+            pstmt.setString(1, PesquisaPaciente.id);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+
+                if ("Sim".equals(rs.getString("deficienciaAuditiva"))) {
+                    rbAuditiva.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("deficienciaFisica"))) {
+                    rbFisica.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("deficienciaVisual"))) {
+                    rbVisual.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("dificuldadeConcentracao"))) {
+                    rbConcentracao.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("dificuldadeEscrita"))) {
+                    rbEscrita.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("dificuldadeLeitura"))) {
+                    rbLeitura.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("superdotacao"))) {
+                    rbSuperdotacao.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("transtornoDesenvolvimento"))) {
+                    rbDesenvolvimento.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("nenhumaEspecifica"))) {
+                    rbNenhumaNecessidade.setSelected(true);
+                }
+
+                //Protese
+                if (null == rs.getString("protese")) {
+                    bgProtese.clearSelection();
+                } else {
+                    switch (rs.getString("protese")) {
+                        case "Sim":
+                            rbProteseSim.setSelected(true);
+                            break;
+                        case "Não":
+                            rbProteseNao.setSelected(true);
+                            break;
+                        default:
+                            bgProtese.clearSelection();
+                            break;
+                    }
+                }
+                //Doença Crônica
+                if ("Sim".equals(rs.getString("asma"))) {
+                    rbAsma.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("bronquite"))) {
+                    rbBronquite.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("cronicaDiabetes"))) {
+                    rbCronicaDiabetes.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("pressaoAlta"))) {
+                    rbPressaoAlta.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("problemaCardiaco"))) {
+                    rbCardiaco.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("problemaRenal"))) {
+                    rbRenal.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("rinite"))) {
+                    rbRinite.setSelected(true);
+                }
+                if (!"Não".equals(rs.getString("doencaCronicaOutros"))) {
+                    rbCronicaOutros.setSelected(true);
+                    tfDoencaCronica.setEnabled(true);
+                    tfDoencaCronica.setText(rs.getString("doencaCronicaOutros"));
+                }
+
+                if (null == rs.getString("acompanhamentoProblema")) {
+                    bgProtese.clearSelection();
+                } else {
+                    switch (rs.getString("acompanhamentoProblema")) {
+                        case "Sim":
+                            rbAcompanhamentoSim.setSelected(true);
+                            break;
+                        case "Não":
+                            rbAcompanhamentoNao.setSelected(true);
+                            break;
+                        default:
+                            bgAcompanhamento.clearSelection();
+                            break;
+                    }
+                }
+
+            }
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
+        }
+    }
+
+    public void imprimirQuestionario1() {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String qry = "SELECT medicamentoContinuo, desmaios, epistaxe,"
+                + " pressaoArterial, cefaleia, diarreia FROM pacientes"
+                + " WHERE idPaciente= ?";
+
+        try {
+            pstmt = conn.prepareStatement(qry);
+            pstmt.setString(1, PesquisaPaciente.id);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                tfMedicamentoContinuo.setText(rs.getString("medicamentoContinuo"));
+                tfDesmaios.setText(rs.getString("desmaios"));
+                tfEpistaxe.setText(rs.getString("epistaxe"));
+                tfPressaoArterial.setText(rs.getString("pressaoArterial"));
+                tfCefaleia.setText(rs.getString("cefaleia"));
+                tfDiarreia.setText(rs.getString("diarreia"));
+            }
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
+        }
+    }
+
+    public void imprimirQuestionario2() {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        String qry = "SELECT colica, psicologico, fonaudiologo, fisioterapia,"
+                + " terapiaOcupacional, acompanhamentoEspecializadoOutro,"
+                + " anotacaoRelevante, contatoEmergencia FROM pacientes"
+                + " WHERE idPaciente= ?";
+
+        try {
+            pstmt = conn.prepareStatement(qry);
+            pstmt.setString(1, PesquisaPaciente.id);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                tfColica.setText(rs.getString("colica"));
+
+                //Acompanhamento Especializado
+                if ("Sim".equals(rs.getString("psicologico"))) {
+                    rbPsicologico.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("fonaudiologo"))) {
+                    rbFonaudiologo.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("fisioterapia"))) {
+                    rbFisioterapia.setSelected(true);
+                }
+                if ("Sim".equals(rs.getString("terapiaOcupacional"))) {
+                    rbTerapiaOcupacional.setSelected(true);
+                }
+                if (!"Não".equals(rs.getString("acompanhamentoEspecializadoOutro"))) {
+                    rbAcompanhamentoEspecializadoOutro.setSelected(true);
+                    tfAcompanhamentoEspecializado.setEnabled(true);
+                    tfAcompanhamentoEspecializado.setText(rs.getString("acompanhamentoEspecializadoOutro"));
+                }
+
+                tfAnotacoesRelevantes.setText(rs.getString("anotacaoRelevante"));
+                tfContatoEmergencia.setText(rs.getString("contatoEmergencia"));
+            }
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
+        }
+    }
+
+    public void atualizarCartao() {
+        PreparedStatement pstmt = null;
+        String qry = "UPDATE CartaoVacina SET cpf= ?, nome= ?, dn= ?,"
+                + " tipoSanguineo= ?, rua= ?, numero= ?, bairro= ?, municipio= ?,"
+                + " uf= ?, telefone= ? WHERE idPaciente= ?";
+
+        try {
+            pstmt = conn.prepareStatement(qry);
             pstmt.setString(1, tfCpf.getText());
             pstmt.setString(2, tfNome.getText());
             pstmt.setString(3, tfDtNasc.getText());
-            pstmt.setString(4, tfMatricula.getText());
-            pstmt.setString(5, cbCurso.getSelectedItem().toString());
-            pstmt.setString(6, tfTurma.getText());
-            pstmt.setString(7, tfRua.getText());
-            pstmt.setString(8, tfNCasa.getText());
-            pstmt.setString(9, tfBairro.getText());
-            pstmt.setString(10, tfCidade.getText());
-            pstmt.setString(11, tfUf.getText());
-            pstmt.setString(12, tfTelefone.getText());
-            pstmt.setString(13, tfMae.getText());
-            pstmt.setString(14, tfTelMae.getText());
-            pstmt.setString(15, tfPai.getText());
-            pstmt.setString(16, tfTelPai.getText());
-            pstmt.setString(17, tfResponsavel.getText());
-            pstmt.setString(18, tfTelResponsavel.getText());
-            //null
-            if (rbMasculino.isSelected()) {
-                pstmt.setString(19, "M");
-            } else if (rbFeminino.isSelected()) {
-                pstmt.setString(19, "F");
-            } else {
-                pstmt.setString(19, null);
-            }
-            pstmt.setString(20, tfPeso.getText());
-            pstmt.setString(21, tfAltura.getText());
-            pstmt.setString(22, tfSangue.getText());
-            if (rbPais.isSelected()) {
-                pstmt.setString(23, "Pais");//Moradia
-            } else if (rbEscola.isSelected()) {
-                pstmt.setString(23, "Escola");
-            } else if (rbParentes.isSelected()) {
-                pstmt.setString(23, "Parentes");
-            } else if (rbRepublica.isSelected()) {
-                pstmt.setString(23, "República");
-            } else if (rbSozinho.isSelected()) {
-                pstmt.setString(23, "Sozinho");
-            } else if (rbOutro.isSelected()) {
-                pstmt.setString(23, "Outro");
-            } else {
-                pstmt.setString(23, null);
-            }
-            //Regime
-            if (rbInterno.isSelected()) {
-                pstmt.setString(24, "Interno");
-            } else if (rbExterno.isSelected()) {
-                pstmt.setString(24, "Externo");
-            } else if (rbSemiInterno.isSelected()) {
-                pstmt.setString(24, "Semi-Interno");
-            } else {
-                pstmt.setString(24, null);
-            }
-            //Plano de saude
-            if (rbPlanoSaudeSim.isSelected()) {
-                pstmt.setString(25, tfPlanoSaude.getText());
-            } else if (rbPlanoSaudeNao.isSelected()) {
-                pstmt.setString(25, "Não");
-            } else {
-                pstmt.setString(25, null);
-            }
-            //Cartão SUS
-            if (rbSusSim.isSelected()) {
-                pstmt.setString(26, tfNSus.getText());
-            } else if (rbSusNao.isSelected()) {
-                pstmt.setString(26, "Não possui");
-            } else {
-                pstmt.setString(26, null);
-            }
+            pstmt.setString(4, tfSangue.getText());
+            pstmt.setString(5, tfRua.getText());
+            pstmt.setString(6, tfNCasa.getText());
+            pstmt.setString(7, tfBairro.getText());
+            pstmt.setString(8, tfCidade.getText());
+            pstmt.setString(9, tfUf.getText());
+            pstmt.setString(10, tfTelefone.getText());
+            pstmt.setString(11, tfIdPaciente.getText());
 
             pstmt.executeUpdate();
-            //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
 
-            //Pegar o ID
-            retornoDoID = pstmt.getGeneratedKeys();
-            retornoDoID.next();
-            Integer idInserido = retornoDoID.getInt(1); //Pronto você tem o ID inserido nesse insert.
-            tfIdPaciente.setText(idInserido.toString());
-
-            this.controleInserir++;
-
-            this.inserirCartao();
         } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar o paciente: ", "ERRO", JOptionPane.ERROR_MESSAGE);
-        } catch (NullPointerException px) {
-            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-            JOptionPane.showMessageDialog(null, "Registre cursos no sistema: ", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao atualizar cartão: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Erro ao atualizar cartão de vacinação.\n"+ex.getMessage());
         }
     }
 
     public void atualizarIdentificacao() {
         PreparedStatement pstmt = null;
-        String qry = "UPDATE pacientes SET cpf= ?, nome= ?, dtNascimento= ?, matricula= ?, curso= ?, turma= ?,"
-                + " rua= ?, numero= ?, bairro= ?, municipio= ?, uf= ?, telefone= ?,"
-                + "nomeMae= ?, telefoneMae= ?, nomePai= ?, telefonePai= ?, nomeResponsavel= ?, telefoneResponsavel= ?, sexo= ?, peso= ?, altura= ?,"
-                + "tipoSanguineo= ?, mora= ?, regime= ?, planoSaude= ?, cartaoSus= ? WHERE idPaciente= ?";
+        String qry = "UPDATE pacientes SET cpf= ?, nome= ?, dtNascimento= ?,"
+                + " matricula= ?, rua= ?, numero= ?, bairro= ?, municipio= ?,"
+                + " uf= ?, telefone= ?, sexo= ?, peso= ?, altura= ?,"
+                + " tipoSanguineo= ?, planoSaude= ?, cartaoSus= ?"
+                + " WHERE idPaciente= ?";
 
         try {
             pstmt = conn.prepareStatement(qry);
@@ -208,86 +586,50 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
             pstmt.setString(2, tfNome.getText());
             pstmt.setString(3, tfDtNasc.getText());
             pstmt.setString(4, tfMatricula.getText());
-            pstmt.setString(5, cbCurso.getSelectedItem().toString());
-            pstmt.setString(6, tfTurma.getText());
-            pstmt.setString(7, tfRua.getText());
-            pstmt.setString(8, tfNCasa.getText());
-            pstmt.setString(9, tfBairro.getText());
-            pstmt.setString(10, tfCidade.getText());
-            pstmt.setString(11, tfUf.getText());
-            pstmt.setString(12, tfTelefone.getText());
-            pstmt.setString(13, tfMae.getText());
-            pstmt.setString(14, tfTelMae.getText());
-            pstmt.setString(15, tfPai.getText());
-            pstmt.setString(16, tfTelPai.getText());
-            pstmt.setString(17, tfResponsavel.getText());
-            pstmt.setString(18, tfTelResponsavel.getText());
+            pstmt.setString(5, tfRua.getText());
+            pstmt.setString(6, tfNCasa.getText());
+            pstmt.setString(7, tfBairro.getText());
+            pstmt.setString(8, tfCidade.getText());
+            pstmt.setString(9, tfUf.getText());
+            pstmt.setString(10, tfTelefone.getText());
             //null
             if (rbMasculino.isSelected()) {
-                pstmt.setString(19, "M");
+                pstmt.setString(11, "M");
             } else if (rbFeminino.isSelected()) {
-                pstmt.setString(19, "F");
+                pstmt.setString(11, "F");
             } else {
-                pstmt.setString(19, null);
+                pstmt.setString(11, null);
             }
-            pstmt.setString(20, tfPeso.getText());
-            pstmt.setString(21, tfAltura.getText());
-            pstmt.setString(22, tfSangue.getText());
-            if (rbPais.isSelected()) {
-                pstmt.setString(23, "Pais");//Moradia
-            } else if (rbEscola.isSelected()) {
-                pstmt.setString(23, "Escola");
-            } else if (rbParentes.isSelected()) {
-                pstmt.setString(23, "Parentes");
-            } else if (rbRepublica.isSelected()) {
-                pstmt.setString(23, "República");
-            } else if (rbSozinho.isSelected()) {
-                pstmt.setString(23, "Sozinho");
-            } else if (rbOutro.isSelected()) {
-                pstmt.setString(23, "Outro");
-            } else {
-                pstmt.setString(23, null);
-            }
-            //Regime
-            if (rbInterno.isSelected()) {
-                pstmt.setString(24, "Interno");
-            } else if (rbExterno.isSelected()) {
-                pstmt.setString(24, "Externo");
-            } else if (rbSemiInterno.isSelected()) {
-                pstmt.setString(24, "Semi-Interno");
-            } else {
-                pstmt.setString(24, null);
-            }
+            pstmt.setString(12, tfPeso.getText());
+            pstmt.setString(13, tfAltura.getText());
+            pstmt.setString(14, tfSangue.getText());
             //Plano de saude
             if (rbPlanoSaudeSim.isSelected()) {
-                pstmt.setString(25, tfPlanoSaude.getText());
+                pstmt.setString(15, tfPlanoSaude.getText());
             } else if (rbPlanoSaudeNao.isSelected()) {
-                pstmt.setString(25, "Não");
+                pstmt.setString(15, "Não");
             } else {
-                pstmt.setString(25, null);
+                pstmt.setString(15, null);
             }
             //Cartão SUS
             if (rbSusSim.isSelected()) {
-                pstmt.setString(26, tfNSus.getText());
+                pstmt.setString(16, tfNSus.getText());
             } else if (rbSusNao.isSelected()) {
-                pstmt.setString(26, "Não possui");
+                pstmt.setString(16, "Não possui");
             } else {
-                pstmt.setString(26, null);
+                pstmt.setString(16, null);
             }
-
             //id
-            pstmt.setString(27, tfIdPaciente.getText());
-
+            pstmt.setString(17, tfIdPaciente.getText());
             pstmt.executeUpdate();
-
-            //JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
         } catch (SQLException ex) {
             //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-            JOptionPane.showMessageDialog(null, "CPF existente localizado", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "CPF existente localizado", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Esse CPF foi previamente cadastrado.");
         }
     }
 
-    public void inserirHistoriaPregressa() {
+    public void atualizarHistoriaPregressa() {
 
         PreparedStatement pstmt = null;
         String qry = "UPDATE pacientes SET vacinasInfancia= ?, vacinasAdolescencia= ?,"
@@ -388,11 +730,12 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
 
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar aqui: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
-    public void inserirHistoriaFamiliar() {
+    public void atualizarHistoriaFamiliar() {
 
         PreparedStatement pstmt = null;
         String qry = "UPDATE pacientes SET cancer= ?, cardiopatias= ?, diabetes= ?,"
@@ -447,11 +790,12 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
 
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
-    public void inserirHistoriaDoencaAtual() {
+    public void atualizarHistoriaDoencaAtual() {
 
         PreparedStatement pstmt = null;
         String qry = "UPDATE pacientes SET deficienciaAuditiva= ?, deficienciaFisica= ?,"
@@ -573,11 +917,12 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
 
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
-    public void inserirQuestionario1() {
+    public void atualizarQuestionario1() {
 
         PreparedStatement pstmt = null;
         String qry = "UPDATE pacientes SET medicamentoContinuo=?,"
@@ -597,11 +942,12 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
 
             //JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
-    public void inserirQuestionario2() {
+    public void atualizarQuestionario2() {
 
         PreparedStatement pstmt = null;
         String qry = "UPDATE pacientes SET colica= ?, psicologico= ?, fonaudiologo= ?, fisioterapia= ?,"
@@ -643,62 +989,12 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
             pstmt.setString(9, tfIdPaciente.getText());
             pstmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+            //JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            MinhasMenssagens.chamarMenssagemSucesso("Servidor alterado com sucesso.");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public void inserirCartao() {
-        PreparedStatement pstmt = null;
-        String qry = "INSERT INTO CartaoVacina(idPaciente, cpf, nome, dn, tipoSanguineo,rua, numero, bairro, municipio, uf, telefone)"
-                + " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-        try {
-            pstmt = conn.prepareStatement(qry);
-            pstmt.setString(1, tfIdPaciente.getText());
-            pstmt.setString(2, tfCpf.getText());
-            pstmt.setString(3, tfNome.getText());
-            pstmt.setString(4, tfDtNasc.getText());
-            pstmt.setString(5, tfSangue.getText());
-            pstmt.setString(6, tfRua.getText());
-            pstmt.setString(7, tfNCasa.getText());
-            pstmt.setString(8, tfBairro.getText());
-            pstmt.setString(9, tfCidade.getText());
-            pstmt.setString(10, tfUf.getText());
-            pstmt.setString(11, tfTelefone.getText());
-
-            pstmt.executeUpdate();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao criar cartão\nEntre em contato com os desenvolvedores ", "ERRO", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    public void atualizarCartao() {
-        PreparedStatement pstmt = null;
-        String qry = "UPDATE CartaoVacina SET cpf= ?, nome= ?, dn= ?,"
-                + " tipoSanguineo= ?,rua= ?, numero= ?, bairro= ?, municipio= ?,"
-                + " uf= ?, telefone= ? WHERE idPaciente= ?";
-
-        try {
-            pstmt = conn.prepareStatement(qry);
-            pstmt.setString(1, tfCpf.getText());
-            pstmt.setString(2, tfNome.getText());
-            pstmt.setString(3, tfDtNasc.getText());
-            pstmt.setString(4, tfSangue.getText());
-            pstmt.setString(5, tfRua.getText());
-            pstmt.setString(6, tfNCasa.getText());
-            pstmt.setString(7, tfBairro.getText());
-            pstmt.setString(8, tfCidade.getText());
-            pstmt.setString(9, tfUf.getText());
-            pstmt.setString(10, tfTelefone.getText());
-            pstmt.setString(11, tfIdPaciente.getText());
-
-            pstmt.executeUpdate();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar cartão: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -726,13 +1022,6 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
         tpCadastroPaciente = new javax.swing.JTabbedPane();
         pnlIdentificacao = new javax.swing.JPanel();
         pnlIdentInterno = new javax.swing.JPanel();
-        lblResponsavel = new javax.swing.JLabel();
-        tfPai = new javax.swing.JTextField();
-        tfResponsavel = new javax.swing.JTextField();
-        lblTelPai = new javax.swing.JLabel();
-        lblTelResponsavel = new javax.swing.JLabel();
-        tfTelResponsavel = new javax.swing.JTextField();
-        tfTelPai = new javax.swing.JTextField();
         lblSexo = new javax.swing.JLabel();
         rbFeminino = new javax.swing.JRadioButton();
         rbMasculino = new javax.swing.JRadioButton();
@@ -742,17 +1031,6 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
         tfAltura = new javax.swing.JTextField();
         lblSangue = new javax.swing.JLabel();
         tfSangue = new javax.swing.JTextField();
-        lblMoradia = new javax.swing.JLabel();
-        rbPais = new javax.swing.JRadioButton();
-        rbEscola = new javax.swing.JRadioButton();
-        rbParentes = new javax.swing.JRadioButton();
-        rbRepublica = new javax.swing.JRadioButton();
-        rbSozinho = new javax.swing.JRadioButton();
-        rbOutro = new javax.swing.JRadioButton();
-        lblRegime = new javax.swing.JLabel();
-        rbExterno = new javax.swing.JRadioButton();
-        rbInterno = new javax.swing.JRadioButton();
-        rbSemiInterno = new javax.swing.JRadioButton();
         lblPlanoSaude = new javax.swing.JLabel();
         rbPlanoSaudeNao = new javax.swing.JRadioButton();
         rbPlanoSaudeSim = new javax.swing.JRadioButton();
@@ -760,18 +1038,7 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
         tfPlanoSaude = new javax.swing.JTextField();
         lblSus = new javax.swing.JLabel();
         rbSusNao = new javax.swing.JRadioButton();
-        lblCurso = new javax.swing.JLabel();
         rbSusSim = new javax.swing.JRadioButton();
-        lblTurma = new javax.swing.JLabel();
-        btnCancelar1 = new javax.swing.JButton();
-        tfTurma = new javax.swing.JTextField();
-        btnContinuar1 = new javax.swing.JButton();
-        cbCurso = new javax.swing.JComboBox<>();
-        lblMae = new javax.swing.JLabel();
-        tfMae = new javax.swing.JTextField();
-        lblTelMae = new javax.swing.JLabel();
-        tfTelMae = new javax.swing.JTextField();
-        lblPai = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
         lblDtNasc = new javax.swing.JLabel();
@@ -799,27 +1066,21 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
-        jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
         sSeparador10 = new javax.swing.JSeparator();
         sSeparador11 = new javax.swing.JSeparator();
-        jSeparator10 = new javax.swing.JSeparator();
-        sSeparador12 = new javax.swing.JSeparator();
-        sSeparador13 = new javax.swing.JSeparator();
-        sSeparador14 = new javax.swing.JSeparator();
-        sSeparador15 = new javax.swing.JSeparator();
-        sSeparador16 = new javax.swing.JSeparator();
-        sSeparador17 = new javax.swing.JSeparator();
         sSeparador18 = new javax.swing.JSeparator();
         sSeparador19 = new javax.swing.JSeparator();
         sSeparador20 = new javax.swing.JSeparator();
         sSeparador21 = new javax.swing.JSeparator();
         sSeparador22 = new javax.swing.JSeparator();
+        btnCancelar1 = new javax.swing.JButton();
+        btnContinuar1 = new javax.swing.JButton();
         btnFinalizar1 = new javax.swing.JButton();
-        jSeparator11 = new javax.swing.JSeparator();
         pnlPregressa = new javax.swing.JPanel();
         pnlPregressaInterno = new javax.swing.JPanel();
         rbCartaoInfanciaCompleto = new javax.swing.JRadioButton();
@@ -967,39 +1228,6 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
         pnlIdentInterno.setBackground(new java.awt.Color(255, 255, 255));
         pnlIdentInterno.setPreferredSize(new java.awt.Dimension(1000, 497));
 
-        lblResponsavel.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblResponsavel.setForeground(new java.awt.Color(102, 102, 102));
-        lblResponsavel.setText("RESPONSÁVEL EM SALINAS");
-
-        tfPai.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfPai.setForeground(new java.awt.Color(102, 102, 102));
-        tfPai.setBorder(null);
-        tfPai.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPaiActionPerformed(evt);
-            }
-        });
-
-        tfResponsavel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfResponsavel.setForeground(new java.awt.Color(102, 102, 102));
-        tfResponsavel.setBorder(null);
-
-        lblTelPai.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblTelPai.setForeground(new java.awt.Color(102, 102, 102));
-        lblTelPai.setText("TELEFONE");
-
-        lblTelResponsavel.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblTelResponsavel.setForeground(new java.awt.Color(102, 102, 102));
-        lblTelResponsavel.setText("TELEFONE");
-
-        tfTelResponsavel.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfTelResponsavel.setForeground(new java.awt.Color(102, 102, 102));
-        tfTelResponsavel.setBorder(null);
-
-        tfTelPai.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfTelPai.setForeground(new java.awt.Color(102, 102, 102));
-        tfTelPai.setBorder(null);
-
         lblSexo.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblSexo.setForeground(new java.awt.Color(102, 102, 102));
         lblSexo.setText("SEXO");
@@ -1044,93 +1272,6 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
         tfSangue.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         tfSangue.setForeground(new java.awt.Color(102, 102, 102));
         tfSangue.setBorder(null);
-
-        lblMoradia.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblMoradia.setForeground(new java.awt.Color(102, 102, 102));
-        lblMoradia.setText("MORADIA");
-
-        rbPais.setBackground(new java.awt.Color(255, 255, 255));
-        bgMoradia.add(rbPais);
-        rbPais.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbPais.setForeground(new java.awt.Color(102, 102, 102));
-        rbPais.setSelected(true);
-        rbPais.setText("COM OS PAIS");
-        rbPais.setContentAreaFilled(false);
-        rbPais.setFocusPainted(false);
-
-        rbEscola.setBackground(new java.awt.Color(255, 255, 255));
-        bgMoradia.add(rbEscola);
-        rbEscola.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbEscola.setForeground(new java.awt.Color(102, 102, 102));
-        rbEscola.setText("ESCOLA");
-        rbEscola.setContentAreaFilled(false);
-        rbEscola.setFocusPainted(false);
-
-        rbParentes.setBackground(new java.awt.Color(255, 255, 255));
-        bgMoradia.add(rbParentes);
-        rbParentes.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbParentes.setForeground(new java.awt.Color(102, 102, 102));
-        rbParentes.setText("PARENTES");
-        rbParentes.setContentAreaFilled(false);
-        rbParentes.setFocusPainted(false);
-        rbParentes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbParentesActionPerformed(evt);
-            }
-        });
-
-        rbRepublica.setBackground(new java.awt.Color(255, 255, 255));
-        bgMoradia.add(rbRepublica);
-        rbRepublica.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbRepublica.setForeground(new java.awt.Color(102, 102, 102));
-        rbRepublica.setText("REPÚBLICA");
-        rbRepublica.setContentAreaFilled(false);
-        rbRepublica.setFocusPainted(false);
-
-        rbSozinho.setBackground(new java.awt.Color(255, 255, 255));
-        bgMoradia.add(rbSozinho);
-        rbSozinho.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbSozinho.setForeground(new java.awt.Color(102, 102, 102));
-        rbSozinho.setText("SOZINHO");
-        rbSozinho.setContentAreaFilled(false);
-        rbSozinho.setFocusPainted(false);
-
-        rbOutro.setBackground(new java.awt.Color(255, 255, 255));
-        bgMoradia.add(rbOutro);
-        rbOutro.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbOutro.setForeground(new java.awt.Color(102, 102, 102));
-        rbOutro.setText("OUTRO");
-        rbOutro.setContentAreaFilled(false);
-        rbOutro.setFocusPainted(false);
-
-        lblRegime.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblRegime.setForeground(new java.awt.Color(102, 102, 102));
-        lblRegime.setText("REGIME");
-
-        rbExterno.setBackground(new java.awt.Color(255, 255, 255));
-        bgRegime.add(rbExterno);
-        rbExterno.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbExterno.setForeground(new java.awt.Color(102, 102, 102));
-        rbExterno.setSelected(true);
-        rbExterno.setText("EXTERNO");
-        rbExterno.setContentAreaFilled(false);
-        rbExterno.setFocusPainted(false);
-
-        rbInterno.setBackground(new java.awt.Color(255, 255, 255));
-        bgRegime.add(rbInterno);
-        rbInterno.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbInterno.setForeground(new java.awt.Color(102, 102, 102));
-        rbInterno.setText("INTERNO");
-        rbInterno.setContentAreaFilled(false);
-        rbInterno.setFocusPainted(false);
-
-        rbSemiInterno.setBackground(new java.awt.Color(255, 255, 255));
-        bgRegime.add(rbSemiInterno);
-        rbSemiInterno.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        rbSemiInterno.setForeground(new java.awt.Color(102, 102, 102));
-        rbSemiInterno.setText("SEMI-INTERNO");
-        rbSemiInterno.setContentAreaFilled(false);
-        rbSemiInterno.setFocusPainted(false);
 
         lblPlanoSaude.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblPlanoSaude.setForeground(new java.awt.Color(102, 102, 102));
@@ -1189,10 +1330,6 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
             }
         });
 
-        lblCurso.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblCurso.setForeground(new java.awt.Color(102, 102, 102));
-        lblCurso.setText("CURSO");
-
         rbSusSim.setBackground(new java.awt.Color(255, 255, 255));
         bgSus.add(rbSusSim);
         rbSusSim.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -1205,80 +1342,6 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
                 rbSusSimActionPerformed(evt);
             }
         });
-
-        lblTurma.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblTurma.setForeground(new java.awt.Color(102, 102, 102));
-        lblTurma.setText("TURMA");
-
-        btnCancelar1.setBackground(new java.awt.Color(102, 102, 102));
-        btnCancelar1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnCancelar1.setForeground(new java.awt.Color(102, 102, 102));
-        btnCancelar1.setText("CANCELAR");
-        btnCancelar1.setBorderPainted(false);
-        btnCancelar1.setContentAreaFilled(false);
-        btnCancelar1.setFocusPainted(false);
-        btnCancelar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnCancelar1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnCancelar1MouseExited(evt);
-            }
-        });
-        btnCancelar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelar1ActionPerformed(evt);
-            }
-        });
-
-        tfTurma.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfTurma.setForeground(new java.awt.Color(102, 102, 102));
-        tfTurma.setBorder(null);
-
-        btnContinuar1.setBackground(new java.awt.Color(102, 102, 102));
-        btnContinuar1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btnContinuar1.setForeground(new java.awt.Color(102, 102, 102));
-        btnContinuar1.setText("CONTINUAR");
-        btnContinuar1.setBorderPainted(false);
-        btnContinuar1.setContentAreaFilled(false);
-        btnContinuar1.setFocusPainted(false);
-        btnContinuar1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnContinuar1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnContinuar1MouseExited(evt);
-            }
-        });
-        btnContinuar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuar1ActionPerformed(evt);
-            }
-        });
-
-        cbCurso.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        cbCurso.setForeground(new java.awt.Color(102, 102, 102));
-        cbCurso.setBorder(null);
-
-        lblMae.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblMae.setForeground(new java.awt.Color(102, 102, 102));
-        lblMae.setText("NOME DA MÃE");
-
-        tfMae.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfMae.setForeground(new java.awt.Color(102, 102, 102));
-        tfMae.setBorder(null);
-
-        lblTelMae.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblTelMae.setForeground(new java.awt.Color(102, 102, 102));
-        lblTelMae.setText("TELEFONE");
-
-        tfTelMae.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        tfTelMae.setForeground(new java.awt.Color(102, 102, 102));
-        tfTelMae.setBorder(null);
-
-        lblPai.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        lblPai.setForeground(new java.awt.Color(102, 102, 102));
-        lblPai.setText("NOME DO PAI");
 
         lblNome.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         lblNome.setForeground(new java.awt.Color(102, 102, 102));
@@ -1404,9 +1467,9 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
 
         jSeparator3.setForeground(new java.awt.Color(51, 51, 51));
 
-        jSeparator5.setForeground(new java.awt.Color(51, 51, 51));
+        jSeparator4.setForeground(new java.awt.Color(51, 51, 51));
 
-        jSeparator6.setForeground(new java.awt.Color(51, 51, 51));
+        jSeparator5.setForeground(new java.awt.Color(51, 51, 51));
 
         jSeparator7.setForeground(new java.awt.Color(51, 51, 51));
 
@@ -1418,20 +1481,6 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
 
         sSeparador11.setForeground(new java.awt.Color(51, 51, 51));
 
-        jSeparator10.setForeground(new java.awt.Color(51, 51, 51));
-
-        sSeparador12.setForeground(new java.awt.Color(51, 51, 51));
-
-        sSeparador13.setForeground(new java.awt.Color(51, 51, 51));
-
-        sSeparador14.setForeground(new java.awt.Color(51, 51, 51));
-
-        sSeparador15.setForeground(new java.awt.Color(51, 51, 51));
-
-        sSeparador16.setForeground(new java.awt.Color(51, 51, 51));
-
-        sSeparador17.setForeground(new java.awt.Color(51, 51, 51));
-
         sSeparador18.setForeground(new java.awt.Color(51, 51, 51));
 
         sSeparador19.setForeground(new java.awt.Color(51, 51, 51));
@@ -1441,6 +1490,268 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
         sSeparador21.setForeground(new java.awt.Color(51, 51, 51));
 
         sSeparador22.setForeground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout pnlIdentInternoLayout = new javax.swing.GroupLayout(pnlIdentInterno);
+        pnlIdentInterno.setLayout(pnlIdentInternoLayout);
+        pnlIdentInternoLayout.setHorizontalGroup(
+            pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlIdentInternoLayout.createSequentialGroup()
+                                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jSeparator3))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlIdentInternoLayout.createSequentialGroup()
+                                            .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(lblNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(tfNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
+                                            .addGap(18, 18, 18)
+                                            .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(lblDtNasc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(tfDtNasc))))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                                        .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                                        .addComponent(lblCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfMatricula)
+                                        .addComponent(jSeparator5))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblTelefone)
+                                        .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblRua, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                        .addComponent(tfRua, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfNCasa)
+                                        .addComponent(lblNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfBairro, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                        .addComponent(jSeparator9, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                        .addComponent(lblBairro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(tfCidade, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                        .addComponent(sSeparador10, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                        .addComponent(lblCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                                            .addComponent(lblUf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblIdPaciente))
+                                        .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                                            .addComponent(tfUf, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(tfIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                                            .addComponent(sSeparador11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblSexo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                                        .addComponent(rbFeminino)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(rbMasculino)))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(sSeparador18, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                                    .addComponent(lblPeso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfPeso, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblAltura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(sSeparador19)
+                                    .addComponent(tfAltura))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblSangue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(tfSangue)
+                                    .addComponent(sSeparador20))))
+                        .addContainerGap(106, Short.MAX_VALUE))
+                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblPlanoSaude, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                                .addComponent(rbPlanoSaudeNao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rbPlanoSaudeSim)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblQualPlanoSaude)
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sSeparador21, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfPlanoSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblSus)
+                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                                .addComponent(rbSusNao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rbSusSim)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblNSus, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(sSeparador22, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfNSus, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        pnlIdentInternoLayout.setVerticalGroup(
+            pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblNome)
+                                    .addComponent(lblDtNasc)
+                                    .addComponent(lblCpf)
+                                    .addComponent(lblMatricula)
+                                    .addComponent(lblTelefone))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfDtNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblRua)
+                                    .addComponent(lblNumero)
+                                    .addComponent(lblBairro)
+                                    .addComponent(lblCidade)
+                                    .addComponent(lblUf)
+                                    .addComponent(lblIdPaciente))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(tfRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfNCasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(sSeparador10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(sSeparador11, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSexo)
+                            .addComponent(lblPeso)
+                            .addComponent(lblAltura)
+                            .addComponent(lblSangue))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbFeminino, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rbMasculino)
+                            .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfSangue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sSeparador18, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sSeparador20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(sSeparador19, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPlanoSaude)
+                    .addComponent(lblSus))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbPlanoSaudeNao)
+                    .addComponent(rbPlanoSaudeSim)
+                    .addComponent(lblQualPlanoSaude)
+                    .addComponent(tfPlanoSaude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbSusNao)
+                    .addComponent(rbSusSim)
+                    .addComponent(lblNSus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNSus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sSeparador21, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sSeparador22, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(130, Short.MAX_VALUE))
+        );
+
+        lblQualPlanoSaude.setEnabled(false);
+        tfPlanoSaude.setEnabled(false);
+        lblIdPaciente.setVisible(false);
+        tfIdPaciente.setVisible(false);
+
+        btnCancelar1.setBackground(new java.awt.Color(102, 102, 102));
+        btnCancelar1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnCancelar1.setForeground(new java.awt.Color(102, 102, 102));
+        btnCancelar1.setText("CANCELAR");
+        btnCancelar1.setBorderPainted(false);
+        btnCancelar1.setContentAreaFilled(false);
+        btnCancelar1.setFocusPainted(false);
+        btnCancelar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelar1MouseExited(evt);
+            }
+        });
+        btnCancelar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelar1ActionPerformed(evt);
+            }
+        });
+
+        btnContinuar1.setBackground(new java.awt.Color(102, 102, 102));
+        btnContinuar1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnContinuar1.setForeground(new java.awt.Color(102, 102, 102));
+        btnContinuar1.setText("CONTINUAR");
+        btnContinuar1.setBorderPainted(false);
+        btnContinuar1.setContentAreaFilled(false);
+        btnContinuar1.setFocusPainted(false);
+        btnContinuar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnContinuar1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnContinuar1MouseExited(evt);
+            }
+        });
+        btnContinuar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContinuar1ActionPerformed(evt);
+            }
+        });
 
         btnFinalizar1.setBackground(new java.awt.Color(102, 102, 102));
         btnFinalizar1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -1463,215 +1774,15 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
             }
         });
 
-        jSeparator11.setForeground(new java.awt.Color(51, 51, 51));
-
-        javax.swing.GroupLayout pnlIdentInternoLayout = new javax.swing.GroupLayout(pnlIdentInterno);
-        pnlIdentInterno.setLayout(pnlIdentInternoLayout);
-        pnlIdentInternoLayout.setHorizontalGroup(
-            pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblDtNasc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfDtNasc)
-                                    .addComponent(jSeparator11))
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                                    .addComponent(lblCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblMatricula, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfMatricula)
-                                    .addComponent(jSeparator5))
-                                .addGap(18, 18, 18)
-                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfTelefone)
-                                    .addComponent(lblTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                    .addComponent(jSeparator3)))
-                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(lblSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlIdentInternoLayout.createSequentialGroup()
-                                                        .addComponent(cbCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(tfTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(rbFeminino)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(rbMasculino)))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                            .addComponent(lblPeso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(tfPeso, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))
-                                                        .addGap(18, 18, 18)
-                                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(lblAltura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                            .addComponent(tfAltura)))
-                                                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                        .addComponent(sSeparador18, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(sSeparador19))))
-                                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblSangue)
-                                            .addComponent(tfSangue, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(sSeparador20, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                        .addComponent(lblRua, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(lblNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlIdentInternoLayout.createSequentialGroup()
-                                                        .addComponent(tfRua, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(tfNCasa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(18, 18, 18)
-                                                .addComponent(lblBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(lblCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlIdentInternoLayout.createSequentialGroup()
-                                                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(sSeparador10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                        .addGap(76, 76, 76)
-                                                        .addComponent(tfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblUf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tfUf, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(sSeparador11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(20, 20, 20)
-                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblPlanoSaude)
-                                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                .addComponent(rbPlanoSaudeNao)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(rbPlanoSaudeSim)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(lblQualPlanoSaude)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(sSeparador21, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(tfPlanoSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                    .addComponent(lblMoradia)
-                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlIdentInternoLayout.createSequentialGroup()
-                                            .addComponent(sSeparador14, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(sSeparador17, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(sSeparador22, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlIdentInternoLayout.createSequentialGroup()
-                                            .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(tfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(lblResponsavel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(tfTelResponsavel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                                .addComponent(lblTelResponsavel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGap(18, 18, 18)
-                                            .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                    .addComponent(rbSusNao)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(rbSusSim)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(lblNSus, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(tfNSus, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addComponent(lblSus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(sSeparador12)
-                                            .addComponent(tfMae, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblMae, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(sSeparador13, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                            .addComponent(tfTelMae, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                            .addComponent(lblTelMae, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(sSeparador16, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfPai, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                .addComponent(lblPai, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                                                .addGap(2, 2, 2)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(sSeparador15, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(lblTelPai, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(tfTelPai, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(tfIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(lblIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(rbPais)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbEscola)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbParentes)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbRepublica)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbSozinho)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(rbOutro))
-                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                        .addComponent(rbExterno)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rbInterno)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(rbSemiInterno))
-                                    .addComponent(lblRegime))))
-                        .addGap(0, 57, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIdentInternoLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlIdentificacaoLayout = new javax.swing.GroupLayout(pnlIdentificacao);
+        pnlIdentificacao.setLayout(pnlIdentificacaoLayout);
+        pnlIdentificacaoLayout.setHorizontalGroup(
+            pnlIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlIdentificacaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlIdentInterno, javax.swing.GroupLayout.DEFAULT_SIZE, 975, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIdentificacaoLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnCancelar1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1680,174 +1791,17 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
                         .addComponent(btnFinalizar1)))
                 .addContainerGap())
         );
-        pnlIdentInternoLayout.setVerticalGroup(
-            pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(lblDtNasc)
-                    .addComponent(lblCpf)
-                    .addComponent(lblMatricula)
-                    .addComponent(lblTelefone))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfDtNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCurso)
-                    .addComponent(lblTurma)
-                    .addComponent(lblSexo)
-                    .addComponent(lblPeso)
-                    .addComponent(lblAltura)
-                    .addComponent(lblSangue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rbFeminino, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rbMasculino)
-                            .addComponent(tfPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfSangue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sSeparador18, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sSeparador19, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(sSeparador20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRua)
-                    .addComponent(lblNumero)
-                    .addComponent(lblBairro)
-                    .addComponent(lblCidade)
-                    .addComponent(lblUf)
-                    .addComponent(lblPlanoSaude))
-                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbPlanoSaudeSim)
-                            .addComponent(rbPlanoSaudeNao)
-                            .addComponent(lblQualPlanoSaude)
-                            .addComponent(tfPlanoSaude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sSeparador21, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tfNCasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(tfBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sSeparador10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pnlIdentInternoLayout.createSequentialGroup()
-                                .addComponent(tfUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sSeparador11, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblMae)
-                            .addComponent(lblTelMae)
-                            .addComponent(lblPai)
-                            .addComponent(lblTelPai)
-                            .addComponent(lblIdPaciente))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfMae, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfTelMae, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfPai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfTelPai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sSeparador12, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sSeparador13, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sSeparador16, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sSeparador15, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblResponsavel)
-                            .addComponent(lblTelResponsavel)
-                            .addComponent(lblSus))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfTelResponsavel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rbSusNao)
-                            .addComponent(rbSusSim)
-                            .addComponent(lblNSus, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfNSus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sSeparador14, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sSeparador17, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sSeparador22, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMoradia)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbPais)
-                            .addComponent(rbEscola)
-                            .addComponent(rbParentes)
-                            .addComponent(rbRepublica)
-                            .addComponent(rbSozinho)
-                            .addComponent(rbOutro))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblRegime)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rbExterno)
-                            .addComponent(rbInterno)
-                            .addComponent(rbSemiInterno))
-                        .addGap(20, 20, 20)))
-                .addGroup(pnlIdentInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnFinalizar1)
-                    .addComponent(btnContinuar1)
-                    .addComponent(btnCancelar1))
-                .addContainerGap())
-        );
-
-        lblQualPlanoSaude.setEnabled(false);
-        tfPlanoSaude.setEnabled(false);
-        lblIdPaciente.setVisible(false);
-        tfIdPaciente.setVisible(false);
-
-        javax.swing.GroupLayout pnlIdentificacaoLayout = new javax.swing.GroupLayout(pnlIdentificacao);
-        pnlIdentificacao.setLayout(pnlIdentificacaoLayout);
-        pnlIdentificacaoLayout.setHorizontalGroup(
+        pnlIdentificacaoLayout.setVerticalGroup(
             pnlIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIdentificacaoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlIdentInterno, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
-                .addGap(49, 49, 49))
-        );
-        pnlIdentificacaoLayout.setVerticalGroup(
-            pnlIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlIdentInterno, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
+                .addComponent(pnlIdentInterno, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFinalizar1)
+                    .addComponent(btnContinuar1)
+                    .addComponent(btnCancelar1))
+                .addGap(22, 22, 22))
         );
 
         tpCadastroPaciente.addTab("Identificação", pnlIdentificacao);
@@ -3122,30 +3076,27 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
                         .addComponent(btnFinalizar5))
                     .addGroup(pnlQuestionario1InternoLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(pnlQuestionario1InternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlQuestionario1InternoLayout.createSequentialGroup()
-                                .addComponent(lblMedicamentoContinuo)
-                                .addGap(368, 663, Short.MAX_VALUE))
-                            .addGroup(pnlQuestionario1InternoLayout.createSequentialGroup()
-                                .addGroup(pnlQuestionario1InternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblDiarreia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sSeparador35)
-                                    .addComponent(tfDiarreia)
-                                    .addComponent(sSeparador34)
-                                    .addComponent(tfCefaleia)
-                                    .addComponent(lblCefaleia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sSeparador33)
-                                    .addComponent(tfPressaoArterial)
-                                    .addComponent(lblPressaoArterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sSeparador32)
-                                    .addComponent(tfEpistaxe)
-                                    .addComponent(lblEpistaxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sSeparador31)
-                                    .addComponent(tfDesmaios)
-                                    .addComponent(lblDesmaios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sSeparador30)
-                                    .addComponent(tfMedicamentoContinuo))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGroup(pnlQuestionario1InternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblMedicamentoContinuo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnlQuestionario1InternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblDiarreia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfDiarreia)
+                                .addComponent(sSeparador35)
+                                .addComponent(sSeparador34)
+                                .addComponent(tfCefaleia)
+                                .addComponent(lblCefaleia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(sSeparador33)
+                                .addComponent(tfPressaoArterial)
+                                .addComponent(lblPressaoArterial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(sSeparador32)
+                                .addComponent(tfEpistaxe)
+                                .addComponent(lblEpistaxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(sSeparador31)
+                                .addComponent(tfDesmaios)
+                                .addComponent(lblDesmaios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(sSeparador30)
+                                .addComponent(tfMedicamentoContinuo)))
+                        .addGap(0, 24, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlQuestionario1InternoLayout.setVerticalGroup(
@@ -3352,39 +3303,40 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFinalizar6))
                     .addGroup(pnlQuestionario2InternoLayout.createSequentialGroup()
-                        .addGroup(pnlQuestionario2InternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblColica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblAcompanhamentoEspecializado)
-                            .addGroup(pnlQuestionario2InternoLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(pnlQuestionario2InternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pnlQuestionario2InternoLayout.createSequentialGroup()
-                                        .addComponent(rbPsicologico)
-                                        .addGap(15, 15, 15)
-                                        .addComponent(rbFonaudiologo)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(rbFisioterapia)
-                                        .addGap(16, 16, 16)
-                                        .addComponent(rbTerapiaOcupacional)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestionario2InternoLayout.createSequentialGroup()
-                                        .addGroup(pnlQuestionario2InternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(pnlQuestionario2InternoLayout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE)
-                                                .addComponent(sSeparador37, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlQuestionario2InternoLayout.createSequentialGroup()
-                                                .addComponent(rbAcompanhamentoEspecializadoOutro)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(tfAcompanhamentoEspecializado)))
-                                        .addGap(154, 154, 154))))
-                            .addComponent(sSeparador36)
-                            .addComponent(tfColica)
-                            .addComponent(lblAnotacoesRelevantes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfAnotacoesRelevantes)
-                            .addComponent(sSeparador38)
-                            .addComponent(lblContatoEmergencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfContatoEmergencia)
-                            .addComponent(sSeparador39))
+                        .addGroup(pnlQuestionario2InternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlQuestionario2InternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblColica)
+                                .addComponent(lblAcompanhamentoEspecializado)
+                                .addGroup(pnlQuestionario2InternoLayout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addGroup(pnlQuestionario2InternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(pnlQuestionario2InternoLayout.createSequentialGroup()
+                                            .addComponent(rbPsicologico)
+                                            .addGap(15, 15, 15)
+                                            .addComponent(rbFonaudiologo)
+                                            .addGap(10, 10, 10)
+                                            .addComponent(rbFisioterapia)
+                                            .addGap(16, 16, 16)
+                                            .addComponent(rbTerapiaOcupacional)
+                                            .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlQuestionario2InternoLayout.createSequentialGroup()
+                                            .addGroup(pnlQuestionario2InternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addGroup(pnlQuestionario2InternoLayout.createSequentialGroup()
+                                                    .addGap(0, 0, Short.MAX_VALUE)
+                                                    .addComponent(sSeparador37, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlQuestionario2InternoLayout.createSequentialGroup()
+                                                    .addComponent(rbAcompanhamentoEspecializadoOutro)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(tfAcompanhamentoEspecializado)))
+                                            .addGap(154, 154, 154))))
+                                .addComponent(lblAnotacoesRelevantes)
+                                .addComponent(tfAnotacoesRelevantes, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblContatoEmergencia)
+                                .addComponent(tfContatoEmergencia, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(sSeparador36)
+                                .addComponent(tfColica))
+                            .addComponent(sSeparador38, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sSeparador39, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 185, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -3465,10 +3417,6 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
             .addComponent(tpCadastroPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void rbParentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbParentesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rbParentesActionPerformed
 
     private void rbPlanoSaudeNaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPlanoSaudeNaoActionPerformed
         // TODO add your handling code here:
@@ -3740,10 +3688,6 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfNomeActionPerformed
 
-    private void tfPaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPaiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfPaiActionPerformed
-
     private void btnFinalizar1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFinalizar1MouseEntered
         // TODO add your handling code here:
         this.entraMouse(btnFinalizar1);
@@ -3865,14 +3809,11 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
     private javax.swing.JButton btnFinalizar4;
     private javax.swing.JButton btnFinalizar5;
     private javax.swing.JButton btnFinalizar6;
-    private javax.swing.JComboBox<String> cbCurso;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator10;
-    private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
@@ -3889,7 +3830,6 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
     private javax.swing.JLabel lblColica;
     private javax.swing.JLabel lblContatoEmergencia;
     private javax.swing.JLabel lblCpf;
-    private javax.swing.JLabel lblCurso;
     private javax.swing.JLabel lblDesmaios;
     private javax.swing.JLabel lblDiarreia;
     private javax.swing.JLabel lblDoencaCronica;
@@ -3899,31 +3839,22 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
     private javax.swing.JLabel lblEpistaxe;
     private javax.swing.JLabel lblEspecificar;
     private javax.swing.JLabel lblIdPaciente;
-    private javax.swing.JLabel lblMae;
     private javax.swing.JLabel lblMatricula;
     private javax.swing.JLabel lblMedicamentoContinuo;
-    private javax.swing.JLabel lblMoradia;
     private javax.swing.JLabel lblNSus;
     private javax.swing.JLabel lblNecessidadeEspecifica;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNumero;
-    private javax.swing.JLabel lblPai;
     private javax.swing.JLabel lblPeso;
     private javax.swing.JLabel lblPlanoSaude;
     private javax.swing.JLabel lblPressaoArterial;
     private javax.swing.JLabel lblProtese;
     private javax.swing.JLabel lblQualPlanoSaude;
-    private javax.swing.JLabel lblRegime;
-    private javax.swing.JLabel lblResponsavel;
     private javax.swing.JLabel lblRua;
     private javax.swing.JLabel lblSangue;
     private javax.swing.JLabel lblSexo;
     private javax.swing.JLabel lblSus;
-    private javax.swing.JLabel lblTelMae;
-    private javax.swing.JLabel lblTelPai;
-    private javax.swing.JLabel lblTelResponsavel;
     private javax.swing.JLabel lblTelefone;
-    private javax.swing.JLabel lblTurma;
     private javax.swing.JLabel lblUf;
     private javax.swing.JLabel lblVacinaFaltando;
     private javax.swing.JLabel lblVacinasAdolescencia;
@@ -3967,9 +3898,7 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbDengue;
     private javax.swing.JRadioButton rbDesenvolvimento;
     private javax.swing.JRadioButton rbDiabetes;
-    private javax.swing.JRadioButton rbEscola;
     private javax.swing.JRadioButton rbEscrita;
-    private javax.swing.JRadioButton rbExterno;
     private javax.swing.JRadioButton rbFeminino;
     private javax.swing.JRadioButton rbFisica;
     private javax.swing.JRadioButton rbFisioterapia;
@@ -3977,16 +3906,12 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbHepatite;
     private javax.swing.JRadioButton rbHipertensao;
     private javax.swing.JRadioButton rbHistFamiliarOutro;
-    private javax.swing.JRadioButton rbInterno;
     private javax.swing.JRadioButton rbLeitura;
     private javax.swing.JRadioButton rbMasculino;
     private javax.swing.JRadioButton rbMeningite;
     private javax.swing.JRadioButton rbMental;
     private javax.swing.JRadioButton rbNenhumaNecessidade;
     private javax.swing.JRadioButton rbOftalmologico;
-    private javax.swing.JRadioButton rbOutro;
-    private javax.swing.JRadioButton rbPais;
-    private javax.swing.JRadioButton rbParentes;
     private javax.swing.JRadioButton rbPlanoSaudeNao;
     private javax.swing.JRadioButton rbPlanoSaudeSim;
     private javax.swing.JRadioButton rbPneumonia;
@@ -3996,12 +3921,9 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbProteseSim;
     private javax.swing.JRadioButton rbPsicologico;
     private javax.swing.JRadioButton rbRenal;
-    private javax.swing.JRadioButton rbRepublica;
     private javax.swing.JRadioButton rbRinite;
     private javax.swing.JRadioButton rbRubeola;
     private javax.swing.JRadioButton rbSarampo;
-    private javax.swing.JRadioButton rbSemiInterno;
-    private javax.swing.JRadioButton rbSozinho;
     private javax.swing.JRadioButton rbSuperdotacao;
     private javax.swing.JRadioButton rbSusNao;
     private javax.swing.JRadioButton rbSusSim;
@@ -4009,12 +3931,6 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbVisual;
     private javax.swing.JSeparator sSeparador10;
     private javax.swing.JSeparator sSeparador11;
-    private javax.swing.JSeparator sSeparador12;
-    private javax.swing.JSeparator sSeparador13;
-    private javax.swing.JSeparator sSeparador14;
-    private javax.swing.JSeparator sSeparador15;
-    private javax.swing.JSeparator sSeparador16;
-    private javax.swing.JSeparator sSeparador17;
     private javax.swing.JSeparator sSeparador18;
     private javax.swing.JSeparator sSeparador19;
     private javax.swing.JSeparator sSeparador20;
@@ -4057,24 +3973,17 @@ public final class pnlCadastroPaciente extends javax.swing.JPanel {
     private javax.swing.JTextField tfEpistaxe;
     private javax.swing.JTextField tfEspecificar;
     private javax.swing.JTextField tfIdPaciente;
-    private javax.swing.JTextField tfMae;
     private javax.swing.JTextField tfMatricula;
     private javax.swing.JTextField tfMedicamentoContinuo;
     private javax.swing.JTextField tfNCasa;
     private javax.swing.JTextField tfNSus;
     private javax.swing.JTextField tfNome;
-    private javax.swing.JTextField tfPai;
     private javax.swing.JTextField tfPeso;
     private javax.swing.JTextField tfPlanoSaude;
     private javax.swing.JTextField tfPressaoArterial;
-    private javax.swing.JTextField tfResponsavel;
     private javax.swing.JTextField tfRua;
     private javax.swing.JTextField tfSangue;
-    private javax.swing.JTextField tfTelMae;
-    private javax.swing.JTextField tfTelPai;
-    private javax.swing.JTextField tfTelResponsavel;
     private javax.swing.JTextField tfTelefone;
-    private javax.swing.JTextField tfTurma;
     private javax.swing.JTextField tfUf;
     private javax.swing.JTextField tfVacinaFaltando;
     private javax.swing.JTabbedPane tpCadastroPaciente;

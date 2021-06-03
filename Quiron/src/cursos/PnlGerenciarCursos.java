@@ -12,26 +12,28 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import menssagensalerta.MinhasMenssagens;
 import principal.TelaPrincipal;
 
 /**
  *
  * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
-public final class pnlGerenciarCursos extends javax.swing.JPanel {
+public final class PnlGerenciarCursos extends javax.swing.JPanel {
 
     Connection conn = null;
 
     /**
      * Creates new form pnlGerenciarCursos
      */
-    public pnlGerenciarCursos() {
+    public PnlGerenciarCursos() {
         initComponents();
         try {
             conn = MysqlConnect.connectDB();
             this.preencheTabela();
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Erro ao conectar com o banco de dados");
         }
     }
 
@@ -65,7 +67,8 @@ public final class pnlGerenciarCursos extends javax.swing.JPanel {
                 }
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -124,7 +127,8 @@ public final class pnlGerenciarCursos extends javax.swing.JPanel {
     }
 
     public void sair() {
-        int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        //int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        int op = MinhasMenssagens.chamarMenssagemOpcaoSair();
         if (op == JOptionPane.YES_OPTION) {
             TelaPrincipal.voltarHome();
         }
@@ -149,7 +153,8 @@ public final class pnlGerenciarCursos extends javax.swing.JPanel {
             pstmt.executeUpdate();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao inserir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao inserir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
         this.preencheTabela();
         this.travarCampos();
@@ -536,7 +541,9 @@ public final class pnlGerenciarCursos extends javax.swing.JPanel {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
         if (tfCurso.getText().equals("") || !rbTecnico.isSelected() && !rbSuperior.isSelected() && !rbMestrado.isSelected()) {
-            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios", "ERRO", JOptionPane.ERROR_MESSAGE);
+            
+            MinhasMenssagens.chamarMenssagemCamposObrigatorios();
         } else {
             this.adicionarCurso();
         }
@@ -556,7 +563,8 @@ public final class pnlGerenciarCursos extends javax.swing.JPanel {
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         // TODO add your handling code here:
 
-        int op = JOptionPane.showConfirmDialog(null, "Deseja realmente remover este curso?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        //int op = JOptionPane.showConfirmDialog(null, "Deseja realmente remover este curso?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        int op = MinhasMenssagens.chamarMenssagemOpcao("Deseja realmente remover esse curso?");
         if (op == JOptionPane.YES_OPTION) {
             PreparedStatement pstmt = null;
             String qry = "DELETE FROM cursos WHERE idCursos= ?";
@@ -566,12 +574,15 @@ public final class pnlGerenciarCursos extends javax.swing.JPanel {
                 pstmt.setString(1, (tblCursos.getValueAt(tblCursos.getSelectedRow(), 0).toString()));
 
                 pstmt.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+                //JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+                MinhasMenssagens.chamarMenssagemSucesso("Excluido com sucesso.");
 
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
             } catch (ArrayIndexOutOfBoundsException ex) {
-                JOptionPane.showMessageDialog(null, "Selecione um curso!", "ERRO", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Selecione um curso!", "ERRO", JOptionPane.ERROR_MESSAGE);
+                MinhasMenssagens.chamarMenssagemErro("Selecione um curso!");
             }
             this.preencheTabela();
             this.limpaCampos();
@@ -657,10 +668,12 @@ public final class pnlGerenciarCursos extends javax.swing.JPanel {
             pstmt.setString(3, (tblCursos.getValueAt(tblCursos.getSelectedRow(), 0).toString()));
 
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            //JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            MinhasMenssagens.chamarMenssagemSucesso("Atualizado com sucesso");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
         this.preencheTabela();
         this.travarCampos();

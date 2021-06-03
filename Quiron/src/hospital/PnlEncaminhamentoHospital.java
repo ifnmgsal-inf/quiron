@@ -4,7 +4,7 @@
 package hospital;
 
 import bancodedados.MysqlConnect;
-import fichaatendimento.pnlFichaAtendimento;
+import fichaatendimento.PnlFichaAtendimento;
 //import fichaatendimento.FichasAtendimento;
 import java.awt.Color;
 import java.sql.Connection;
@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import menssagensalerta.MinhasMenssagens;
 import principal.PesquisaPaciente;
 import principal.TelaPrincipal;
 
@@ -26,24 +27,26 @@ import principal.TelaPrincipal;
  *
  * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
-public class pnlEncaminhamentoHospital extends javax.swing.JPanel {
+public class PnlEncaminhamentoHospital extends javax.swing.JPanel {
 
     Connection conn = null;
     /**
      * Creates new form pnlEncaminhamentoHospital
      */
-    public pnlEncaminhamentoHospital() {
+    public PnlEncaminhamentoHospital() {
         initComponents();
         try {
             conn = MysqlConnect.connectDB();
             this.preencheTabela();
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
         }
     }
     
     public void sair() {
-        int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        //int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        int op = MinhasMenssagens.chamarMenssagemOpcaoSair();
         if (op == JOptionPane.YES_OPTION) {
             TelaPrincipal.voltarHome();
         }
@@ -82,7 +85,8 @@ public class pnlEncaminhamentoHospital extends javax.swing.JPanel {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -102,7 +106,8 @@ public class pnlEncaminhamentoHospital extends javax.swing.JPanel {
                 tabelaFichas.addRow(new String[]{getDatDate((rs.getString("data"))), rs.getString("nomePaciente"), rs.getString("cpfPaciente"), rs.getString("idEncaminhamentos"), rs.getString("idPaciente")});
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -154,7 +159,7 @@ public class pnlEncaminhamentoHospital extends javax.swing.JPanel {
             enteredDate = dfDMA.parse(dataDMA);
             reportDate = df.format(enteredDate);
         } catch (ParseException ex) {
-            Logger.getLogger(pnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
         }
         //String reportDate = df.format(enteredDate);
         return reportDate;
@@ -171,7 +176,7 @@ public class pnlEncaminhamentoHospital extends javax.swing.JPanel {
             reportDate = dfDMA.format(enteredDate);
             reportDate.replace('-', '/');
         } catch (ParseException ex) {
-            Logger.getLogger(pnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
         }
         //String reportDate = df.format(enteredDate);
         return reportDate;
@@ -191,7 +196,8 @@ public class pnlEncaminhamentoHospital extends javax.swing.JPanel {
             pstmt.executeUpdate();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: Data Inválida" /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: Data Inválida" /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("DATA INVÁIDA INFORMADA.");
         }
         this.preencheTabela();
         this.travarCampos();
@@ -213,10 +219,12 @@ public class pnlEncaminhamentoHospital extends javax.swing.JPanel {
             pstmt.setString(2, (tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString()));
 
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            //JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            MinhasMenssagens.chamarMenssagemSucesso("Encaminhamento ao hospital registrado com sucesso.");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
         this.preencheTabela();
         this.travarCampos();
@@ -233,15 +241,18 @@ public class pnlEncaminhamentoHospital extends javax.swing.JPanel {
             pstmt.setString(1, (tblPacientes.getValueAt(tblPacientes.getSelectedRow(), 3).toString()));
 
             pstmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+            //JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+            MinhasMenssagens.chamarMenssagemSucesso("Encaminhamento ao hospital excluido com sucesso.");
             this.preencheTabela();
             this.resetBotoes();
             this.limpaCampos();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(null, "Selecione uma linha!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
 
@@ -681,7 +692,8 @@ public class pnlEncaminhamentoHospital extends javax.swing.JPanel {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
         if(ftfData.getText().equals("  /  /    ") || tfPaciente.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "PREENCHA OS CAMPOS COM *", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "PREENCHA OS CAMPOS COM *", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemCamposObrigatorios();
         }
         else{
             this.inserirBD();
@@ -767,7 +779,8 @@ public class pnlEncaminhamentoHospital extends javax.swing.JPanel {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
         if(ftfData.getText().equals("  /  /    ") || tfPaciente.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "PREENCHA OS CAMPOS COM *", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "PREENCHA OS CAMPOS COM *", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemCamposObrigatorios();
         }
         else
         this.alterarEncaminhamento();

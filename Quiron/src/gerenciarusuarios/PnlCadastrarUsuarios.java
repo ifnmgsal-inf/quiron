@@ -11,13 +11,14 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import menssagensalerta.MinhasMenssagens;
 import principal.TelaPrincipal;
 
 /**
  *
  * @author Franciele Alves Barbosa e Rogério Costa Negro Rocha
  */
-public class pnlCadastrarUsuarios extends javax.swing.JPanel {
+public class PnlCadastrarUsuarios extends javax.swing.JPanel {
 
     private Connection conn = null;
     protected String nome, matricula, cpf, telefone;
@@ -25,17 +26,19 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
     /**
      * Creates new form pnlCadastrarUsuarios
      */
-    public pnlCadastrarUsuarios() {
+    public PnlCadastrarUsuarios() {
         initComponents();
         try {
             conn = MysqlConnect.connectDB();
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
         }
     }
     
     public void sair() {
-        int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        //int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        int op = MinhasMenssagens.chamarMenssagemOpcaoSair();
         if (op == JOptionPane.YES_OPTION) {
             TelaPrincipal.voltarHome();
         }
@@ -61,7 +64,8 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
         cpf = tfCpf.getText();
         telefone = tfTelefone.getText();
         if (!(Arrays.equals(tfSenha.getPassword(), tfConfirmaSenha.getPassword()))) {
-            JOptionPane.showMessageDialog(null, "Senhas não coincidem!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Senhas não coincidem!", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro("Senhas não coincidem.");
         } else {
             String qryStr = "INSERT INTO usuarios(matricula, nome, cpf, telefone, senha, administrador, ativado)" + "VALUES (?,?,?,?,AES_ENCRYPT(?,?),?,?)";
 
@@ -83,13 +87,16 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
                 int qtd = pstmt.executeUpdate();
 
                 if (qtd > 0) {
-                    JOptionPane.showMessageDialog(this, "Registrado!");
+                    //JOptionPane.showMessageDialog(this, "Registrado!");
+                    MinhasMenssagens.chamarMenssagemSucesso("Usuário cadastrado com sucesso.");
                     TelaPrincipal.voltarHome();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Erro ao Registrar", "ERRO", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(null, "Erro ao Registrar", "ERRO", JOptionPane.ERROR_MESSAGE);
+                    MinhasMenssagens.chamarMenssagemErro("Erro ao registrar");
                 }
             } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Erro: Matrícula já registrada: "+ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(null, "Erro: Matrícula já registrada: "+ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+                MinhasMenssagens.chamarMenssagemErro("Esse número de matrícula já foi previamente cadastrado no Quíron.");
             }
         }
     }
@@ -440,7 +447,8 @@ public class pnlCadastrarUsuarios extends javax.swing.JPanel {
         cpfVazio= cpfVazio.replace("-", "");
         System.out.println(cpfVazio);
         if(tfNome.getText().equals("") || tfMatricula.getText().equals("") || cpfVazio.trim().length()==0){
-            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios (campos com *)", "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios (campos com *)", "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemCamposObrigatorios();
         }
         else
         this.cadastrarUsuario();

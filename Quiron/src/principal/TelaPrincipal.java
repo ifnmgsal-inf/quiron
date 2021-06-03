@@ -6,13 +6,13 @@
 package principal;
 
 import bancodedados.MysqlConnect;
-import cursos.pnlGerenciarCursos;
-import gerenciarpacientes.pnlCadastroPaciente;
-import gerenciarservidores.pnlCadastroServidor;
-import gerenciarusuarios.pnlAlterarUsuario;
-import gerenciarusuarios.pnlAtivarUsuario;
-import gerenciarusuarios.pnlCadastrarUsuarios;
-import hospital.pnlEncaminhamentoHospital;
+import cursos.PnlGerenciarCursos;
+import gerenciarpacientes.PnlCadastroPaciente;
+import gerenciarservidores.PnlCadastroServidor;
+import gerenciarusuarios.PnlAlterarUsuario;
+import gerenciarusuarios.PnlAtivarUsuario;
+import gerenciarusuarios.PnlCadastrarUsuarios;
+import hospital.PnlEncaminhamentoHospital;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.WindowEvent;
@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import login.TelaLogin;
+import menssagensalerta.MinhasMenssagens;
 import relatorio.pnlRelatorios;
 
 /**
@@ -45,7 +46,8 @@ public final class TelaPrincipal extends javax.swing.JFrame {
             this.voltarHome();
             lblNomeUsuario.setText(TelaLogin.nomeUsuario);
         } catch (SQLException sqle) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(sqle.getMessage());
         }
     }
 
@@ -90,7 +92,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
     public static void voltarHome() {
         pnlTelaAtual.setVisible(false);
         lblTextoAtual.setText("Bem Vindo(a)");
-        pnlInicial pnlInicial = new pnlInicial();
+        PnlInicial pnlInicial = new PnlInicial();
         abrirJPainel(pnlInicial);
     }
 
@@ -644,7 +646,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
     private void btnAtivarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtivarUsuarioActionPerformed
         // TODO add your handling code here:
         lblTextoAtual.setText("Ativar / Inativar Usuarios");
-        pnlAtivarUsuario pnlAtivarUsuario = new pnlAtivarUsuario();
+        PnlAtivarUsuario pnlAtivarUsuario = new PnlAtivarUsuario();
         TelaPrincipal.abrirJPainel(pnlAtivarUsuario);
         //TelaAtivarUsuario alteraRemoveUsuario = new TelaAtivarUsuario();
         //alteraRemoveUsuario.setVisible(true);
@@ -653,7 +655,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
     private void btnAdicionarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarUsuarioActionPerformed
         // TODO add your handling code here:
         lblTextoAtual.setText("Cadastrar Usuário");
-        pnlCadastrarUsuarios pnlCadastrarUsuario = new pnlCadastrarUsuarios();
+        PnlCadastrarUsuarios pnlCadastrarUsuario = new PnlCadastrarUsuarios();
         TelaPrincipal.abrirJPainel(pnlCadastrarUsuario);
         //TelaCadastroUsuario cadastroUsuario = new TelaCadastroUsuario();
         //cadastroUsuario.setVisible(true);
@@ -661,7 +663,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:       
-        int op = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "ATENÇÃO", JOptionPane.YES_OPTION);
+        int op = MinhasMenssagens.chamarMenssagemOpcao("Deseja realmente encerrar o Quíron?");
         if (op == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
@@ -670,7 +672,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
     private void btnAlterarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarUsuarioActionPerformed
         // TODO add your handling code here:
         lblTextoAtual.setText("Alterar Usuários");
-        pnlAlterarUsuario pnlAlterarUsuario = new pnlAlterarUsuario();
+        PnlAlterarUsuario pnlAlterarUsuario = new PnlAlterarUsuario();
         TelaPrincipal.abrirJPainel(pnlAlterarUsuario);
         //TelaAlteraUsuario alteraUsuario = new TelaAlteraUsuario();
         //alteraUsuario.setVisible(true);
@@ -707,7 +709,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         //TelaCadastroPaciente cadastroPacientes = new TelaCadastroPaciente(); 
         lblTextoAtual.setText("Cadastrar Paciente");
-        pnlCadastroPaciente cadastroPaciente = new pnlCadastroPaciente();
+        PnlCadastroPaciente cadastroPaciente = new PnlCadastroPaciente();
         TelaPrincipal.abrirJPainel(cadastroPaciente);
     }//GEN-LAST:event_btnAdicionarPacienteActionPerformed
 
@@ -724,7 +726,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
     private void btnGerenciarCursosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarCursosActionPerformed
         // TODO add your handling code here:
         lblTextoAtual.setText("Gerenciar Cursos");
-        pnlGerenciarCursos pnlCursos = new pnlGerenciarCursos();
+        PnlGerenciarCursos pnlCursos = new PnlGerenciarCursos();
         TelaPrincipal.abrirJPainel(pnlCursos);
         //TelaCursos cursos = new TelaCursos();
         //cursos.setVisible(true);
@@ -761,7 +763,7 @@ public final class TelaPrincipal extends javax.swing.JFrame {
     private void btnEncaminhamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncaminhamentosActionPerformed
         // TODO add your handling code here:
         lblTextoAtual.setText("Encaminhamentos ao Hospital");
-        pnlEncaminhamentoHospital pnlEncaminhamentoHospital = new pnlEncaminhamentoHospital();
+        PnlEncaminhamentoHospital pnlEncaminhamentoHospital = new PnlEncaminhamentoHospital();
         TelaPrincipal.abrirJPainel(pnlEncaminhamentoHospital);
         //TelaEncaminhamentos encaminhamentos = new TelaEncaminhamentos();
         //encaminhamentos.setVisible(true);
@@ -779,13 +781,13 @@ public final class TelaPrincipal extends javax.swing.JFrame {
 
     private void btnAdcionarServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdcionarServidorActionPerformed
         // TODO add your handling code here:
-        pnlCadastroServidor pnlCadastroServidor= new pnlCadastroServidor();
+        PnlCadastroServidor pnlCadastroServidor= new PnlCadastroServidor();
         TelaPrincipal.abrirJPainel(pnlCadastroServidor);
     }//GEN-LAST:event_btnAdcionarServidorActionPerformed
 
     private void lblLogoQuironMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLogoQuironMouseClicked
         // TODO add your handling code here:
-        pnlInicial pnlInicial= new pnlInicial();
+        PnlInicial pnlInicial= new PnlInicial();
         TelaPrincipal.abrirJPainel(pnlInicial);
     }//GEN-LAST:event_lblLogoQuironMouseClicked
 

@@ -3125,25 +3125,23 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="lblMedicamentoContinuo" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="lblDiarreia" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfDiarreia" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="sSeparador35" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="sSeparador34" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfCefaleia" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lblCefaleia" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="sSeparador33" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfPressaoArterial" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lblPressaoArterial" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="sSeparador32" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfEpistaxe" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lblEpistaxe" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="sSeparador31" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfDesmaios" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lblDesmaios" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="sSeparador30" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfMedicamentoContinuo" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="lblDiarreia" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfDiarreia" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador35" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador34" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfCefaleia" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblCefaleia" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador33" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfPressaoArterial" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblPressaoArterial" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador32" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfEpistaxe" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblEpistaxe" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador31" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfDesmaios" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="lblDesmaios" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="sSeparador30" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfMedicamentoContinuo" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="24" max="32767" attributes="0"/>
                               </Group>

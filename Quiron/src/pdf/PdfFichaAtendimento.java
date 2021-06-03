@@ -17,7 +17,7 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import fichaatendimento.pnlFichaAtendimento;
+import fichaatendimento.PnlFichaAtendimento;
 //import fichaatendimento.FichasAtendimento;
 import java.awt.Desktop;
 import java.io.File;
@@ -70,7 +70,7 @@ public class PdfFichaAtendimento {
             reportDate = dfDMA.format(enteredDate);
             reportDate.replace('-', '/');
         } catch (ParseException ex) {
-            Logger.getLogger(pnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PnlFichaAtendimento.class.getName()).log(Level.SEVERE, null, ex);
         }
         //String reportDate = df.format(enteredDate);
         return reportDate;

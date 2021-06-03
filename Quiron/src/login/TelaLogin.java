@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import static login.TelaLogin.administradorBD;
 import static login.TelaLogin.ativadoBD;
 import static login.TelaLogin.cpfBD;
+import menssagensalerta.MinhasMenssagens;
 import principal.TelaPrincipal;
 
 /**
@@ -40,7 +41,8 @@ public class TelaLogin extends javax.swing.JFrame {
         try {
             conn = MysqlConnect.connectDB();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro ao conectar com o Banco de Dados " /*+ ex.getMessage()*/, "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }
     
@@ -313,7 +315,6 @@ public class TelaLogin extends javax.swing.JFrame {
             try (ResultSet rs = stmt.executeQuery(qryLogin)) {
                 while (rs.next()) {
                     matriculaBD = rs.getInt("matricula");
-                    System.out.println(matriculaBD);
                     cpfBD = rs.getString("cpf");
                     senhaBD = rs.getString("aes_decrypt(senha, 'Quiron')");
                     //senhaBD = rs.getString("aes_decrypt(aes_encrypt(senha, 'Quiron'), 'Quiron')");
@@ -335,14 +336,18 @@ public class TelaLogin extends javax.swing.JFrame {
                 }
                 if (logou == false) {
                     if (ativadoBD == 0) {
-                        JOptionPane.showMessageDialog(null, "Usuário Inativo", "ERRO", JOptionPane.ERROR_MESSAGE);
+                        //JOptionPane.showMessageDialog(null, "Usuário Inativo", "ERRO", JOptionPane.ERROR_MESSAGE);
+                        MinhasMenssagens.chamarMenssagemErro("Usuário inativo");
+                        
                     } else {
-                        JOptionPane.showMessageDialog(null, "Login inválido!", "ERRO", JOptionPane.ERROR_MESSAGE);
+                        //JOptionPane.showMessageDialog(null, "Login inválido!", "ERRO", JOptionPane.ERROR_MESSAGE);
+                        MinhasMenssagens.chamarMenssagemErro("Usuário inválido");
                     }
                 }
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+            MinhasMenssagens.chamarMenssagemErro(ex.getMessage());
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
